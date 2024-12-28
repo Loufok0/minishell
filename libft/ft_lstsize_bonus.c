@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: malapoug <marvin@42lausanne.ch>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2024/12/28 23:27:34 by malapoug         ###   ########.fr       */
+/*   Created: 2024/10/31 14:02:39 by malapoug          #+#    #+#             */
+/*   Updated: 2024/11/05 15:56:15 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int main(void)
+int	ft_lstsize(t_list *lst)
 {
-	char *rl;
+	int	count;
 
-	rl = NULL;
-
-	while (!ft_strnstr(rl, "exit", ft_strlen(rl)))
+	if (!lst)
+		return (0);
+	count = 1;
+	while (lst->next)
 	{
-		rl = readline(prompt());
-		printf("%s\n", rl);
-		//voir comment stocker l'historique
+		count += 1;
+		lst = lst->next;
 	}
-	return (0);
+	return (count);
 }

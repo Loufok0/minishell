@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2024/12/28 23:27:34 by malapoug         ###   ########.fr       */
+/*   Created: 2024/09/13 12:52:39 by malapoug          #+#    #+#             */
+/*   Updated: 2024/09/25 19:40:45 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int main(void)
+int	ft_isdigit(int c)
 {
-	char *rl;
-
-	rl = NULL;
-
-	while (!ft_strnstr(rl, "exit", ft_strlen(rl)))
-	{
-		rl = readline(prompt());
-		printf("%s\n", rl);
-		//voir comment stocker l'historique
-	}
-	return (0);
+	return (c >= 48 && c <= 57);
 }

@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2024/12/28 23:27:34 by malapoug         ###   ########.fr       */
+/*   Created: 2024/09/13 20:06:06 by malapoug          #+#    #+#             */
+/*   Updated: 2024/10/03 15:53:23 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int main(void)
+char	*ft_strrchr(const char *s, int c)
 {
-	char *rl;
+	char	*ptr;
 
-	rl = NULL;
-
-	while (!ft_strnstr(rl, "exit", ft_strlen(rl)))
+	ptr = NULL;
+	while (*s)
 	{
-		rl = readline(prompt());
-		printf("%s\n", rl);
-		//voir comment stocker l'historique
+		if (*s == (char)c)
+			ptr = (char *)s;
+		s++;
 	}
-	return (0);
+	if ((char)c == '\0')
+		ptr = (char *)s;
+	return ((char *)ptr);
 }

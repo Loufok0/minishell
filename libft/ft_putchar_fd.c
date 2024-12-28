@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2024/12/28 23:27:34 by malapoug         ###   ########.fr       */
+/*   Created: 2024/09/25 14:54:23 by malapoug          #+#    #+#             */
+/*   Updated: 2024/09/25 19:41:50 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int main(void)
+void	ft_putchar_fd(char c, int fd)
 {
-	char *rl;
-
-	rl = NULL;
-
-	while (!ft_strnstr(rl, "exit", ft_strlen(rl)))
-	{
-		rl = readline(prompt());
-		printf("%s\n", rl);
-		//voir comment stocker l'historique
-	}
-	return (0);
+	write(fd, &c, 1);
 }

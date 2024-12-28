@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2024/12/28 23:27:34 by malapoug         ###   ########.fr       */
+/*   Created: 2024/09/28 00:14:45 by malapoug          #+#    #+#             */
+/*   Updated: 2024/10/08 11:44:09 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int main(void)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	char *rl;
+	unsigned char	*ptrs;
+	unsigned char	*ptrd;
+	size_t			i;
 
-	rl = NULL;
-
-	while (!ft_strnstr(rl, "exit", ft_strlen(rl)))
+	if (n == 0)
+		return (dest);
+	if (!dest && !src)
+		return (NULL);
+	i = 0;
+	ptrs = (unsigned char *)src;
+	ptrd = (unsigned char *)dest;
+	while (i < n)
 	{
-		rl = readline(prompt());
-		printf("%s\n", rl);
-		//voir comment stocker l'historique
+		ptrd[i] = ptrs[i];
+		i++;
 	}
-	return (0);
+	return (dest);
 }

@@ -1,28 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2024/12/28 23:27:34 by malapoug         ###   ########.fr       */
+/*   Created: 2024/09/14 15:55:38 by malapoug          #+#    #+#             */
+/*   Updated: 2024/09/27 22:57:42 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int main(void)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	char *rl;
+	size_t	i;
+	size_t	j;
 
-	rl = NULL;
-
-	while (!ft_strnstr(rl, "exit", ft_strlen(rl)))
+	if (*little == '\0')
+		return ((char *)big);
+	i = 0;
+	while (i < len && big[i])
 	{
-		rl = readline(prompt());
-		printf("%s\n", rl);
-		//voir comment stocker l'historique
+		j = 0;
+		while (i + j < len && big[i + j] && little[j]
+			&& big[i + j] == little[j])
+		{
+			j++;
+			if (little[j] == '\0')
+				return ((char *)(big + i));
+		}
+		i++;
 	}
 	return (0);
 }

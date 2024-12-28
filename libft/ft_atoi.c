@@ -1,28 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2024/12/28 23:27:34 by malapoug         ###   ########.fr       */
+/*   Created: 2024/09/14 17:49:52 by malapoug          #+#    #+#             */
+/*   Updated: 2024/10/01 13:00:48 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int main(void)
+int	ft_atoi(const char *str)
 {
-	char *rl;
+	int	signe;
+	int	res;
 
-	rl = NULL;
-
-	while (!ft_strnstr(rl, "exit", ft_strlen(rl)))
+	signe = 1;
+	res = 0;
+	while ((*str >= 9 && *str <= 13) || *str == 32)
+		str++;
+	if (*str == '-' || *str == '+')
 	{
-		rl = readline(prompt());
-		printf("%s\n", rl);
-		//voir comment stocker l'historique
+		signe *= (44 - *str);
+		str++;
 	}
-	return (0);
+	while (*str && *str >= '0' && *str <= '9')
+	{
+		res = res * 10 + (*str) - '0';
+		str++;
+	}
+	return (res * signe);
 }
+
+/*(-: 45 and +: 43)
+int main()
+{
+	printf("%d", ft_atoi("123456789"));
+}
+*/

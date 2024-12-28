@@ -1,28 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2024/12/28 23:27:34 by malapoug         ###   ########.fr       */
+/*   Created: 2024/09/14 10:56:16 by malapoug          #+#    #+#             */
+/*   Updated: 2024/09/27 12:56:43 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int main(void)
+char	*ft_strdup(char *src)
 {
-	char *rl;
+	char	*dup;
+	int		i;
 
-	rl = NULL;
-
-	while (!ft_strnstr(rl, "exit", ft_strlen(rl)))
+	dup = (char *)malloc(ft_strlen(src) * sizeof(char) + 1);
+	if (!dup)
+		return (0);
+	i = 0;
+	while (src[i])
 	{
-		rl = readline(prompt());
-		printf("%s\n", rl);
-		//voir comment stocker l'historique
+		dup[i] = src[i];
+		i++;
 	}
-	return (0);
+	dup[i] = '\0';
+	return (dup);
 }
+
+/*
+#include <stdio.h>
+int main ()
+{
+	printf("%s", ft_strdup("hello"));
+}
+*/

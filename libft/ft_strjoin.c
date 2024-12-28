@@ -1,28 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2024/12/28 23:27:34 by malapoug         ###   ########.fr       */
+/*   Created: 2024/09/15 11:31:08 by malapoug          #+#    #+#             */
+/*   Updated: 2024/09/25 22:40:02 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int main(void)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char *rl;
+	char	*ptr;
+	int		size;
+	int		i;
 
-	rl = NULL;
-
-	while (!ft_strnstr(rl, "exit", ft_strlen(rl)))
+	if (!s1)
+		return (ft_strdup((char *)s2));
+	i = 0;
+	size = ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1;
+	ptr = (char *)malloc(size * sizeof(char));
+	if (!ptr)
+		return (0);
+	while (*s1)
 	{
-		rl = readline(prompt());
-		printf("%s\n", rl);
-		//voir comment stocker l'historique
+		ptr[i++] = *s1;
+		s1++;
 	}
-	return (0);
+	while (*s2)
+	{
+		ptr[i++] = *s2;
+		s2++;
+	}
+	ptr[i] = '\0';
+	return (ptr);
 }
