@@ -1,38 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_free_arr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/15 11:31:08 by malapoug          #+#    #+#             */
-/*   Updated: 2024/09/25 22:40:02 by malapoug         ###   ########.fr       */
+/*   Created: 2024/12/28 12:42:07 by malapoug          #+#    #+#             */
+/*   Updated: 2024/12/31 11:09:13 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+int	arr_size(char **arr)
 {
-	char	*ptr;
-	int		size;
-	int		i;
+	int	i;
 
 	i = 0;
-	size = ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1;
-	ptr = (char *)malloc(size * sizeof(char));
-	if (!ptr)
-		return (0);
-	while (*s1)
-	{
-		ptr[i++] = *s1;
-		s1++;
-	}
-	while (*s2)
-	{
-		ptr[i++] = *s2;
-		s2++;
-	}
-	ptr[i] = '\0';
-	return (ptr);
+	while (arr[i])
+		i++;
+	return (i);
+}
+
+int	arr_size_i(int **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+		i++;
+	return (i);
+}
+
+void	ft_free_arr(char **arr, int i)
+{
+	while (i > 0)
+		free(arr[i--]);
+	free(arr);
+}
+
+void	ft_free_arr_i(int **arr, int i)
+{
+	while (i > 0 && arr)
+		free(arr[i--]);
+	free(arr[i]);
+	if (arr)
+		free(arr);
 }

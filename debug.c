@@ -1,38 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/15 11:31:08 by malapoug          #+#    #+#             */
-/*   Updated: 2024/09/25 22:40:02 by malapoug         ###   ########.fr       */
+/*   Created: 2024/12/31 13:43:26 by malapoug          #+#    #+#             */
+/*   Updated: 2024/12/31 14:35:03 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+void	show_arr(char **arr)
 {
-	char	*ptr;
-	int		size;
-	int		i;
+	int	i;
 
 	i = 0;
-	size = ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1;
-	ptr = (char *)malloc(size * sizeof(char));
-	if (!ptr)
-		return (0);
-	while (*s1)
+	while(arr[i])
 	{
-		ptr[i++] = *s1;
-		s1++;
+		ft_putstr_fd(arr[i], 1);
+		ft_putstr_fd("\t", 1);
+		i++;
 	}
-	while (*s2)
-	{
-		ptr[i++] = *s2;
-		s2++;
-	}
-	ptr[i] = '\0';
-	return (ptr);
+	ft_putstr_fd("\n", 1);
 }

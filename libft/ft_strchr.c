@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 20:06:06 by malapoug          #+#    #+#             */
-/*   Updated: 2024/10/02 19:55:05 by malapoug         ###   ########.fr       */
+/*   Updated: 2024/12/31 14:40:12 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 char	*ft_strchr(const char *s, int c)
 {
+	if (*s == '\0')
+		return (NULL);
 	while (*s)
 	{
 		if (*s == (char)c)

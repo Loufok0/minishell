@@ -6,19 +6,31 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:41:26 by malapoug          #+#    #+#             */
-/*   Updated: 2024/12/28 23:27:48 by malapoug         ###   ########.fr       */
+/*   Updated: 2024/12/31 14:27:50 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+//====================(INCLUDES)============================//
+
 #include <stdio.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "libft/libft.h"
 
+//====================(DECLARATIONS)========================//
+
+//prompt
 char	*prompt(void);
+
+//parser
+char **parse(char *rl);
+
+//debug
+void	show_arr(char **arr);
+//====================(COLORS)==============================//
 
 // Réinitialisation
 #define RESET       "\033[0m"

@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 19:07:06 by malapoug          #+#    #+#             */
-/*   Updated: 2024/12/28 12:44:46 by malapoug         ###   ########.fr       */
+/*   Updated: 2024/12/31 15:19:00 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ int		ft_strlen(const char *str);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
-void	ft_free_arr(char **arr, int i);
-int		count_w(const char *s, char c);
 
 //Bonnus
 typedef struct s_list
@@ -64,17 +62,17 @@ typedef struct s_list
 t_list	*ft_lstnew(void *content);
 int		ft_lstsize(t_list *lst);
 t_list	*ft_lstlast(t_list *lst);
-void	ft_lstadd_front(t_list **lst, t_list *new);
-void	ft_lstadd_back(t_list **lst, t_list *new);
+void	ft_lstadd_front(t_list **lst, t_list *new_l);
+void	ft_lstadd_back(t_list **lst, t_list *new_l);
 void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
-//gnl
-char	*get_next_line(int fd);
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
-# endif
+//Ajouts
+void	ft_free_arr(char **arr, int i);
+void	ft_free_arr_i(int **arr, int i);
+int		arr_size(char **arr);
+int		arr_size_i(int **arr);
 
 #endif

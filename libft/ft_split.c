@@ -6,13 +6,13 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:52:31 by malapoug          #+#    #+#             */
-/*   Updated: 2024/12/28 12:43:56 by malapoug         ###   ########.fr       */
+/*   Updated: 2024/12/31 10:50:18 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	count_w(const char *s, char c)// to_use?
+static int	count_w(const char *s, char c)
 {
 	int	i;
 	int	count;
@@ -35,7 +35,7 @@ int	count_w(const char *s, char c)// to_use?
 	return (count);
 }
 
-static char	*ft_malloc_w(char *s, char c)// to_use?
+static char	*ft_malloc_w(char *s, char c)
 {
 	char	*arr;
 	int		i;
@@ -47,15 +47,6 @@ static char	*ft_malloc_w(char *s, char c)// to_use?
 	if (!arr)
 		return (NULL);
 	return (arr);
-}
-
-void	ft_free_arr(char **arr, int i)
-{
-	while (i > 0 && arr)
-		free(arr[i--]);
-	free(arr[i]);
-	if (arr)
-		free(arr);
 }
 
 char	**ft_split(const char *s, char c)
