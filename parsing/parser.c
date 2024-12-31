@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:06:44 by malapoug          #+#    #+#             */
-/*   Updated: 2024/12/31 14:45:56 by malapoug         ###   ########.fr       */
+/*   Updated: 2024/12/31 16:11:21 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	check_quotes(char **split)
 		count = 0;
 		while (count < ft_strlen(split[i]) && ft_strchr(split[i] + count, '\"'))
 			count++; // si count impaire str pas fini donc strjoin de lui et du prochain
-		if (count % 2 != 0 && split[i + 1])
+		if ((count % 10) % 2 != 0 && split[i + 1])
 		{
 			split[i] = ft_strjoin(split[i], split[i + 1]);
 			if (!split[i])

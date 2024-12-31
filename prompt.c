@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:49:41 by malapoug          #+#    #+#             */
-/*   Updated: 2024/12/31 15:28:53 by malapoug         ###   ########.fr       */
+/*   Updated: 2024/12/31 16:13:49 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,15 @@
 
 char	*get_name(void)
 {
-	//echo whoami ?
+	//envp : USER
 	return (NULL);
 }
 
+char	*prompt(void)
+{
+	return(MAGENTA "\n┌─[NAME @ DEVICE]~[PATH]~o\n└─>" RESET);
+}
+/*
 char	*prompt(void)
 {
 	char	*final;
@@ -29,15 +34,15 @@ char	*prompt(void)
 	name = MAGENTA "NAME" RESET;
 	device = MAGENTA "DEVICE" RESET;
 	path = CYAN "PATH" RESET;
-	size = ft_strlen(name) + ft_strlen(device) + ft_strlen(path) + 16;
+	size = ft_strlen(name) + ft_strlen(device) + ft_strlen(path) + 20;
 	final = malloc(sizeof(char) * size);
-	ft_strlcat(final, "\n┌─[", 3);//check
-	ft_strlcat(final, name, ft_strlen(name));//check
-	ft_strlcat(final, " @ ", 3);//check
-	ft_strlcat(final, device, ft_strlen(device));//check
-	ft_strlcat(final, "]~[", 3);//check
-	ft_strlcat(final, path, ft_strlen(path));//check
-	ft_strlcat(final, "]~o\n└─>", 6);//check
-	ft_putstr_fd("ertggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg", 2);//trouver pourquoi ca marche pas
+	join(final, "\n┌─[");//check
+	join(final, name);//check
+	join(final, " @ ");//check
+	join(final, device);//check
+	join(final, "]~[");//check
+	join(final, path);//check
+	join(final, "]~o\n└─>");//check
 	return (final);
 }
+*/
