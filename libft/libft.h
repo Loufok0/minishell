@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 19:07:06 by malapoug          #+#    #+#             */
-/*   Updated: 2024/12/31 16:01:23 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/01 15:35:10 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 //Ajouts
-void	join(char *dst, const char *src);
+char*	ft_strjoin_f(char *dst, char *src);
 void	ft_free_arr(char **arr, int i);
 void	ft_free_arr_i(int **arr, int i);
 int		arr_size(char **arr);

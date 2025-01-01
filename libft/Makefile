@@ -48,7 +48,7 @@ SRCS = ft_atoi.c\
 	ft_lstiter_bonus.c\
 	ft_lstmap_bonus.c\
 	ft_free_arr.c\
-	join.c\
+	ft_strjoin_f.c\
 
 OBJS = $(SRCS:.c=.o)
 

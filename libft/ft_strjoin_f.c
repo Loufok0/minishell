@@ -6,21 +6,38 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 15:56:36 by malapoug          #+#    #+#             */
-/*   Updated: 2024/12/31 16:01:57 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/01 15:31:15 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	join(char *dst, const char *src)
+char	*ft_strjoin_f(char *s1, char *s2)
 {
-	int	i;
-	int	j;
+	char	*ptr;
+	int		size;
+	int		i;
+	int		j;
 
+	if (!s1)
+		return (ft_strdup(s2));
 	i = 0;
-	j = -1;
-	while (dst[i] != 0)
+	size = ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1;
+	ptr = (char *)malloc(size * sizeof(char));
+	if (!ptr)
+		return (0);
+	while (s1[i])
+	{
+		ptr[i] = s1[i];
 		i++;
-	while (src[j++] != 0)
-		dst[i + j] = src[j];
+	}
+	j = 0;
+	while (s2[j])
+	{
+		ptr[i] = s2[j++];
+		i++;
+	}
+	ptr[i] = '\0';
+	free(s1);
+	return (ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 12:42:07 by malapoug          #+#    #+#             */
-/*   Updated: 2024/12/31 11:09:13 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/01 15:45:22 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ft_free_arr(char **arr, int i)
 {
 	while (i > 0)
 		free(arr[i--]);
+	free(arr[i]);
 	free(arr);
 }
 
