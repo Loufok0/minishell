@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:49:41 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/01 15:32:45 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/01 16:09:54 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ char	*prompt(void)
 	name = MAGENTA "NAME" RESET;
 	device = MAGENTA "DEVICE" RESET;
 	path = CYAN "PATH" RESET;
-	final = NULL;
-	final = ft_strjoin_f(final, "\n┌─[");//check
+	final = ft_strjoin_f(NULL, "\n┌─[");//check
 	final = ft_strjoin_f(final, name);//check
 	final = ft_strjoin_f(final, " @ ");//check
 	final = ft_strjoin_f(final, device);//check

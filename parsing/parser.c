@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:06:44 by malapoug          #+#    #+#             */
-/*   Updated: 2024/12/31 16:11:21 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/01 18:33:49 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	duck_fishing(char **split, int i)
 {
+	if (split[i] == NULL && split[i - 1])
+		return ;
 	free(split[i]);
 	while (split[i + 1])
 	{
@@ -24,6 +26,25 @@ void	duck_fishing(char **split, int i)
 	free(split[i + 1]);
 }// a verifier
 
+int	count_occurences(char *str, int c)
+{
+	int		i;
+	int		count;
+
+	if (str == NULL)
+		return (0);
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		printf("\n%s\n", str);
+		if (str[i] == c)
+			count++;
+		i++;
+	}
+	return (count);
+}
+
 int	check_quotes(char **split)
 {
 	int		size;
@@ -32,23 +53,24 @@ int	check_quotes(char **split)
 
 	size = arr_size(split);
 	i = 0;
-	while (i < size)
+	count = 0;
+	while (i <= size)
 	{
-		count = 0;
-		while (count < ft_strlen(split[i]) && ft_strchr(split[i] + count, '\"'))
-			count++; // si count impaire str pas fini donc strjoin de lui et du prochain
+		count += count_occurences(split[i], '"'); // si count impaire str pas fini donc strjoin de lui et du prochain
 		if ((count % 10) % 2 != 0 && split[i + 1])
 		{
 			split[i] = ft_strjoin(split[i], split[i + 1]);
 			if (!split[i])
 				return (0);
 			duck_fishing(split, i + 1);
+			size--;
 		}
 		else
 			i++;
 	}
-	if(count % 2 != 0)
-		return (ft_putstr_fd("GERER GNL POUR FINIR LE \"", 2), 0);
+	printf("\n%d\n\n", count);
+//	if(count % 2 != 0)
+//		return (ft_putstr_fd("GERER GNL POUR FINIR LE \"", 2), 0);
 	return (1);
 }
 

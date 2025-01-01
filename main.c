@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/01 15:46:49 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/01 16:12:23 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int main(void)
 		rl = readline(pr);
 		parsed = parse(rl);//voir qu'est ce aue je dois renvoyer (on peut changer en char *** ou n'importe)
 		if (!parsed)
-			return (0);
+			return (free(pr), 0);
 		show_arr(parsed);
 		//process(parsed);
 		//voir comment stocker l'historique
