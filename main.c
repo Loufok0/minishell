@@ -6,13 +6,13 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/01 16:12:23 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/02 18:20:08 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main(void)
+int	main(void)
 {
 	char	*rl;
 	char	**parsed;
@@ -24,9 +24,9 @@ int main(void)
 	{
 		free(rl);
 		rl = readline(pr);
-		parsed = parse(rl);//voir qu'est ce aue je dois renvoyer (on peut changer en char *** ou n'importe)
+		parsed = parse(rl);//voir qu'est ce que je dois renvoyer (on peut changer en char *** ou n'importe)
 		if (!parsed)
-			return (free(pr), 0);
+			break ;
 		show_arr(parsed);
 		//process(parsed);
 		//voir comment stocker l'historique
@@ -36,3 +36,5 @@ int main(void)
 	free(rl);
 	return (0);
 }
+
+//on vas reorganiser tkt pas mdr

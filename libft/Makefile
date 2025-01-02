@@ -49,6 +49,7 @@ SRCS = ft_atoi.c\
 	ft_lstmap_bonus.c\
 	ft_free_arr.c\
 	ft_strjoin_f.c\
+	ft_split_let.c\
 
 OBJS = $(SRCS:.c=.o)
 
