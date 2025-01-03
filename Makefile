@@ -6,7 +6,7 @@
 #    By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/09 00:28:46 by malapoug          #+#    #+#              #
-#    Updated: 2025/01/02 17:37:52 by malapoug         ###   ########.fr        #
+#    Updated: 2025/01/03 13:45:28 by malapoug         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS =	main.c\
 	prompt.c\
 	parsing/parser.c\
 	parsing/parser_utils.c\
+	history.c\
 	debug.c\
 
 OBJS = $(SRCS:.c=.o)

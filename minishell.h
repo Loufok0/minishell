@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:41:26 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/02 17:37:33 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/03 13:45:43 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 # include <readline/history.h>
 # include "libft/libft.h"
 
+//====================(DEFINES)=============================//
+
+# define HIST_SIZE	10
+
 //====================(DECLARATIONS)========================//
 
 //prompt
@@ -29,14 +33,21 @@ char	*prompt(void);
 char	**parse(char *rl);
 
 //parser_utils
-void	duck_fishing(char **split, int i);
-int	count_occ(char *str, int c);
-int	total_occ(char **split, int c);
-int	check_quotes(char **split);
 char	**list_insert(char **lst1, char **lst2, int n);
+void	duck_fishing(char **split, int i);
+int		count_occ(char *str, int c);
+int		total_occ(char **split, int c);
+int		check_quotes(char **split);
+
+//history
+char	*get_prev_hist(char **hist, int ind);
+void	shift_left(char ***arr);
+int	add_hist(char ***hist, char *rl);
+int	handle_hist(char ***hist, char *rl);
 
 //debug
 void	show_arr(char **arr);
+
 //====================(COLORS)==============================//
 
 // Réinitialisation

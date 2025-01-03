@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:06:44 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/02 17:59:18 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/03 12:25:58 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ char	**parse(char *rl)
 	return (split);
 }
 // ^^^^^ checker partout ^^^^^
-
 
 
 /*
