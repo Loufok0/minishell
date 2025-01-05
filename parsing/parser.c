@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:06:44 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/03 12:25:58 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/05 14:21:37 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ char	**parse(char *rl)
 	split = ft_split_let(rl, '"');
 	if (!split)
 		return (NULL);
-	if (total_occ(split, '"') % 2 != 0)
-		ft_putstr_fd("GERER GNL POUR FINIR LE \" (reste a implementer)", 2);
+	if (total_occ(split, '"') % 2 != 0 || total_occ(split, '\'') % 2 != 0)
+		ft_putstr_fd(RED "GERER GNL POUR FINIR \" ET \' (reste a implementer)" RESET, 2);
 	//mettre le /GNL ici
 	if (total_occ(split, '"') % 2 != 0)
 		return (ft_free_arr(split, arr_size(split)), NULL);// peut etre des leaks, a verifier

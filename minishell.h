@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:41:26 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/03 13:45:43 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/05 14:08:23 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 //====================(DECLARATIONS)========================//
 
 //prompt
-char	*prompt(void);
+char	*prompt(char **envp);
 
 //parser
 char	**parse(char *rl);
@@ -44,6 +44,13 @@ char	*get_prev_hist(char **hist, int ind);
 void	shift_left(char ***arr);
 int	add_hist(char ***hist, char *rl);
 int	handle_hist(char ***hist, char *rl);
+
+//minishell_utils
+int		check11(char *temp, char *path);
+int		check21(char **args, char *path);
+char	*get_envp(char **envp, char *path);
+int		find_envp(char **envp, char *path);
+char	*get_path(char **envp, char *cmd);
 
 //debug
 void	show_arr(char **arr);
