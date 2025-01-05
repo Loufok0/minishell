@@ -6,36 +6,71 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:06:44 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/05 14:21:37 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/05 20:19:52 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+char	**split_insert_arr(char ***split, int c)
+{
+	int		i;
+
+	i = -1;
+	while ((*split)[++i])
+	{
+		(*split) = list_insert((*split), ft_split_let((*split)[i], c), i);
+		if (!split)
+			return (NULL);
+	}
+	return (*split);
+}
+
+char	**full_split(char *rl)
+{
+	char	**split;
+
+	split = ft_split_let(rl, '"');
+	if (!split)
+		return (NULL);
+	split = split_insert_arr(&split, ' ');
+	if (!split)
+		return (ft_free_arr(split, arr_size(split)), NULL);
+	split = split_insert_arr(&split, '\'');
+	if (!split)
+		return (ft_free_arr(split, arr_size(split)), NULL);
+	split = split_insert_arr(&split, '|');
+	if (!split)
+		return (ft_free_arr(split, arr_size(split)), NULL);
+	return (split);
+}
 
 char	**parse(char *rl)
 {
 	char	**split;
 	int		i;
 
-	i = 0;
-	split = ft_split_let(rl, '"');
+	i = -1;
+	split = full_split(rl);
 	if (!split)
 		return (NULL);
 	if (total_occ(split, '"') % 2 != 0 || total_occ(split, '\'') % 2 != 0)
-		ft_putstr_fd(RED "GERER GNL POUR FINIR \" ET \' (reste a implementer)" RESET, 2);
-	//mettre le /GNL ici
-	if (total_occ(split, '"') % 2 != 0)
-		return (ft_free_arr(split, arr_size(split)), NULL);// peut etre des leaks, a verifier
-	if (!check_quotes(split))
-		return (ft_free_arr(split, arr_size(split)), NULL);// peut etre des leaks, a verifier
-	while (split[i])
+		ft_putstr_fd(RED "GERER GNL POUR FINIR \" ET \' (reste a implementer)" RESET, 2);//mettre le /GNL ici
+	while (split[++i])
 	{
-		if (ft_strchr(split[i], '"') == 0) // && '{'
-			split = list_insert(split, ft_split(split[i], ' '), i);//check		reverse duck fishing...
-		i++;
+		if (ft_strchr(split[i], '"') == 0 && ft_strchr(split[i], '\'') == 0)
+			split = list_insert(split, ft_split_let(split[i], ' '), i);//checki
 	}
-	//split = ft_split(rl, ' | ');	 pour gerer les ';' ?
-	//split = ft_split(rl, ' ; ');	 pour gerer les ';' ?
+	if (!check_quotes(split, '"'))
+		return (ft_free_arr(split, arr_size(split)), NULL);
+	if (!check_quotes(split, '\''))
+		return (ft_free_arr(split, arr_size(split)), NULL);
+	i = -1;
+	while (split[++i])
+	{
+		if (ft_strncmp(split[i], " ", 2) == 0)
+			duck_fishing(split, i);//check ?
+	}
 	return (split);
 }
 // ^^^^^ checker partout ^^^^^

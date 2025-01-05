@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:41:26 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/05 14:08:23 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/05 19:06:07 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	**list_insert(char **lst1, char **lst2, int n);
 void	duck_fishing(char **split, int i);
 int		count_occ(char *str, int c);
 int		total_occ(char **split, int c);
-int		check_quotes(char **split);
+int		check_quotes(char **split, int c);
 
 //history
 char	*get_prev_hist(char **hist, int ind);
@@ -45,7 +45,7 @@ void	shift_left(char ***arr);
 int	add_hist(char ***hist, char *rl);
 int	handle_hist(char ***hist, char *rl);
 
-//minishell_utils
+//envp
 int		check11(char *temp, char *path);
 int		check21(char **args, char *path);
 char	*get_envp(char **envp, char *path);

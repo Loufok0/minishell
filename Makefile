@@ -6,7 +6,7 @@
 #    By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/09 00:28:46 by malapoug          #+#    #+#              #
-#    Updated: 2025/01/05 13:55:51 by malapoug         ###   ########.fr        #
+#    Updated: 2025/01/05 18:58:22 by malapoug         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ DEBUG = -fsanitize=address
 CFLAGS = -Wall -Wextra -Werror
 
 SRCS =	main.c\
-	minishell_utils.c\
+	envp.c\
 	prompt.c\
 	parsing/parser.c\
 	parsing/parser_utils.c\
