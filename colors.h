@@ -1,73 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   color.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:41:26 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/06 19:07:15 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/06 17:54:07 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
-
-//====================(INCLUDES)============================//
-
-# include <stdio.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-# include "libft/libft.h"
-# include "colors.h"
-
-//====================(DEFINES)=============================//
-
-# define HIST_SIZE	10
-
-//====================(STRUCTS)=============================//
-
-typedef struct s_token
-{
-	char	*str;
-	char	*path;
-	int	is_cmd;
-	int	is_d_quoted;
-	int	is_quoted;
-	struct s_token	*prev;
-	struct s_token	*next;
-}	t_token;
-
-//====================(DECLARATIONS)========================//
-
-//prompt
-char	*prompt(char **envp);
-
-//parser
-t_token	*parse(char **envp, char *rl);
-
-//tokenizer
-char	**tokenize(char *rl);
-
-//parser_utils
-char	**list_insert(char **lst1, char **lst2, int n);
-void	duck_fishing(char **split, int i);
-int		count_occ(char *str, int c);
-int		total_occ(char **split, int c);
-int		check_quotes(char **split, int c);
-
-//envp
-int		check11(char *temp, char *path);
-int		check21(char **args, char *path);
-char	*get_envp(char **envp, char *path);
-int		find_envp(char **envp, char *path);
-char	*get_path(char **envp, char *cmd);
-
-//clean
-void	free_t_token(t_token *head);
-
-//debug
-void	show_arr(char **arr);
+#ifndef COLORS_H
+# define COLORS_H
 
 //====================(COLORS)==============================//
 
