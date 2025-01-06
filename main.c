@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/05 14:15:51 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/06 15:10:34 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int ac, char **av, char **envp)
 			break ;
 		//ft_putstr_fd(get_prev_hist(hist, 0), 1);
 		//show_arr(hist);
-		show_arr(parsed);
+		//show_arr(parsed);
 		//process(parsed);
 		free(pr);
 		pr = prompt(envp);

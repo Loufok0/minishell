@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:06:44 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/05 20:19:52 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/06 15:36:08 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,25 @@ char	**full_split(char *rl)
 	return (split);
 }
 
+char	*get_echo(char **split, int i)
+{
+	char	*echo;
+
+	echo = NULL;
+
+	while (split[++i])
+	{
+		if (split[i][0] && split[i][0] == '"')
+			split[i] = ft_strtrim(split[i], "\"");//gerer pour laisser les \"
+		echo = ft_strjoin_f(echo, split[i]);
+		if (!echo)
+			return (NULL);
+	}
+	return (echo);
+
+
+}
+
 char	**parse(char *rl)
 {
 	char	**split;
@@ -54,8 +73,10 @@ char	**parse(char *rl)
 	split = full_split(rl);
 	if (!split)
 		return (NULL);
-	if (total_occ(split, '"') % 2 != 0 || total_occ(split, '\'') % 2 != 0)
+	if (total_occ(split, '"') % 2 != 0 || total_occ(split, '\'') % 2 != 0)//while
 		ft_putstr_fd(RED "GERER GNL POUR FINIR \" ET \' (reste a implementer)" RESET, 2);//mettre le /GNL ici
+		//rl = ft_strjoin_f(rl, nl);//check
+		//free(nl);
 	while (split[++i])
 	{
 		if (ft_strchr(split[i], '"') == 0 && ft_strchr(split[i], '\'') == 0)
@@ -69,8 +90,13 @@ char	**parse(char *rl)
 	while (split[++i])
 	{
 		if (ft_strncmp(split[i], " ", 2) == 0)
+		{
 			duck_fishing(split, i);//check ?
+			i--;
+		}
 	}
+	if (split && split[0] && ft_strncmp(split[0], "echo", 5) == 0)
+		ft_putstr_fd(get_echo(split, 0), 1);
 	return (split);
 }
 // ^^^^^ checker partout ^^^^^

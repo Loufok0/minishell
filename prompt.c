@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:49:41 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/05 14:14:17 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/06 15:09:50 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ char	*prompt(char **envp)
 	final = ft_strjoin_f(final, path );//check
 	final = ft_strjoin_f(final, RESET );//check
 	final = ft_strjoin_f(final, "]~o\n└─>");//check
+	//final = ft_strjoin_f(final, BG_BLUE );//check
 	free(path);
 	return (final);
 }
