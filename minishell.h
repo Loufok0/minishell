@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:41:26 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/06 19:07:15 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/07 15:28:25 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ typedef struct s_token
 	int	is_cmd;
 	int	is_d_quoted;
 	int	is_quoted;
-	struct s_token	*prev;
 	struct s_token	*next;
 }	t_token;
 

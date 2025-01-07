@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 18:51:17 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/06 19:09:13 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/07 15:32:57 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,14 @@ void	free_t_token(t_token *head)
 {
 	t_token	*temp;
 
-	temp = head;
-	while (temp->next)
+	while (head->next)
 	{
-		if (temp->str)
-			free(temp->str);
-		if (temp->path)
-			free(temp->path);
-		temp = temp->next;
-		if (temp->prev)
-			free(temp);
+		free(head->str);
+		free(head->path);
+		temp = head;
+		head = head->next;
+		free(temp);
 	}
-	if (head)
-		free(head);
+//	if (head)
+//		free(head);
 }

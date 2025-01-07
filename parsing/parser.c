@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:46:37 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/06 19:16:06 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/07 15:28:37 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	init_token(t_token **token)
 	(*token)->is_d_quoted = 0;
 	(*token)->is_quoted = 0;
 	(*token)->next = NULL;
-	(*token)->prev = NULL;
 	return (1);
 }
 
@@ -47,7 +46,6 @@ t_token	*list_const(char **envp, char **split)
 			current->is_cmd = 1;
 		if (!init_token(&(current->next)))
 			return (NULL);//ft_free_t_token a faire
-		current->next->prev = current;
 		current = current->next;
 	}
 	return (lst);
