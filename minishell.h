@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:41:26 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/15 02:03:06 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/15 23:17:35 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@
 //====================(INCLUDES)============================//
 
 # include <stdio.h>
+# include <unistd.h>
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-//# include "libft/libft.h"
+# include "42_libft/libft.h"
 # include "colors.h"
 
 //====================(DEFINES)=============================//

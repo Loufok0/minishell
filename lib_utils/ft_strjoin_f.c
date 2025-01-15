@@ -6,11 +6,11 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 15:56:36 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/02 13:06:30 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/15 23:15:54 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
 char	*ft_strjoin_f(char *s1, char *s2)
 {

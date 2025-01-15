@@ -6,11 +6,11 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 12:42:07 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/01 15:45:22 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/15 23:15:29 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
 int	arr_size(char **arr)
 {

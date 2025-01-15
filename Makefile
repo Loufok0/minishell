@@ -6,7 +6,7 @@
 #    By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/09 00:28:46 by malapoug          #+#    #+#              #
-#    Updated: 2025/01/15 02:02:25 by malapoug         ###   ########.fr        #
+#    Updated: 2025/01/15 23:18:07 by malapoug         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,13 +39,13 @@ RM = rm -f
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@make -C libft/
-	@$(CC) $(CFLAGS) $(OBJS) libft/libft.a -lreadline -o $(NAME)
+	@make -C 42_libft/
+	@$(CC) $(CFLAGS) $(OBJS) 42_libft/libft.a -lreadline -o $(NAME)
 	@echo $(NAME)" compiled!\n"
 
 debug: $(OBJS)
-	@make -C libft/
-	@$(CC) $(CFLAGS) $(DEBUG) $(OBJS) libft/libft.a  -lreadline -o $(NAME)
+	@make -C 42_libft/
+	@$(CC) $(CFLAGS) $(DEBUG) $(OBJS) 42_libft/libft.a  -lreadline -o $(NAME)
 	@echo $(NAME)" compiled with debug!\n"
 
 %.o: %.c
@@ -53,11 +53,11 @@ debug: $(OBJS)
 
 
 clean:
-	@make clean -C libft/
+	@make clean -C 42_libft/
 	@$(RM) $(OBJS)
 
 fclean: clean
-	@make fclean -C libft/
+	@make fclean -C 42_libft/
 	@$(RM) $(NAME)
 
 re: fclean all

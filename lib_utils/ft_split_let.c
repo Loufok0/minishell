@@ -6,13 +6,11 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 12:47:14 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/02 13:04:31 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/15 23:15:41 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-#include "libft.h"
+#include "../minishell.h"
 
 static int	count_w(const char *s, char c)
 {
