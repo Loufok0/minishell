@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:41:26 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/07 15:28:25 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/15 02:03:06 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@
 //====================(INCLUDES)============================//
 
 # include <stdio.h>
+# include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "libft/libft.h"
+//# include "libft/libft.h"
 # include "colors.h"
 
 //====================(DEFINES)=============================//
@@ -64,6 +65,14 @@ char	*get_path(char **envp, char *cmd);
 
 //clean
 void	free_t_token(t_token *head);
+
+//lib_utils
+char	*ft_strjoin_f(char *dst, char *src);
+void	ft_free_arr(char **arr, int i);
+void	ft_free_arr_i(int **arr, int i);
+int		arr_size(char **arr);
+int		arr_size_i(int **arr);
+char	**ft_split_let(char const *s, char c);
 
 //debug
 void	show_arr(char **arr);

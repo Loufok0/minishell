@@ -1,27 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_striteri.c                                      :+:      :+:    :+:   */
+/*   ft_strjoin_f.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/25 14:46:25 by malapoug          #+#    #+#             */
-/*   Updated: 2024/10/01 12:44:30 by malapoug         ###   ########.fr       */
+/*   Created: 2024/12/31 15:56:36 by malapoug          #+#    #+#             */
+/*   Updated: 2025/01/02 13:06:30 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+char	*ft_strjoin_f(char *s1, char *s2)
 {
-	int	i;
+	char	*ptr;
+	int		size;
+	int		i;
+	int		j;
 
-	if (!s || !f)
-		return ;
+	if (!s1)
+		return (ft_strdup(s2));
 	i = 0;
-	while (s[i])
+	size = ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1;
+	ptr = (char *)malloc(size * sizeof(char));
+	if (!ptr)
+		return (0);
+	while (s1[i])
 	{
-		f(i, &s[i]);
+		ptr[i] = s1[i];
 		i++;
 	}
+	j = 0;
+	while (s2[j])
+		ptr[i++] = s2[j++];
+	ptr[i] = '\0';
+	free(s1);
+	return (ptr);
 }

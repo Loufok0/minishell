@@ -1,14 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_let.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/02 11:52:31 by malapoug          #+#    #+#             */
-/*   Updated: 2024/12/31 10:50:18 by malapoug         ###   ########.fr       */
+/*   Created: 2025/01/02 12:47:14 by malapoug          #+#    #+#             */
+/*   Updated: 2025/01/02 13:04:31 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 #include "libft.h"
 
@@ -16,63 +18,64 @@ static int	count_w(const char *s, char c)
 {
 	int	i;
 	int	count;
-	int	in_w;
 
 	i = 0;
 	count = 0;
-	in_w = 0;
 	while (s[i])
 	{
-		if (s[i] != c && in_w == 0)
-		{
+		if (s[i] == c)
 			count++;
-			in_w = 1;
-		}
-		else if (s[i] == c)
-			in_w = 0;
+		else if (i == 0 || s[i - 1] == c)
+			count++;
 		i++;
 	}
 	return (count);
 }
 
-static char	*ft_malloc_w(char *s, char c)
+static char	*ft_malloc_w(char *s, char c, int is_sep)
 {
 	char	*arr;
 	int		i;
 
-	i = 0;
-	while (s[i] && s[i] != c)
-		i++;
-	arr = ft_substr(s, 0, i);
+	if (is_sep)
+	{
+		arr = ft_substr(s, 0, 1);
+	}
+	else
+	{
+		i = 0;
+		while (s[i] && s[i] != c)
+			i++;
+		arr = ft_substr(s, 0, i);
+	}
 	if (!arr)
 		return (NULL);
 	return (arr);
 }
 
-char	**ft_split(const char *s, char c)
+char	**ft_split_let(const char *s, char c)
 {
 	char	**arr;
 	int		i;
 
-	i = 0;
 	arr = (char **)malloc((count_w(s, c) + 1) * sizeof(char *));
-	if (!arr ||!s)
+	if (!arr)
 		return (NULL);
+	i = 0;
 	while (*s)
 	{
-		while (*s == c)
+		if (*s == c)
+			arr[i++] = ft_malloc_w((char *)s, c, 1);
+		if (*s == c)
 			s++;
-		if (*s == '\0')
-			break ;
-		arr[i] = ft_malloc_w((char *)s, c);
-		if (!arr[i])
+		else
 		{
-			ft_free_arr(arr, i);
-			return (NULL);
+			arr[i++] = ft_malloc_w((char *)s, c, 0);
+			while (*s && *s != c)
+				s++;
 		}
-		i++;
-		while (*s && *s != c)
-			s++;
+		if (!arr[i - 1])
+			return (ft_free_arr(arr, i), NULL);
 	}
 	arr[i] = NULL;
 	return (arr);
