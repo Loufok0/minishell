@@ -6,11 +6,12 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:49:41 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/06 15:09:50 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/17 16:57:04 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
+#include "colors.h"
 
 char	*get_name(void)
 {

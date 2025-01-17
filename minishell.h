@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:41:26 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/15 23:17:35 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/17 17:00:19 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,10 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "42_libft/libft.h"
-# include "colors.h"
 
 //====================(DEFINES)=============================//
 
-# define HIST_SIZE	10
+# define HIST_SIZE	100
 
 //====================(STRUCTS)=============================//
 
