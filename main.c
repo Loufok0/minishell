@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/06 18:58:15 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/19 18:32:21 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	main(int ac, char **av, char **envp)
 {
 	char	*rl;
 	char	*pr;
-	t_token	*list;
+	char	**list;
 
 	(void)ac;
 	(void)av;
@@ -29,13 +29,12 @@ int	main(int ac, char **av, char **envp)
 		list = parse(envp, rl);//voir qu'est ce que je dois renvoyer (on peut changer en char *** ou n'importe)
 		if (!list)
 			break ;
-		//ft_putstr_fd(get_prev_hist(hist, 0), 1);
 		//show_arr(hist);
-		//process(parsed);
+		//process(list);
 		free(pr);
 		pr = prompt(envp);
 	}
-	free_t_token(list);
+	ft_free_arr(list, arr_size(list));
 	free(pr);
 	free(rl);
 	return (0);

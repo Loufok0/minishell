@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 17:35:36 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/06 17:44:45 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/19 18:17:24 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	count_occ(char *str, int c)
 	count = 0;
 	while (str[i])
 	{
-		if (str[i] == c && (str[i - 1] && str[i - 1] != '\\'))
+		if (str[i] == c)
 			count++;
 		i++;
 	}
@@ -59,7 +59,7 @@ int	total_occ(char **split, int c)
 	return (count);
 }
 
-int	check_quotes(char **split, int c)
+int	check_closed(char **split, int c)
 {
 	int		size;
 	int		i;

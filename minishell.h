@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:41:26 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/17 17:00:19 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/19 18:31:04 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_token
 char	*prompt(char **envp);
 
 //parser
-t_token	*parse(char **envp, char *rl);
+char	**parse(char **envp, char *rl);
 
 //tokenizer
 char	**tokenize(char *rl);
@@ -54,7 +54,7 @@ char	**list_insert(char **lst1, char **lst2, int n);
 void	duck_fishing(char **split, int i);
 int		count_occ(char *str, int c);
 int		total_occ(char **split, int c);
-int		check_quotes(char **split, int c);
+int		check_closed(char **split, int c);
 
 //envp
 int		check11(char *temp, char *path);

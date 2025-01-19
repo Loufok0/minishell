@@ -6,12 +6,66 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:46:37 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/07 15:28:37 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/19 19:38:54 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+int	replace_var(char **str, char *path)
+{
+	int	i;
+
+	i = 0;
+	while ((*str)[i])
+
+
+	printf("%s", path);
+	return (1);
+}
+
+char	**handle_env(char **envp, char **split)
+{
+	int	i;
+
+	i = -1;
+	while (split[++i])
+	{
+		//if (ft_strchr(ft_strchr(split[i], '$') + 1, '$') != 0)//a faire
+		//	path = get_envp(envp, "BASHPID=");
+		if (split[i][0] != '\'' && ft_strchr(split[i], '$') != 0)
+			replace_var(&split[i], get_envp(envp, ft_strchr(split[i], '$') + 1) + 1);
+	}
+	return (split);
+}
+
+char	**parse(char **envp, char *rl)
+{
+	char	**split;
+	split = tokenize(rl);
+	if (!split)
+		return (NULL);
+	handle_env(envp, split);
+	return (split);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 int	init_token(t_token **token)
 {
 	(*token) = malloc(sizeof(t_token));
@@ -63,3 +117,5 @@ t_token	*parse(char **envp, char *rl)
 	lst = list_const(envp, split);
 	return (ft_free_arr(split, arr_size(split)), lst);
 }
+
+*/

@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:06:44 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/06 17:45:04 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/19 18:21:10 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,25 +45,6 @@ char	**full_split(char *rl)
 	return (split);
 }
 
-char	*get_echo(char **split, int i)
-{
-	char	*echo;
-
-	echo = NULL;
-
-	while (split[++i])
-	{
-		if (split[i][0] && split[i][0] == '"')
-			split[i] = ft_strtrim(split[i], "\"");//gerer pour laisser les \"
-		echo = ft_strjoin_f(echo, split[i]);
-		if (!echo)
-			return (NULL);
-	}
-	return (echo);
-
-
-}
-
 char	**tokenize(char *rl)
 {
 	char	**split;
@@ -73,20 +54,12 @@ char	**tokenize(char *rl)
 	split = full_split(rl);
 	if (!split)
 		return (NULL);
-	if (total_occ(split, '"') % 2 != 0 || total_occ(split, '\'') % 2 != 0)//while
-		ft_putstr_fd(RED "GERER GNL POUR FINIR \" ET \' (reste a implementer)" RESET, 2);//mettre le /GNL ici
-		//rl = ft_strjoin_f(rl, nl);//check
-		//free(nl);
-	while (split[++i])
-	{
-		if (ft_strchr(split[i], '"') == 0 && ft_strchr(split[i], '\'') == 0)
-			split = list_insert(split, ft_split_let(split[i], ' '), i);//checki
-	}
-	if (!check_quotes(split, '"'))
-		return (ft_free_arr(split, arr_size(split)), NULL);
-	if (!check_quotes(split, '\''))
-		return (ft_free_arr(split, arr_size(split)), NULL);
-	i = -1;
+	if (total_occ(split, '\"') % 2 != 0 || total_occ(split, '\'') % 2 != 0)//while
+		ft_putstr_fd(RED "[ツ] Unclosed quote !" RESET, 2);//mettre le /GNL ici
+	if (!check_closed(split, '"'))
+		return (0);
+	if (!check_closed(split, '\''))
+		return (0);
 	while (split[++i])
 	{
 		if (ft_strncmp(split[i], " ", 2) == 0)
@@ -95,8 +68,6 @@ char	**tokenize(char *rl)
 			i--;
 		}
 	}
-	if (split && split[0] && ft_strncmp(split[0], "echo", 5) == 0)
-		ft_putstr_fd(get_echo(split, 0), 1);
 	return (split);
 }
 // ^^^^^ checker partout ^^^^^
