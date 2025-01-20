@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 17:35:36 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/19 18:17:24 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/20 17:09:29 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	total_occ(char **split, int c)
 	return (count);
 }
 
-int	check_closed(char **split, int c)
+int	check_closed(char **split, int c, int n)
 {
 	int		size;
 	int		i;
@@ -70,7 +70,7 @@ int	check_closed(char **split, int c)
 	while (i <= size)
 	{
 		count = count_occ(split[i], c);
-		if ((count % 10) % 2 != 0 && split[i + 1])
+		if ((count % 10) % n != 0 && split[i + 1])
 		{
 			split[i] = ft_strjoin_f(split[i], split[i + 1]);
 			if (!split[i])

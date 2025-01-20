@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:06:44 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/19 18:21:10 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/20 17:28:43 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ char	**tokenize(char *rl)
 	split = full_split(rl);
 	if (!split)
 		return (NULL);
-	if (total_occ(split, '\"') % 2 != 0 || total_occ(split, '\'') % 2 != 0)//while
-		ft_putstr_fd(RED "[ツ] Unclosed quote !" RESET, 2);//mettre le /GNL ici
-	if (!check_closed(split, '"'))
+	if (total_occ(split, '\"') % 2 != 0 || total_occ(split, '\'') % 2 != 0) // gerer " ' " '
+		ft_putstr_fd(RED "[ツ] Unclosed quote !" RESET, 2);
+	if (!check_closed(split, '"', 2))
 		return (0);
-	if (!check_closed(split, '\''))
+	if (!check_closed(split, '\'', 2))
 		return (0);
 	while (split[++i])
 	{
@@ -68,17 +68,12 @@ char	**tokenize(char *rl)
 			i--;
 		}
 	}
+	show_arr(split);
 	return (split);
 }
 // ^^^^^ checker partout ^^^^^
 
 
 /*
- * J'avais pense on [eut faire une boucle while qui parcourt split et split en char *** si le path env
- * de la commande existe et sinon tu le rajoute a la derniere commande comme ce sera un argument
- * et on execute la commande quand on tombe sur le prochain path qui marche ou sur la fin du char **
- *
- *
  * FAIR ATTENTION AU COMPORTEMENT DES ';' la on gere "cat file1 cat file2" alors aue ca ne devrait pas marcher,
- * 					on doit gerer "cat file1; cat file2"
 */

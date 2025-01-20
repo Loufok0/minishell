@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_utils.c                                  :+:      :+:    :+:   */
+/*   envp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 13:45:36 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/05 14:09:38 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/20 15:18:48 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ char	*get_envp(char **envp, char *path)
 			break ;
 		i++;
 	}
-	return (envp[i] + ft_strlen(path));
+	if (envp[i])
+		return (envp[i] + ft_strlen(path));
+	else
+		return (NULL);
 }
 
 char	*get_path(char **envp, char *cmd)

@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:41:26 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/19 18:31:04 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/20 17:09:56 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "42_libft/libft.h"
+# include "libft/libft.h"
 
 //====================(DEFINES)=============================//
 
@@ -54,7 +54,7 @@ char	**list_insert(char **lst1, char **lst2, int n);
 void	duck_fishing(char **split, int i);
 int		count_occ(char *str, int c);
 int		total_occ(char **split, int c);
-int		check_closed(char **split, int c);
+int		check_closed(char **split, int c, int n);
 
 //envp
 int		check11(char *temp, char *path);
