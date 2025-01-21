@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 19:07:06 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/02 13:05:45 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/21 16:54:00 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,6 @@ void	ft_free_arr_i(int **arr, int i);
 int		arr_size(char **arr);
 int		arr_size_i(int **arr);
 char	**ft_split_let(char const *s, char c);
+size_t	ft_strlcat_mod(char *dst, const char *src, size_t size);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/05 13:45:36 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/20 15:18:48 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/21 18:11:55 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,20 @@ int	find_envp(char **envp, char *path)
 char	*get_envp(char **envp, char *path)
 {
 	int	i;
+	int	len;
 
+	len = 0;
+	while (path[len] && path[len] != ' ')
+		len++;
 	i = 0;
 	while (envp[i])
 	{
-		if (ft_strncmp(envp[i], path, ft_strlen(path)) == 0)
+		if (ft_strncmp(envp[i], path, len) == 0)
 			break ;
 		i++;
 	}
 	if (envp[i])
-		return (envp[i] + ft_strlen(path));
+		return (envp[i] + len);
 	else
 		return (NULL);
 }

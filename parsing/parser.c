@@ -6,38 +6,39 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:46:37 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/20 15:26:24 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/01/21 19:40:38 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	replace_var(char **str, char *path)
+char	*replace_var(char *str, char *path)
 {
 	char	*new;
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;
-	while ((*str)[i] && (*str)[i] != '$')
+	while (str[i] && str[i] != '$')
 		i++;
-	while ((*str)[i + j] && (*str)[i + j] != ' ')
+	while (str[i + j] && (str[i + j] != ' ' && str[i + j] != '\0'))
 		j++;
-	new = ft_calloc(1, sizeof(char) * (ft_strlen(*str) - j + ft_strlen(path) + 1));
+	new = ft_calloc(1, sizeof(char) * (ft_strlen(str) - j + ft_strlen(path) + 1));
 	if (!new)
-		return (0);
-	ft_strlcat(new, (*str), i);
+		return (NULL);
+	ft_strlcat(new, str, i + 1);
 	if (path)
-		ft_strlcat(new, path, ft_strlen(path) + 1);
-	ft_strlcat(new, (*str) + i + j, ft_strlen(*str) - (i + j));
-	printf("%s", new);
-	return (1);
+		ft_strlcat_mod(new, path, ft_strlen(path) + 1);
+	ft_strlcat_mod(new, str + i + j, ft_strlen(str + i + j));
+	new[ft_strlen(str) - j + ft_strlen(path) + 1] = '\0';
+	return (new);
 }
 
 char	**handle_env(char **envp, char **split)
 {
 	char	*path;
+	char	*temp;
 	int	i;
 
 	i = -1;
@@ -46,11 +47,15 @@ char	**handle_env(char **envp, char **split)
 	{
 		//if (ft_strchr(ft_strchr(split[i], '$') + 1, '$') != 0)//a faire
 		//	path = get_envp(envp, "BASHPID=");
-		if (split[i][0] != '\'' && ft_strchr(split[i], '$') != 0)
+		if (split[i][0] != '\'' && count_occ(split[i], '$') != 0)
 		{
+			split[i] = ft_strtrim(split[i], "\"");
 			path = get_envp(envp, ft_strchr(split[i], '$') + 1) + 1;
-			if (!replace_var(&split[i], path))
+			temp = replace_var(split[i], path);
+			if (!temp)
 				return (ft_free_arr(split, arr_size(split)), NULL);
+			else
+				split[i] = temp;//leaks here
 		}
 	}
 	return (split);
@@ -63,7 +68,8 @@ char	**parse(char **envp, char *rl)
 	split = tokenize(rl);
 	if (!split)
 		return (NULL);
-	handle_env(envp, split);
+	split = handle_env(envp, split);
+	show_arr(split);
 	return (split);
 }
 
