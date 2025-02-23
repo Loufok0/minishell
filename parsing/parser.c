@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:46:37 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/21 19:40:38 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/02/24 00:02:22 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*replace_var(char *str, char *path)
 	j = 0;
 	while (str[i] && str[i] != '$')
 		i++;
-	while (str[i + j] && (str[i + j] != ' ' && str[i + j] != '\0'))
+	while (str[i + j] && (str[i + j] != ' ' && str[i + j] != '\0' && str[i + j] != '$'))
 		j++;
 	new = ft_calloc(1, sizeof(char) * (ft_strlen(str) - j + ft_strlen(path) + 1));
 	if (!new)
@@ -51,11 +51,17 @@ char	**handle_env(char **envp, char **split)
 		{
 			split[i] = ft_strtrim(split[i], "\"");
 			path = get_envp(envp, ft_strchr(split[i], '$') + 1) + 1;
-			temp = replace_var(split[i], path);
+			if (find_envp(envp, ft_strchr(split[i], '$') + 1) == arr_size(envp))
+				temp = replace_var(split[i], "");//free path
+			else
+				temp = replace_var(split[i], path);
 			if (!temp)
 				return (ft_free_arr(split, arr_size(split)), NULL);
 			else
-				split[i] = temp;//leaks here
+			{
+				free(split[i]);
+				split[i] = temp;
+			}
 		}
 	}
 	return (split);
@@ -77,7 +83,7 @@ char	**parse(char **envp, char *rl)
 
 
 
-
+//WARNING  "echo \$HOME"	>>	"$HOME"
 
 
 
