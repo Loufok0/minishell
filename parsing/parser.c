@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:46:37 by malapoug          #+#    #+#             */
-/*   Updated: 2025/02/24 04:42:32 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:37:13 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ char	**handle_env(char **envp, char **split)
 	path = NULL;
 	while (split[++i])
 	{
-		//if (ft_strchr(ft_strchr(split[i], '$') + 1, '$') != 0)//a faire
-		//	path = get_envp(envp, "BASHPID=");
+		if (ft_strlen(ft_strchr(split[i], '$')) == 1 && ft_strnstr(ft_strchr(split[i], '$') + 1, "$$", 2) != 0)//a faire
+			path = get_envp(envp, "BASHPID=");
 		while (split[i][0] != '\'' && count_occ(split[i], '$') != 0)
 		{
 			split[i] = ft_strtrim(split[i], "\"");//leaks

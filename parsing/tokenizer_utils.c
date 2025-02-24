@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 17:35:36 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/20 17:09:29 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:31:20 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,29 @@ int	total_occ(char **split, int c)
 		i++;
 	}
 	return (count);
+}
+
+int	check_follow(char **split, char *c)
+{
+	int		size;
+	int		i;
+
+	size = arr_size(split);
+	i = 0;
+	while (i < size)
+	{
+		if (split[i + 1] && (ft_strncmp(split[i], c, 1) == 0 && ft_strncmp(split[i + 1], c, 1) == 0))
+		{
+			split[i] = ft_strjoin_f(split[i], split[i + 1]);
+			if (!split[i])
+				return (0);
+			duck_fishing(split, i + 1);
+			size--;
+		}
+		else
+			i++;
+	}
+	return (1);
 }
 
 int	check_closed(char **split, int c, int n)

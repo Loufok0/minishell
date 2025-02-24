@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:41:26 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/20 17:09:56 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:28:39 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	duck_fishing(char **split, int i);
 int		count_occ(char *str, int c);
 int		total_occ(char **split, int c);
 int		check_closed(char **split, int c, int n);
+int		check_follow(char **split, char *c);
 
 //envp
 int		check11(char *temp, char *path);

@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:06:44 by malapoug          #+#    #+#             */
-/*   Updated: 2025/02/24 03:54:52 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:31:01 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,12 @@ char	**tokenize(char *rl)
 		return (0);
 	if (!check_closed(split, '\'', 2))
 		return (0);
+	if (!check_follow(split, "<"))
+		return (0);
+	if (!check_follow(split, ">"))
+		return (0);
+	if (!check_follow(split, "$"))
+		return (0);
 	while (split[++i])
 	{
 		if (ft_strncmp(split[i], " ", 2) == 0 || ft_strncmp(split[i], "\"\"", 2) == 0)
@@ -83,5 +89,5 @@ char	**tokenize(char *rl)
 
 
 /*
- * FAIR ATTENTION AU COMPORTEMENT DES ';' la on gere "cat file1 cat file2" alors aue ca ne devrait pas marcher,
+ * 		in << EOF | wc -l >> out        =========>>            in	<<	EOF	|	wc	-l	>>	out			✓
 */
