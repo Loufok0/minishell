@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:06:44 by malapoug          #+#    #+#             */
-/*   Updated: 2025/02/24 00:16:26 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/02/24 03:54:52 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,13 @@ char	**full_split(char *rl)
 	split = split_insert_arr(&split, '|');
 	if (!split)
 		return (ft_free_arr(split, arr_size(split)), NULL);
-	split = split_insert_arr(&split, '$');
+	split = split_insert_arr(&split, ';');
 	if (!split)
 		return (ft_free_arr(split, arr_size(split)), NULL);
-	split = split_insert_arr(&split, ';');
+	split = split_insert_arr(&split, '>');
+	if (!split)
+		return (ft_free_arr(split, arr_size(split)), NULL);
+	split = split_insert_arr(&split, '<');
 	if (!split)
 		return (ft_free_arr(split, arr_size(split)), NULL);
 	return (split);
@@ -61,14 +64,14 @@ char	**tokenize(char *rl)
 	if (!split)
 		return (NULL);
 	if (total_occ(split, '\"') % 2 != 0 || total_occ(split, '\'') % 2 != 0) // gerer " ' " '
-		ft_putstr_fd(RED "[ツ] Unclosed quote !" RESET, 2);
+		ft_putstr_fd(RED "[ツ] Unclosed quote !\n" RESET, 2);
 	if (!check_closed(split, '"', 2))
 		return (0);
 	if (!check_closed(split, '\'', 2))
 		return (0);
 	while (split[++i])
 	{
-		if (ft_strncmp(split[i], " ", 2) == 0)
+		if (ft_strncmp(split[i], " ", 2) == 0 || ft_strncmp(split[i], "\"\"", 2) == 0)
 		{
 			duck_fishing(split, i);//check ?
 			i--;

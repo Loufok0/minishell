@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:46:37 by malapoug          #+#    #+#             */
-/*   Updated: 2025/02/24 00:26:31 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/02/24 04:42:32 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,15 @@ char	*replace_var(char *str, char *path)
 
 	i = 0;
 	j = 0;
-	while (str[i] && str[i] != '$')
+	while (str[i] && str[i - 1] != '$')
 		i++;
-	while (str[i + j] && (str[i + j] != ' ' && str[i + j] != '\0' && str[i + j] != '$'))
+	while (str[i + j] && str[i + j] != ' ' && ft_isalpha(str[i + j]))
 		j++;
 	new = ft_calloc(1, sizeof(char) * (ft_strlen(str) - j + ft_strlen(path) + 1));
 	if (!new)
 		return (NULL);
-	ft_strlcat(new, str, i + 1);
-	if (path)
-		ft_strlcat_mod(new, path, ft_strlen(path) + 1);
+	ft_strlcat(new, str, i);
+	ft_strlcat_mod(new, path, ft_strlen(path) + 1);
 	ft_strlcat_mod(new, str + i + j, ft_strlen(str + i + j));
 	new[ft_strlen(str) - j + ft_strlen(path) + 1] = '\0';
 	return (new);
@@ -47,9 +46,9 @@ char	**handle_env(char **envp, char **split)
 	{
 		//if (ft_strchr(ft_strchr(split[i], '$') + 1, '$') != 0)//a faire
 		//	path = get_envp(envp, "BASHPID=");
-		if (split[i][0] != '\'' && count_occ(split[i], '$') != 0)
+		while (split[i][0] != '\'' && count_occ(split[i], '$') != 0)
 		{
-			split[i] = ft_strtrim(split[i], "\"");
+			split[i] = ft_strtrim(split[i], "\"");//leaks
 			path = get_envp(envp, ft_strchr(split[i], '$') + 1) + 1;
 			if (find_envp(envp, ft_strchr(split[i], '$') + 1) == arr_size(envp))
 				temp = replace_var(split[i], "");//free path
