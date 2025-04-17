@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 17:35:36 by malapoug          #+#    #+#             */
-/*   Updated: 2025/02/24 17:31:20 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/17 13:48:56 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,14 @@ int	check_follow(char **split, char *c)
 	i = 0;
 	while (i < size)
 	{
-		if (split[i + 1] && (ft_strncmp(split[i], c, 1) == 0 && ft_strncmp(split[i + 1], c, 1) == 0))
+		if (split[i + 1] && (ft_strncmp(split[i], c, 1) == 0 \
+			&& ft_strncmp(split[i + 1], c, 1) == 0))
 		{
 			split[i] = ft_strjoin_f(split[i], split[i + 1]);
 			if (!split[i])
 				return (0);
 			duck_fishing(split, i + 1);
-			size--;
+			size = arr_size(split);
 		}
 		else
 			i++;
@@ -82,28 +83,68 @@ int	check_follow(char **split, char *c)
 	return (1);
 }
 
-int	check_closed(char **split, int c, int n)
+int	quote_gnl(char **split, int n)
+{
+	int		count_s;
+	int		count_d;
+	int		i;
+
+	i = arr_size(split) - 1;
+	if (ft_strlen(split[i]) == 0)
+		return (1);
+	count_s = count_occ(split[i], '\'');
+	count_d = count_occ(split[i], '\"');
+	if (split[i] && (count_d % n != 0 && split[i][0] == '\"' \
+		&& split[i][ft_strlen(split[i])] != '\"'))
+	{
+		printf(RED "[ツ] Unclosed quote !\n" RESET);
+		printf("We closed it with: %c\n", '"');
+		split[i] = ft_strjoin_f(split[i], "\"");
+		if (!split[i])
+			return (0);
+	}
+	if (split[i] && (count_s % n != 0 && split[i][0] == '\'' \
+		&& split[i][ft_strlen(split[i])] != '\''))
+	{
+		printf(RED "[ツ] Unclosed quote !\n" RESET);
+		printf("We closed it with: %c\n", '\'');
+		split[i] = ft_strjoin_f(split[i], "'");
+		if (!split[i])
+			return (0);
+	}
+	return (1);
+}
+
+int	check_closed(char **split, int n)
 {
 	int		size;
 	int		i;
-	int		count;
+	int		count_s;
+	int		count_d;
 
 	size = arr_size(split);
 	i = 0;
 	while (i <= size)
 	{
-		count = count_occ(split[i], c);
-		if ((count % 10) % n != 0 && split[i + 1])
+		count_s = count_occ(split[i], '\'');
+		count_d = count_occ(split[i], '\"');
+		if (split[i] && split[i + 1] && ((count_s % n != 0 \
+			&& split[i][0] == '\'' \
+			&& split[i][ft_strlen(split[i])] != '\'') \
+			|| (count_d % n != 0 && split[i][0] == '\"' \
+			&& split[i][ft_strlen(split[i])] != '\"')))
 		{
 			split[i] = ft_strjoin_f(split[i], split[i + 1]);
 			if (!split[i])
 				return (0);
 			duck_fishing(split, i + 1);
-			size--;
+			size = arr_size(split);
 		}
 		else
 			i++;
 	}
+	if (!quote_gnl(split, n))
+		return (0);
 	return (1);
 }
 
@@ -114,9 +155,7 @@ char	**list_insert(char **lst1, char **lst2, int n)
 	int		i;
 	int		j;
 
-	if (!lst1 || !lst2)
-		return (NULL);
-	if (n >= arr_size(lst1))
+	if (!lst1 || !lst2 || n >= arr_size(lst1))
 		return (NULL);
 	size = arr_size(lst1) - 1 + arr_size(lst2);
 	new = malloc((size + 1) * sizeof(char *));
@@ -125,12 +164,26 @@ char	**list_insert(char **lst1, char **lst2, int n)
 	i = -1;
 	j = -1;
 	while (++i < n)
-		new[i] = ft_strdup(lst1[i]);
+	{
+		new[i] = ft_strdup(lst1[i]);//check
+		free(lst1[i]);
+	}
+	free(lst1[i]);
 	while (lst2[++j])
-		new[i + j] = ft_strdup(lst2[j]);
+	{
+		new[i + j] = ft_strdup(lst2[j]);//check
+		free(lst2[j]);
+	}
+	free(lst2[j]);
+	free(lst2);
 	while (lst1[n + 1])
-		new[j + i++] = ft_strdup(lst1[n++ + 1]);
+	{
+		new[j + i++] = ft_strdup(lst1[n + 1]);//check
+		free(lst1[n+1]);
+		n++;
+	}
+	free(lst1[n + 1]);
+	free(lst1);
 	new[i + j] = NULL;
-	ft_free_arr(lst2, arr_size(lst2));
-	return (ft_free_arr(lst1, arr_size(lst1)), new);
+	return (new);
 }

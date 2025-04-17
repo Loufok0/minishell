@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/19 18:32:21 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/17 13:44:34 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,30 @@ int	main(int ac, char **av, char **envp)
 {
 	char	*rl;
 	char	*pr;
-	char	**list;
+	int		code;
+	t_parsed	*list;
 
 	(void)ac;
 	(void)av;
 	rl = NULL;
+	code = 0;
 	pr = prompt(envp);
 	while (!ft_strnstr(rl, "exit", ft_strlen(rl)))// voir comment faire avec exceve pour "exit"
 	{
-		free(rl);
+		if (rl)
+			free(rl);
 		rl = readline(pr);
-		list = parse(envp, rl);//voir qu'est ce que je dois renvoyer (on peut changer en char *** ou n'importe)
-		if (!list)
+		list = parse(envp, rl, &code);
+		if (!list && code != 2)
 			break ;
-		//show_arr(hist);
-		//process(list);
+		if (code != 2)
+		{
+			//process(list);
+			free_chain(list);
+		}
 		free(pr);
 		pr = prompt(envp);
 	}
-	ft_free_arr(list, arr_size(list));
 	free(pr);
 	free(rl);
 	return (0);

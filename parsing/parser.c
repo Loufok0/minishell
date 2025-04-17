@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:46:37 by malapoug          #+#    #+#             */
-/*   Updated: 2025/02/24 17:37:13 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/17 14:44:21 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*replace_var(char *str, char *path)
 {
-	char	*new;
+	char	*n;
 	int		i;
 	int		j;
 
@@ -24,127 +24,79 @@ char	*replace_var(char *str, char *path)
 		i++;
 	while (str[i + j] && str[i + j] != ' ' && ft_isalpha(str[i + j]))
 		j++;
-	new = ft_calloc(1, sizeof(char) * (ft_strlen(str) - j + ft_strlen(path) + 1));
-	if (!new)
+	n = ft_calloc(1, sizeof(char) * (ft_strlen(str) - j + ft_strlen(path) + 1));
+	if (!n)
 		return (NULL);
-	ft_strlcat(new, str, i);
-	ft_strlcat_mod(new, path, ft_strlen(path) + 1);
-	ft_strlcat_mod(new, str + i + j, ft_strlen(str + i + j));
-	new[ft_strlen(str) - j + ft_strlen(path) + 1] = '\0';
-	return (new);
+	ft_strlcat(n, str, i);
+	ft_strlcat_mod(n, path, ft_strlen(path) + 1);
+	ft_strlcat_mod(n, str + i + j, ft_strlen(str + i + j));
+	n[ft_strlen(str) - j + ft_strlen(path) + 1] = '\0';
+	return (n);
 }
 
-char	**handle_env(char **envp, char **split)
+int	is_problem_char(char *str)
 {
+	if (str[0] == ')' \
+		|| str[0] == '}' || str[0] == '<' || str[0] == '>' || str[0] == '|')
+	{
+		printf("Syntax error near unexpected token `%c'\n", (str[0]));
+		return (1);
+	}
+	return (0);
+}
+
+char	**handle_env(char **envp, char **split, int *code)
+{
+	int		i;
 	char	*path;
 	char	*temp;
-	int	i;
 
 	i = -1;
 	path = NULL;
 	while (split[++i])
 	{
-		if (ft_strlen(ft_strchr(split[i], '$')) == 1 && ft_strnstr(ft_strchr(split[i], '$') + 1, "$$", 2) != 0)//a faire
-			path = get_envp(envp, "BASHPID=");
-		while (split[i][0] != '\'' && count_occ(split[i], '$') != 0)
+		while (split[i] && split[i][0] != '\'' && count_occ(split[i], '$') != 0)
 		{
-			split[i] = ft_strtrim(split[i], "\"");//leaks
-			path = get_envp(envp, ft_strchr(split[i], '$') + 1) + 1;
-			if (find_envp(envp, ft_strchr(split[i], '$') + 1) == arr_size(envp))
-				temp = replace_var(split[i], "");//free path
+			if (ft_strnstr(split[i], "<<", 3) \
+					&& !ft_strnstr(split[i], "<<<", 4))
+				break ;
+			path = get_envp(envp, ft_strchr(split[i], '$') + 1);
+			if (!path)
+				temp = replace_var(split[i], "");
 			else
-				temp = replace_var(split[i], path);
+				temp = replace_var(split[i], path + 1);
 			if (!temp)
 				return (ft_free_arr(split, arr_size(split)), NULL);
-			else
-			{
-				free(split[i]);
-				split[i] = temp;
-			}
+			free(split[i]);
+			split[i] = temp;
+			split = list_insert(split, tokenize(split[i], code), i);
+			if (!split)
+				return (NULL);
 		}
 	}
 	return (split);
 }
 
-char	**parse(char **envp, char *rl)
+t_parsed	*parse(char **envp, char *rl, int *code)
 {
-	char	**split;
+	char		**split;
+	t_parsed	*parsed;
 
-	split = tokenize(rl);
+	split = tokenize(rl, code);
+	if (!split)
+		return (printf("Error while tokenizing\n"), NULL);
+	split = handle_env(envp, split, code);
+	if (!split)
+		return (printf("Error while handling env vars\n"), NULL);
+	split = handle_redirections(split, code);
 	if (!split)
 		return (NULL);
-	split = handle_env(envp, split);
-	show_arr(split);
-	return (split);
+	parsed = struct_maker(split, code);
+	if (!parsed)
+		return (NULL);
+//	trimm(parsed->split);
+	show_t_parsed(parsed);
+	return (parsed);
 }
-
-
-
-
 
 //WARNING  "echo \$HOME"	>>	"$HOME"
-
-
-
-
-
-
-
-
-
-
-
-/*
-int	init_token(t_token **token)
-{
-	(*token) = malloc(sizeof(t_token));
-	if (!(*token))
-		return (0);
-	(*token)->str = NULL;
-	(*token)->path = NULL;
-	(*token)->is_cmd = 0;
-	(*token)->is_d_quoted = 0;
-	(*token)->is_quoted = 0;
-	(*token)->next = NULL;
-	return (1);
-}
-
-t_token	*list_const(char **envp, char **split)
-{
-	t_token	*lst;
-	t_token	*current;
-	int	i;
-
-	if (!init_token(&lst))
-		return (NULL);
-	current = lst;
-	i = -1;
-	while (split[++i])
-	{
-		current->str = ft_strdup(split[i]);//check
-		if (!current->str)
-			return (NULL);
-		current->path = get_path(envp, split[i]); //gerer pour enlever les "
-		if (current->path != NULL)
-			current->is_cmd = 1;
-		if (!init_token(&(current->next)))
-			return (NULL);//ft_free_t_token a faire
-		current = current->next;
-	}
-	return (lst);
-}
-
-t_token	*parse(char **envp, char *rl)
-{
-	char	**split;
-	t_token	*lst;
-
-	lst = NULL;
-	split = tokenize(rl);
-	if (!split)
-		return(NULL);
-	lst = list_const(envp, split);
-	return (ft_free_arr(split, arr_size(split)), lst);
-}
-
-*/

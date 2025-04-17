@@ -1,29 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_clean.c                                  :+:      :+:    :+:   */
+/*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 18:51:17 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/07 15:32:57 by malapoug         ###   ########.fr       */
+/*   Created: 2025/03/10 19:33:16 by malapoug          #+#    #+#             */
+/*   Updated: 2025/04/13 11:43:56 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "parsing.h"
 
-void	free_t_token(t_token *head)
+void	clean_node(t_parsed *parsed)
 {
-	t_token	*temp;
+	int	i;
 
-	while (head->next)
+	i = 0;
+	if (!parsed)
+		return ;
+	while (parsed->split && parsed->split[i])
+		free(parsed->split[i++]);
+	free(parsed->split[i]);
+	if (parsed->infile)
+		free(parsed->infile);
+	if (parsed->outfile)
+		free(parsed->outfile);
+	if (parsed)
+		free(parsed);
+}
+
+void	free_chain(t_parsed *head)
+{
+	t_parsed	*temp;
+	char		**t;
+
+	t = head->split;
+	while (head)
 	{
-		free(head->str);
-		free(head->path);
 		temp = head;
 		head = head->next;
-		free(temp);
+		clean_node(temp);
 	}
-//	if (head)
-//		free(head);
+	if (t)
+		free(t);
 }

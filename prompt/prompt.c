@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:49:41 by malapoug          #+#    #+#             */
-/*   Updated: 2025/02/24 17:39:34 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/03/11 16:12:57 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ char	*get_name(void)
 }
 
 /*
-char	*prompt(void)
+char	*prompt(char **envp)
 {
-	return(MAGENTA "\n┌─[NAME @ DEVICE]~[PATH]~o\n└─>" RESET);
+	(void)envp;
+	return(ft_strdup(MAGENTA "\n┌─[NAME @ DEVICE]~[PATH]~o\n└─>" RESET));
 }
 */
 
@@ -32,8 +33,8 @@ char	*prompt(char **envp)
 	char	*name; //fonct a faire
 	char	*path; //fonct a faire
 
-	name = get_envp(envp, "LOGNAME=") + 1;
-	path = getcwd(NULL, 0);
+	name = get_envp(envp, "LOGNAME=") + 1; // if null
+	path = getcwd(NULL, 0); // change with get_envp
 	final = ft_strjoin_f(NULL, "\n┌─[");//check
 	final = ft_strjoin_f(final, MAGENTA);//check
 	final = ft_strjoin_f(final, name);//check

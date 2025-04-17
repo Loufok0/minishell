@@ -1,0 +1,217 @@
+
+|=======================================================================================|
+|This is a file where i put the exemples of what is missing or need to be fixed/upgraded|
+|=======================================================================================|
+
+
+
+
+
+-------------------------------------------------------------------------------------------------
+--------------------------------------------TO DO------------------------------------------------
+-------------------------------------------------------------------------------------------------
+
+
+faire une struct principale pour stocker les codes d'exit ?
+
+-------------------------------------------------------------------------------------------------
+
+
+cat <<< "wergv" | cat <<< "sdzxv"
+normalement ca marche mais a verifier quand meme
+
+
+-------------------------------------------------------------------------------------------------
+
+
+handle "$?"
+
+
+-------------------------------------------------------------------------------------------------
+
+ls | ls | ls | ls
+
+un seul ls
+-------------------------------------------------------------------------------------------------
+
+!!! cat | cat | ls
+
+si infile == stdin : gnl
+
+-------------------------------------------------------------------------------------------------
+
+!!! cat
+
+infinite gnl
+-------------------------------------------------------------------------------------------------
+
+
+ajouter une commande a la fin pour supprimer le this_is_a_temporary_file_for_the_eof
+
+
+-------------------------------------------------------------------------------------------------
+
+
+implementer:
+
+0 	Successful exit without errors
+1 	One or more generic errors encountered upon exit
+2 	Incorrect usage, such as invalid options or missing arguments
+126 	Command found but is not executable
+127 	Command not found, usually the result of a missing directory in $PATH variable
+128+N 	Command encountered fatal error (was forcefully terminated manually or from an outside source). The N tells us which signal was received (see example below)
+130 	Command terminated with signal 2 (SIGINT) (ctrl+c on keyboard). 128+2
+143 	Command terminated with signal 15 (SIGTERM) (kill command). 128+15
+
+
+-------------------------------------------------------------------------------------------------
+
+
+Warning Ctrl-D ==> segv
+
+
+-------------------------------------------------------------------------------------------------
+
+
+gnl pour le  |  et  "" (ca a ete teste, c'est trop chiant)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------------------------
+--------------------------------------------DONE-------------------------------------------------
+-------------------------------------------------------------------------------------------------
+
+cat <<< "aaaaaaaaa" cat <<< "qqqqqqqqqqqqqq"
+cense afficher no such file "cat" in cuu dirr													✓
+(je suis un semi geni)
+
+
+-------------------------------------------------------------------------------------------------
+
+
+"'"'																							✓
+
+-------------------------------------------------------------------------------------------------
+
+
+┌─[l]~[/home/l/42/minishell_parsing]~o
+└─O ad  >
+
+================================
+==443095==ERROR: LeakSanitizer: detected memory leaks											✓
+
+...
+
+
+┌─[l @ frigo]-[minishell_parsing]-[ parsing]-✖
+└──>cat main.c >
+bash: parse error near `new_line'
+-------------------------------------------------------------------------------------------------
+
+
+
+
+┌─[l]~[/home/l/42/test]~o
+└─O cat << lim1 << lim2
+hello
+lim1
+world
+lim2
+
+
+└─O cat	this_is_a_temporary_file_for_the_eof		<== out
+
+Suposed to be in this_is_a_temporary_file_for_the_eof:
+world
+
+Is in this_is_a_temporary_file_for_the_eof:
+world																							✓
+
+
+-------------------------------------------------------------------------------------------------
+
+cat <<< "hello" >> cat >> test		<== censer rediriger l'output vers le dernier seulement		✓
+
+
+-------------------------------------------------------------------------------------------------
+
+
+
+
+
+ajouter le trimm avant d'ecrire dans this_is_a_temporary_file_for_the_eof						✓
+
+
+
+
+-------------------------------------------------------------------------------------------------
+
+
+┌─[l @ frigo][ parsing][!?][C v14.2.1-gcc]
+└─[minishell_parsing]─✖ >> test																	✓
+
+
+
+-------------------------------------------------------------------------------------------------
+
+
+cat << EOF | wc -l >> out        =========>>            cat	<<	EOF	|	wc	-l	>>	out			✓
+
+
+┌─[l]~[/home/l/42/minishell_parsing]~o
+└─O  < infile cat | wc -l >> outfile
+
+IN T_PARSED** :
+
+INFILE:
+infile
+
+OUTFILE:																						✓
+outfile
+
+OUT_MODE:
+O_APPEND
+
+STR:
+cat	|	wc	-l
+
+
+-------------------------------------------------------------------------------------------------
+
+
+└─[test]─> cat << "$HOME"
+/home/l			<=== no stop here
+$HOME			<=== stop here
+/home/l
+																								✓
+┌─[l]@ frigo][ parsing][!?][C v14.2.1-gcc]
+└─[minishell_parsing]─> cat << $HOME
+$HOME			<=== should have stop here
+/home/l			<=== but stoped here
+
+Only  )};<> shouldn't work																		✓
+
+
+-------------------------------------------------------------------------------------------------
+
+
+└─[test]─> cat << $
+hello											!!! WORKING but should not						✓
+$			<=== stop here
+
+
+-------------------------------------------------------------------------------------------------
+
+
+corriger le trim de " et '																		✓

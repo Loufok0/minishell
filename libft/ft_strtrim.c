@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:55:38 by malapoug          #+#    #+#             */
-/*   Updated: 2024/10/03 17:07:06 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/02/25 22:47:35 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	size = end - start + 1;
 	ptr = malloc((size + 1) * sizeof(char));
 	if (!ptr)
-		return (0);
+		return (NULL);
 	ft_strlcpy(ptr, s1 + start, size + 1);
 	ptr[size] = '\0';
 	return (ptr);
