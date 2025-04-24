@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:17:34 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/17 14:47:44 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/24 22:12:12 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	init_node(char **split, t_parsed *node)
 	node->infile = NULL;
 	node->outfile = NULL;
 	node->out_mode = 0;
+	node->fds[0] = 0;
+	node->fds[1] = 1;
 }
 
 t_parsed	*create_chain(char **split, int n_node)
