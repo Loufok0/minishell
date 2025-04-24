@@ -11,57 +11,32 @@
 --------------------------------------------TO DO------------------------------------------------
 -------------------------------------------------------------------------------------------------
 
+┌─[l]~[/home/l/42/minishell_parsing]~o
+└─O cat edfbv < wre
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==278831==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x5ef3dd1bc2ef bp 0x7ffd33dea8a0 sp 0x7ffd33dea8a0 T0)
+==278831==The signal is caused by a READ memory access.
+==278831==Hint: address points to the zero page.
+    #0 0x5ef3dd1bc2ef in ft_strnstr (/home/l/42/minishell_parsing/minishell+0x52ef) (BuildId: ca39bfcfe9561099f47ee6e91ae74953eb151fbb)
+    #1 0x5ef3dd1baa8b in in parsing/in_and_out.c:24
+    #2 0x5ef3dd1bac11 in remove_in_out parsing/in_and_out.c:53
+    #3 0x5ef3dd1ba9d6 in struct_maker parsing/struct.c:89
+    #4 0x5ef3dd1b8dca in parse parsing/parser.c:88
+    #5 0x5ef3dd1b8275 in main /home/l/42/minishell_parsing/main.c:32
+    #6 0x7ec61484ce07  (/usr/lib/libc.so.6+0x25e07) (BuildId: aed3a2b0cf4e6cc12296052529af22f6a450a75a)
+    #7 0x7ec61484cecb in __libc_start_main (/usr/lib/libc.so.6+0x25ecb) (BuildId: aed3a2b0cf4e6cc12296052529af22f6a450a75a)
+    #8 0x5ef3dd1b8124 in _start (/home/l/42/minishell_parsing/minishell+0x1124) (BuildId: ca39bfcfe9561099f47ee6e91ae74953eb151fbb)
 
-faire une struct principale pour stocker les codes d'exit ?
-
--------------------------------------------------------------------------------------------------
-
-
-cat <<< "wergv" | cat <<< "sdzxv"
-normalement ca marche mais a verifier quand meme
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV (/home/l/42/minishell_parsing/minishell+0x52ef) (BuildId: ca39bfcfe9561099f47ee6e91ae74953eb151fbb) in ft_strnstr
+==278831==ABORTING
 
 
--------------------------------------------------------------------------------------------------
-
-
-handle "$?"
-
-
--------------------------------------------------------------------------------------------------
-
-ls | ls | ls | ls
-
-un seul ls
--------------------------------------------------------------------------------------------------
-
-!!! cat | cat | ls
-
-si infile == stdin : gnl
-
--------------------------------------------------------------------------------------------------
-
-!!! cat
-
-infinite gnl
 -------------------------------------------------------------------------------------------------
 
 
 ajouter une commande a la fin pour supprimer le this_is_a_temporary_file_for_the_eof
-
-
--------------------------------------------------------------------------------------------------
-
-
-implementer:
-
-0 	Successful exit without errors
-1 	One or more generic errors encountered upon exit
-2 	Incorrect usage, such as invalid options or missing arguments
-126 	Command found but is not executable
-127 	Command not found, usually the result of a missing directory in $PATH variable
-128+N 	Command encountered fatal error (was forcefully terminated manually or from an outside source). The N tells us which signal was received (see example below)
-130 	Command terminated with signal 2 (SIGINT) (ctrl+c on keyboard). 128+2
-143 	Command terminated with signal 15 (SIGTERM) (kill command). 128+15
 
 
 -------------------------------------------------------------------------------------------------
@@ -74,17 +49,6 @@ Warning Ctrl-D ==> segv
 
 
 gnl pour le  |  et  "" (ca a ete teste, c'est trop chiant)
-
-
-
-
-
-
-
-
-
-
-
 
 
 

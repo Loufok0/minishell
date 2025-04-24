@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:19:03 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/24 15:39:16 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/04/24 21:58:53 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,30 @@
 # define PARSING_H
 
 //====================(INCLUDES)============================//
-# include "../minishell.h"
+# include <stdio.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include "../libft/libft.h"
+# include "../prompt/colors.h"
 
 //====================(DEFINES)=============================//
 
-//0 	Successful exit without errors
-//1 	One or more generic errors encountered upon exit
-//2 	Incorrect usage, such as invalid options or missing arguments
-//126 	Command found but is not executable
-//127 	Command not found,
-//		usually the result of a missing directory in $PATH variable
-//128+N 	Command encountered fatal error
-//		(was forcefully terminated manually or from an outside source).
-//		The N tells us which signal was received (see example below)
-//130 	Command terminated with signal 2 (SIGINT) (ctrl+c on keyboard). 128+2
-//143 	Command terminated with signal 15 (SIGTERM) (kill command). 128+15
-
 //====================(STRUCTS)=============================//
 
-typedef struct s_parsed	t_parsed;
+typedef struct s_parsed
+{
+	char			**split;
+	char			*infile;
+	char			*outfile;
+	int				out_mode;
+	struct s_parsed	*next;
+	int				fds[2];
+}	t_parsed;
 
 //====================(DECLARATIONS)========================//
 
 //clean
-void		free_chain(t_parsed *head);
 void		free_chain(t_parsed *head);
 
 //debug
@@ -64,10 +64,14 @@ int			limiter(char *limiter);
 //parser
 t_parsed	*parse(char **envp, char *rl, int *code);
 int			is_problem_char(char *str);
-char		**handle_env(char **envp, char **split, int *code);
+char		**handle_env(char **envp, char **split, int *code, int i);
 char		*replace_var(char *str, char *path, int *code);
 
 //parser_utils
+t_parsed	*trimm_struct(t_parsed *parsed);
+int			uh(char *newW, int *code);
+int			find_money(char *str);
+int			is_problem_char(char *str);
 char		*trimm(char *split);
 
 //redirections
@@ -82,6 +86,14 @@ char		**tokenize(char *rl, int *code);
 
 //tokenizer_utils
 char		**split_insert_arr(char ***split, int c);
+
+//tokenizer_utils
+void		duck_fishing(char **split, int i);
+int			count_occ(char *str, int c);
+int			total_occ(char **split, int c);
+
+//list_insert
+char		**list_insert(char **lst1, char **lst2, int n);
 
 //tokenizer_utils
 char		**list_insert(char **lst1, char **lst2, int n);

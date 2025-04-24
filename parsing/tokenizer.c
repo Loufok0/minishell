@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:06:44 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/22 15:06:52 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/23 19:08:29 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ char	**full_split(char *rl)
 char	**full_join_sign(char **split)
 {
 	if (!check_closed(split, 2))
-		return (NULL);
+		return (ft_free_arr(split, arr_size(split)), NULL);
 	if (!check_follow(split, "<"))
-		return (NULL);
+		return (ft_free_arr(split, arr_size(split)), NULL);
 	if (!check_follow(split, ">"))
-		return (NULL);
+		return (ft_free_arr(split, arr_size(split)), NULL);
 	if (!check_follow(split, "$"))
-		return (NULL);
+		return (ft_free_arr(split, arr_size(split)), NULL);
 	return (split);
 }
 

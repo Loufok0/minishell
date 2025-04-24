@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:41:26 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/24 15:17:38 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/04/24 21:59:56 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 //====================(INCLUDES)============================//
 
-# include <libft.h>
+# include "libft/libft.h"
 # include <fcntl.h>
 # include <stdio.h>
 # include <signal.h>
@@ -37,16 +37,6 @@
 # define TMP_FILE ".msh_tmp"
 
 //====================(STRUCTS)=============================//
-
-typedef struct s_parsed
-{
-	char			**split;
-	char			*infile;
-	char			*outfile;
-	int				out_mode;
-	struct s_parsed	*next;
-	int				fds[2];
-}	t_parsed;
 
 //====================(DECLARATIONS)========================//
 

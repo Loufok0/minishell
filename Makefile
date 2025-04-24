@@ -9,18 +9,20 @@ RM = rm -f
 NAME = msh
 LIB = libft/libft.a
 
-SRCS_PARSING = parser.c \
-	parser_utils.c \
-	tokenizer.c \
-	tokenizer_utils.c \
-	limiter.c \
-	redirections.c \
-	debug.c \
-	clean.c \
-	struct.c \
-	in_and_out.c \
-	in.c \
-	out.c \
+SRCS_PARSING = parser.c\
+	parser_utils.c\
+	tokenizer.c\
+	tokenizer_utils.c\
+	tokenizer_utils2.c\
+	limiter.c\
+	redirections.c\
+	debug.c\
+	clean.c\
+	struct.c\
+	in_and_out.c\
+	in.c\
+	out.c\
+	list_insert.c\
 
 SRCS_EXEC = \
 	exec.c \
@@ -81,7 +83,7 @@ clean:
 	$(MAKE) clean -C $(LDIR)
 	@$(RM) $(OBJS)
 
-fclean: 
+fclean:
 	$(MAKE) fclean -C $(LDIR)
 	@$(RM) $(OBJS) $(NAME)
 
