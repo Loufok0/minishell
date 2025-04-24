@@ -1,70 +1,89 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/11/09 00:28:46 by malapoug          #+#    #+#              #
-#    Updated: 2025/04/13 11:02:17 by malapoug         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-NAME = minishell
-
 CC = cc
 
 DEBUG = -fsanitize=address
 
-CFLAGS = -Wall -Wextra -Werror
-
-SRCS_PARSING = parser.c\
-	parser_utils.c\
-	tokenizer.c\
-	tokenizer_utils.c\
-	limiter.c\
-	redirections.c\
-	debug.c\
-	clean.c\
-	struct.c\
-	in_and_out.c\
-
-SRCS = main.c\
-	envp.c\
-	prompt/prompt.c\
-	$(addprefix parsing/, $(SRCS_PARSING))\
-	lib_utils/ft_split_let.c\
-	lib_utils/ft_strjoin_f.c\
-	lib_utils/ft_free_arr.c\
-
-OBJS = $(SRCS:.c=.o)
+CFLAGS = -Wall -Wextra -Werror -I$(LDIR) -I/usr/include -lreadline
 
 RM = rm -f
 
+NAME = msh
+LIB = libft/libft.a
+
+SRCS_PARSING = parser.c \
+	parser_utils.c \
+	tokenizer.c \
+	tokenizer_utils.c \
+	limiter.c \
+	redirections.c \
+	debug.c \
+	clean.c \
+	struct.c \
+	in_and_out.c \
+	in.c \
+	out.c \
+
+SRCS_EXEC = \
+	exec.c \
+	exec_utils.c \
+
+SRCS_BUILTINS = \
+	builtins.c \
+	ft_cd.c \
+	ft_echo.c \
+	ft_env.c \
+	ft_exit.c \
+	ft_export.c \
+	ft_pwd.c \
+	ft_unset.c \
+
+SRCS_LIB_UTILS = \
+	ft_split_let.c\
+	ft_strjoin_f.c\
+	ft_free_arr.c\
+	ft_arrdup.c \
+	ft_arrlen.c \
+
+SRCS_VARS = \
+	vars_2.c \
+	vars.c \
+
+SRCS = \
+	main.c\
+	prompt/prompt.c\
+	$(addprefix parsing/, $(SRCS_PARSING))\
+	$(addprefix exec/, $(SRCS_EXEC))\
+	$(addprefix builtins/, $(SRCS_BUILTINS))\
+	$(addprefix lib_utils/, $(SRCS_LIB_UTILS))\
+	$(addprefix vars/, $(SRCS_VARS))\
+
+OBJS = $(addprefix $(ODIR)/, $(SRCS:.c=.o))
+LDIR = $(dir $(LIB))
+ODIR = obj
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	@make -C libft/
-	@$(CC) $(CFLAGS) $(OBJS) libft/libft.a -lreadline -o $(NAME)
+$(NAME): $(OBJS) $(LIB)
+	@$(CC) $(OBJS) $(LIB) $(CFLAGS) -o $(NAME)
 	@echo $(NAME)" compiled!\n"
 
-debug: $(OBJS)
-	@make -C libft/
-	@$(CC) $(CFLAGS) $(DEBUG) $(OBJS) libft/libft.a  -lreadline -o $(NAME)
+debug: $(OBJS) $(LIB)
+	@$(CC) $(DEBUG) $(OBJS) $(LIB) $(CFLAGS) -o $(NAME)
 	@echo $(NAME)" compiled with debug!\n"
 
-%.o: %.c
-	@$(CC) $(CFLAGS) -g -gdwarf-4 -I/usr/include -lreadline -c $< -o $@
+%.a:
+	$(MAKE) -C $(dir $@)
 
+$(ODIR)/%.o: %.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
-	@make clean -C libft/
+	$(MAKE) clean -C $(LDIR)
 	@$(RM) $(OBJS)
 
-fclean: clean
-	@make fclean -C libft/
-	@$(RM) $(NAME)
+fclean: 
+	$(MAKE) fclean -C $(LDIR)
+	@$(RM) $(OBJS) $(NAME)
 
 re: fclean all
 

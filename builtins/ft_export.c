@@ -1,40 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin_f.c                                     :+:      :+:    :+:   */
+/*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/31 15:56:36 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/17 16:02:06 by ylabussi         ###   ########.fr       */
+/*   Created: 2025/02/25 21:12:59 by ylabussi          #+#    #+#             */
+/*   Updated: 2025/04/24 14:32:48 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "builtins.h"
 
-char	*ft_strjoin_f(char *s1, char *s2)
+int	ft_export(char **args, char ***envp)
 {
-	char	*ptr;
-	int		size;
-	int		i;
-	int		j;
+	size_t	l;
+	int		r;
 
-	if (!s1)
-		return (ft_strdup(s2));
-	i = 0;
-	size = ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1;
-	ptr = (char *)malloc(size * sizeof(char));
-	if (!ptr)
-		return (0);
-	while (s1[i])
+	l = arrlen((void **) args);
+	if (l < 2)
 	{
-		ptr[i] = s1[i];
-		i++;
+		r = ft_env(*envp);
 	}
-	j = 0;
-	while (s2[j])
-		ptr[i++] = s2[j++];
-	ptr[i] = '\0';
-	free(s1);
-	return (ptr);
+	else if (l == 2)
+		r = setvar(args[1], envp);
+	else
+		r = setvar_join(args[1], args[2], envp);
+	return (r);
 }

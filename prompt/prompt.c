@@ -3,48 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:49:41 by malapoug          #+#    #+#             */
-/*   Updated: 2025/03/11 16:12:57 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/24 15:31:14 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "colors.h"
 
-char	*get_name(void)
-{
-	//envp : USER
-	return (NULL);
-}
-
-/*
-char	*prompt(char **envp)
-{
-	(void)envp;
-	return(ft_strdup(MAGENTA "\n┌─[NAME @ DEVICE]~[PATH]~o\n└─>" RESET));
-}
-*/
-
 char	*prompt(char **envp)
 {
 	char	*final;
-	char	*name; //fonct a faire
-	char	*path; //fonct a faire
+	char	*name;
+	char	*path;
 
-	name = get_envp(envp, "LOGNAME=") + 1; // if null
-	path = getcwd(NULL, 0); // change with get_envp
-	final = ft_strjoin_f(NULL, "\n┌─[");//check
-	final = ft_strjoin_f(final, MAGENTA);//check
-	final = ft_strjoin_f(final, name);//check
-	final = ft_strjoin_f(final, RESET);//check
-	final = ft_strjoin_f(final, "]~[");//check
-	final = ft_strjoin_f(final, CYAN );//check
-	final = ft_strjoin_f(final, path );//check
-	final = ft_strjoin_f(final, RESET );//check
-	final = ft_strjoin_f(final, "]~o\n└─O ");//check
-	//final = ft_strjoin_f(final, BG_BLUE );//check
-	free(path);
+	name = getvar("LOGNAME", envp);
+	path = getvar("PWD", envp);
+	if (!name || !path)
+		return (ft_strdup("$ "));
+	final = ft_strjoin_f(NULL, "\n┌─[");
+	final = ft_strjoin_f(final, MAGENTA);
+	final = ft_strjoin_f(final, name);
+	final = ft_strjoin_f(final, RESET);
+	final = ft_strjoin_f(final, "]~[");
+	final = ft_strjoin_f(final, CYAN);
+	final = ft_strjoin_f(final, path);
+	final = ft_strjoin_f(final, RESET);
+	final = ft_strjoin_f(final, "]~o\n└─O ");
 	return (final);
 }
