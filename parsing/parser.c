@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:46:37 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/25 17:38:29 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:40:22 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,14 +75,14 @@ t_parsed	*parse(char **envp, char *rl, int *code)
 	int			i;
 
 	split = tokenize(rl, code);
-	if (*code == 0)
+	if (*code != 0)
 		printf("Error while tokenizing\n");
 	if (!split)
 		return (NULL);
 	i = -1;
 	while (split[++i])
 		split = handle_env(envp, split, code, i);
-	if (*code == 0)
+	if (*code != 0)
 		printf("Error while handling env vars\n");
 	if (!split)
 		return (NULL);
