@@ -115,51 +115,6 @@ exit status - 0								<=== Do work...
 
 
 
-
-┌─[l]~[/home/l/42/minishell]~o
-└─O $AWESD
-
-NODE 0 :
-
-INFILE:
-(null)
-
-OUTFILE:
-(null)
-
-
-OUT_MODE:
-0
-
-
-STR:
-
-
-
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==369889==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000000 (pc 0x5fb17b5fca38 bp 0x7ffcd1c69f80 sp 0x7ffcd1c69f80 T0)
-==369889==The signal is caused by a READ memory access.
-==369889==Hint: address points to the zero page.
-    #0 0x5fb17b5fca38 in ft_strncmp (/home/l/42/minishell/msh+0x6a38) (BuildId: a017d89045356f699408ebc2e4b8cc2c3ae36a9b)
-    #1 0x5fb17b5fabdc in is_builtin (/home/l/42/minishell/msh+0x4bdc) (BuildId: a017d89045356f699408ebc2e4b8cc2c3ae36a9b)
-    #2 0x5fb17b5fa6f8 in exe_cmd (/home/l/42/minishell/msh+0x46f8) (BuildId: a017d89045356f699408ebc2e4b8cc2c3ae36a9b)
-    #3 0x5fb17b5fa87f in exe_pipeline (/home/l/42/minishell/msh+0x487f) (BuildId: a017d89045356f699408ebc2e4b8cc2c3ae36a9b)
-    #4 0x5fb17b5f736e in main_loop (/home/l/42/minishell/msh+0x136e) (BuildId: a017d89045356f699408ebc2e4b8cc2c3ae36a9b)
-    #5 0x5fb17b5f7442 in main (/home/l/42/minishell/msh+0x1442) (BuildId: a017d89045356f699408ebc2e4b8cc2c3ae36a9b)
-    #6 0x770052ec7e07  (/usr/lib/libc.so.6+0x25e07) (BuildId: aed3a2b0cf4e6cc12296052529af22f6a450a75a)
-    #7 0x770052ec7ecb in __libc_start_main (/usr/lib/libc.so.6+0x25ecb) (BuildId: aed3a2b0cf4e6cc12296052529af22f6a450a75a)
-    #8 0x5fb17b5f71c4 in _start (/home/l/42/minishell/msh+0x11c4) (BuildId: a017d89045356f699408ebc2e4b8cc2c3ae36a9b)
-
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV (/home/l/42/minishell/msh+0x6a38) (BuildId: a017d89045356f699408ebc2e4b8cc2c3ae36a9b) in ft_strncmp
-==369889==ABORTING
-
-=============
-some more...
-=============
-
-
 ┌─[l]~[/home/l/42/minishell]~o
 └─O $HOME
 
