@@ -1,0 +1,10 @@
+NAME = msh
+all: $(NAME)
+$(NAME): $(OBJS) $(LIB)
+	$(CC) $(OBJS) $(LIB) $(CFLAGS) -o $(NAME)
+	@echo $(NAME)" compiled!\n"
+	$(CC) $(DEBUG) $(OBJS) $(LIB) $(CFLAGS) -o $(NAME)
+	@echo $(NAME)" compiled with debug!\n"
+	$(RM) $(OBJS) $(NAME)
+run: $(NAME)
+	./$(NAME)

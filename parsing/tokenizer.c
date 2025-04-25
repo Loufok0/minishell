@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:06:44 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/23 19:08:29 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/25 18:05:34 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ char	**tokenize(char *rl, int *code)
 	remove_spaces(split);
 	while (split[++i])
 	{
-		if (ft_strncmp(split[i], "|", 2) == 0 && split[i + 1] \
-			&& ft_strncmp(split[i + 1], "|", 2) == 0)
+		if (ft_strncmp(split[i], "|", 2) == 0 \
+			&& (!split[i + 1] || ft_strncmp(split[i + 1], "|", 2) == 0))
 		{
 			*code = 2;
 			printf("bash: syntax error near unexpected token `%c'\n", \

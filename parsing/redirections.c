@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 11:00:31 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/24 19:40:50 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:54:42 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	**two(char **split, int *code, int i)
 		if (!split[i])
 		{
 			*code = 2;
-			printf("Syntax error near unexpected token `newline'");
+			printf("Syntax error near unexpected token `newline'\n");
 		}
 		ft_free_arr(split, arr_size(split));
 		return (NULL);

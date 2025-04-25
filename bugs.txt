@@ -344,39 +344,6 @@ SUMMARY: AddressSanitizer: SEGV (/home/l/42/minishell/msh+0x6a38) (BuildId: a017
 
 
 
-
-
-=============
-Some more:
-=============
-
-┌─[l @ frigo]-[minishell]-[ main]-✖
-└──>make fclean; make ; env -i ./msh
-msh compiled!\n
-$ export we
-
-NODE 0 :
-
-INFILE:
-(null)
-
-OUTFILE:
-(null)
-
-
-OUT_MODE:
-0
-
-
-STR:
-export	we
-
-
-exit status - 0											<====No error
-$
-
-
-
 ====================
 Surprisingly working
 ====================
@@ -428,13 +395,11 @@ emifasollasi
 zsh: segmentation fault (core dumped)  env -i ./msh
 
 ===========================
-Surprisingly working too XD
+Wrong behavior
 ===========================
 
-┌─[l @ frigo]-[minishell]-[ main]-o
-└──>make fclean; make ; env -i ./msh
-msh compiled!\n
-$ env
+┌─[l]~[/home/l/42/minishell]~o
+└─O export q="a"
 
 NODE 0 :
 
@@ -450,11 +415,56 @@ OUT_MODE:
 
 
 STR:
-env
+export	q=	a
 
 
 exit status - 0
-$
+
+┌─[l]~[/home/l/42/minishell]~o
+└─O $q
+
+NODE 0 :
+
+INFILE:
+(null)
+
+OUTFILE:
+(null)
+
+
+OUT_MODE:
+0
+
+
+STR:
+a
+
+
+exit status - 0
+
+┌─[l]~[/home/l/42/minishell]~o
+└─O bash
+
+NODE 0 :
+
+INFILE:
+(null)
+
+OUTFILE:
+(null)
+
+
+OUT_MODE:
+0
+
+
+STR:
+bash
+
+
+[l@frigo minishell]$ $q
+bash: a: command not found
+[l@frigo minishell]$
 
 
 
@@ -498,6 +508,158 @@ exit status - 0
 
 ┌─[l]~[/home/l/42/minishell]~o
 └─O
+
+
+=============
+Some more:
+=============
+
+
+
+┌─[l]~[/home/l/42/minishell]~o
+└─O export q = a
+
+NODE 0 :
+
+INFILE:
+(null)
+
+OUTFILE:
+(null)
+
+
+OUT_MODE:
+0
+
+
+STR:
+export	q	=	a
+
+
+exit status - 0
+
+┌─[l]~[/home/l/42/minishell]~o
+└─O $q
+
+NODE 0 :
+
+INFILE:
+(null)
+
+OUTFILE:
+(null)
+
+
+OUT_MODE:
+0
+
+
+STR:
+
+
+
+exit status - 0
+
+
+================================================================================
+
+ ___     _              __
+| _ \___| |_____ _ _   / _|__ _ __ ___
+|  _/ _ \ / / -_) '_| |  _/ _` / _/ -_)
+|_| \___/_\_\___|_|   |_| \__,_\__\___|
+
+
+
+
+┌─[l]~[/home/l/42/minishell]~o
+└─O dfgb
+
+NODE 0 :
+
+INFILE:
+(null)
+
+OUTFILE:
+(null)
+
+
+OUT_MODE:
+0
+
+
+STR:
+dfgb
+
+
+exit status - 0
+
+┌─[l]~[/home/l/42/minishell]~o
+└─O
+
+================================================================================
+
+ ___
+| __|_ _____ __
+| _|\ \ / -_) _|
+|___/_\_\___\__|
+
+
+
+
+
+┌─[l]~[/home/l/42/minishell]~o
+└─O cat Makefile | grep NAME >> test
+
+NODE 0 :
+
+INFILE:
+(null)
+
+OUTFILE:
+(null)
+
+
+OUT_MODE:
+0
+
+
+STR:
+cat	Makefile
+
+
+
+NODE 1 :
+
+INFILE:
+(null)
+
+OUTFILE:
+test
+
+
+OUT_MODE:
+1024
+
+
+STR:
+grep	NAME
+
+
+grep: write error: Bad file descriptor
+exit status - 0
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
