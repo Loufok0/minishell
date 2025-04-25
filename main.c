@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/25 15:15:21 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:26:59 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,17 +64,17 @@ int	main_loop(char *pr, int *status, char ***envp)
 
 	rl = readline(pr);
 	if (ft_strlen(rl) == 0)
-		return (rl == NULL);
+		return (free(rl), free(pr), rl == NULL);
 	line = parse(*envp, rl, status);
 	if (!line && *status != 2)
-		return (1);
+		return (free(rl), free(pr), 1);
 	else if (*status != 2)
 	{
 		exe_pipeline(line, envp, status);
 		fprintf(stderr, "exit status - %i\n", *status & 0xFF);
 		free_chain(line);
 	}
-	return (0);
+	return (free(rl), free(pr), 0);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -92,7 +92,6 @@ int	main(int argc, char **argv, char **envp)
 		pr = prompt(envp);
 		if (!pr || main_loop(pr, &status, &envp))
 			break ;
-		free(pr);
 	}
 	return (status);
 	argc++;

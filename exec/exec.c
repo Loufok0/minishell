@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:01:18 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/04/25 15:48:54 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/04/25 17:15:03 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ pid_t	exe_cmd_fork(t_parsed *cmd, char ***envp, int *status)
 
 pid_t	exe_cmd(t_parsed *cmd, char ***envp, int *status)
 {
+	if (!cmd->split[0])
+		return (0);
 	if (!is_builtin(cmd->split[0]))
 		return (exe_cmd_fork(cmd, envp, status));
 	else
