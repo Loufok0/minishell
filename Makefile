@@ -65,29 +65,31 @@ ODIR = obj
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIB)
-	@$(CC) $(OBJS) $(LIB) $(CFLAGS) -o $(NAME)
+	$(CC) $(OBJS) $(LIB) $(CFLAGS) -o $(NAME)
 	@echo $(NAME)" compiled!\n"
 
 debug: $(OBJS) $(LIB)
-	@$(CC) $(DEBUG) $(OBJS) $(LIB) $(CFLAGS) -o $(NAME)
+	$(CC) $(DEBUG) $(OBJS) $(LIB) $(CFLAGS) -o $(NAME)
 	@echo $(NAME)" compiled with debug!\n"
 
 %.a:
 	$(MAKE) -C $(dir $@)
 
 $(ODIR)/%.o: %.c
-	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -c -o $@ $<
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
 	$(MAKE) clean -C $(LDIR)
-	@$(RM) $(OBJS)
+	$(RM) $(OBJS)
 
 fclean:
 	$(MAKE) fclean -C $(LDIR)
-	@$(RM) $(OBJS) $(NAME)
+	$(RM) $(OBJS) $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+run: $(NAME)
+	./$(NAME)
 
+.PHONY: all clean fclean re run quiet

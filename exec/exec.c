@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:01:18 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/04/24 15:33:29 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:48:54 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ pid_t	exe_cmd_fork(t_parsed *cmd, char ***envp, int *status)
 
 	path = find_exe(cmd->split[0], *envp);
 	if (!path && !is_builtin(cmd->split[0]))
-		return (-1);
+		return (0);
 	cpid = fork();
 	if (cpid == -1)
 		*status = EXIT_SYSERROR;

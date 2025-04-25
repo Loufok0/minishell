@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:20:03 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/04/24 15:33:45 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:46:48 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,30 @@
 char	*find_exe(char *cmd, char **envp)
 {
 	char	**paths;
+	char	*pathvar;
 	char	*exe;
 	size_t	i;
 
 	i = 0;
+	exe = NULL;
 	if (ft_strchr("/.~", cmd[0]))
 		return (ft_strdup(cmd));
-	paths = ft_split(getvar("PATH", envp), ':');
+	pathvar = getvar("PATH", envp);
+	if (!pathvar)
+		return (ft_putendl_fd("$PATH var not found", STDERR_FILENO), NULL);
+	paths = ft_split(pathvar, ':');
 	if (!paths)
 		return (NULL);
-	exe = NULL;
 	while (paths[i])
 	{
-		exe = pathcat(paths[i], cmd);
-		i++;
-		if (!exe)
-			continue ;
-		else if (access(exe, F_OK) == 0)
+		exe = pathcat(paths[i++], cmd);
+		if (exe && access(exe, X_OK) == 0)
 			break ;
-		free(exe);
+		else if (exe)
+			free(exe);
 		exe = NULL;
 	}
-	ft_free_arr(paths, arrlen((void **) paths));
-	return (exe);
+	return (ft_free_arr(paths, arrlen((void **) paths)), exe);
 }
 
 char	*pathcat(const char *path, const char *rel)

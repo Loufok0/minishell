@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:46:37 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/24 22:03:23 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:15:59 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	**handle_env(char **envp, char **split, int *code, int i)
 		if (!path || split[i][find_money(split[i])] == '$')
 			temp = replace_var(split[i], "", code);
 		else
-			temp = replace_var(split[i], path + 1, code);
+			temp = replace_var(split[i] + 1, path, code);
 		if (!temp)
 			return (ft_free_arr(split, arr_size(split)), NULL);
 		free(split[i]);

@@ -7,6 +7,13 @@
                      __/ |                                          __/ |
                     |___/                                          |___/
 
+1. inch'allah? - bonne question (can't reproduce)
+2. exit? no... - ??? (can't reproduce)
+3. do we really need to ? - yes we do, it's cleaner and all managed by the Makefile (there wasn't much to fix)
+4. some vars - remove the " + 1" in parser.c:59:40 (fixed)
+5. envvv - yeah, it was trying to split $PATH which doesn't exist (fixed)
+
+other - tu peux faire make -s au lieu de spam des @ partout dans le Makefile et make re run pour lancer msh directement
 
 
 ================================================================================

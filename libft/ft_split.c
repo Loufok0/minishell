@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 11:52:31 by malapoug          #+#    #+#             */
-/*   Updated: 2024/12/31 10:50:18 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/25 15:36:39 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static int	count_w(const char *s, char c)
 	int	count;
 	int	in_w;
 
+	if (!s)
+		return (-1);
 	i = 0;
 	count = 0;
 	in_w = 0;
