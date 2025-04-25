@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/25 18:15:03 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/25 19:42:06 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,23 @@ int	main(int ac, char **av, char **envp)
 
 void	sa(int sig)
 {
+	char	*rl;
+
 	if (sig == 3)
 		ft_putendl_fd("quit (core dumped)", STDERR_FILENO);
 	else
-		ft_putchar_fd('\n', STDERR_FILENO);
+	{
+		rl = readline("\nWanna quit buddy ?: Press Enter to quit.\n"); // le laisse-t-on ? XD
+		if (rl[0] == '\0')
+		{
+			free (rl);
+			exit(0);
+		}
+		else
+			rl = readline("prompt>>\n"); // a revoir
+
+		free (rl);
+	}
 }
 
 int	main_loop(char *pr, int *status, char ***envp)
@@ -71,7 +84,7 @@ int	main_loop(char *pr, int *status, char ***envp)
 	else if (*status != 2)
 	{
 		exe_pipeline(line, envp, status);
-		fprintf(stderr, "exit status - %i\n", *status & 0xFF);
+		fprintf(stderr, "exit status - %i\n", *status & 0xFF); //a enlever (fprintf)
 		free_chain(line);
 	}
 	return (free(rl), free(pr), 0);
@@ -93,7 +106,7 @@ int	main(int argc, char **argv, char **envp)
 		if (!pr || main_loop(pr, &status, &envp))
 			break ;
 	}
-	return (status);
+	exit (status);
 	argc++;
 	argv++;
 }

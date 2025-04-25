@@ -560,6 +560,58 @@ STR:
 
 exit status - 0
 
+================
+UH ???
+================
+
+┌─[l @ frigo]-[minishell]-[ main]-✖
+└──>make fclean; make debug; ./msh
+msh compiled with debug!\n
+
+┌─[l]~[/home/l/42/minishell]~o
+└─O <tests/list.txt
+
+NODE 0 :
+
+INFILE:
+tests/list.txt
+
+OUTFILE:
+(null)
+
+
+OUT_MODE:
+0
+
+
+STR:
+
+
+
+exit status - 0
+
+┌─[l]~[/home/l/42/minishell]~o
+└─O <tests/list.txt echo "" "" "" "" "" $?
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==419394==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000261 (pc 0x6239dc28dbea bp 0x7fff919cc510 sp 0x7fff919cc510 T0)
+==419394==The signal is caused by a READ memory access.
+==419394==Hint: address points to the zero page.
+    #0 0x6239dc28dbea in ft_strnstr (/home/l/42/minishell/msh+0x6bea) (BuildId: e81ba738ff07f5306550e7666a24c90a8b6ddec9)
+    #1 0x6239dc28a15d in handle_redirections (/home/l/42/minishell/msh+0x315d) (BuildId: e81ba738ff07f5306550e7666a24c90a8b6ddec9)
+    #2 0x6239dc288b94 in parse (/home/l/42/minishell/msh+0x1b94) (BuildId: e81ba738ff07f5306550e7666a24c90a8b6ddec9)
+    #3 0x6239dc288347 in main_loop (/home/l/42/minishell/msh+0x1347) (BuildId: e81ba738ff07f5306550e7666a24c90a8b6ddec9)
+    #4 0x6239dc28848a in main (/home/l/42/minishell/msh+0x148a) (BuildId: e81ba738ff07f5306550e7666a24c90a8b6ddec9)
+    #5 0x7b097c7d9e07  (/usr/lib/libc.so.6+0x25e07) (BuildId: aed3a2b0cf4e6cc12296052529af22f6a450a75a)
+    #6 0x7b097c7d9ecb in __libc_start_main (/usr/lib/libc.so.6+0x25ecb) (BuildId: aed3a2b0cf4e6cc12296052529af22f6a450a75a)
+    #7 0x6239dc2881c4 in _start (/home/l/42/minishell/msh+0x11c4) (BuildId: e81ba738ff07f5306550e7666a24c90a8b6ddec9)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV (/home/l/42/minishell/msh+0x6bea) (BuildId: e81ba738ff07f5306550e7666a24c90a8b6ddec9) in ft_strnstr
+==419394==ABORTING
+
+
+
 
 ================================================================================
 

@@ -1,0 +1,36 @@
+<
+>
+<<
+>>
+<<<
+>>>
+|
+||
+||||
+esdtg
+stdg w5ht
+"hello"
+'hello'
+"hello world"
+hello " www'ooo "rld
+hello " www'oooo' rrr "ld
+"hello $USER world"
+'hello $USER (???) world'
+"hello $USER world : $HOME"
+"hello not $USER world : $wesrgwesrsgfwegr"
+cat Makefile | grep NAME > test.txt
+"cat Makefile | grep NAME > test.txt"
+'cat Makefile | grep NAME > test.txt'
+cat Makefile | grep NAME >> test.txt
+"cat Makefile | grep NAME >> test.txt"
+'cat Makefile | grep NAME >> test.txt'
+echo $?
+|
+echo $?
+echo tabs:										$?
+echo spaces:                                              $?
+echo "" "" "" "" "" "" "" "" "" "" "" "" "" "" $?
+<tests/list.txt
+<tests/list.txt echo "" "" "" "" "" $?
+make re
+mkdir teeest | cd test | mkdir teeest2 | cd teeest2 | rm ../teeest
