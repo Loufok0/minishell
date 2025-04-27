@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/25 19:42:06 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/27 16:10:56 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,23 +51,11 @@ int	main(int ac, char **av, char **envp)
 
 void	sa(int sig)
 {
-	char	*rl;
-
 	if (sig == 3)
 		ft_putendl_fd("quit (core dumped)", STDERR_FILENO);
 	else
-	{
-		rl = readline("\nWanna quit buddy ?: Press Enter to quit.\n"); // le laisse-t-on ? XD
-		if (rl[0] == '\0')
-		{
-			free (rl);
-			exit(0);
-		}
-		else
-			rl = readline("prompt>>\n"); // a revoir
+		ft_putchar_fd('\n', STDERR_FILENO);
 
-		free (rl);
-	}
 }
 
 int	main_loop(char *pr, int *status, char ***envp)

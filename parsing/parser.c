@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:46:37 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/25 18:27:35 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/27 16:09:34 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_parsed	*parse(char **envp, char *rl, int *code)
 		return (NULL);
 	i = -1;
 	while (split && split[++i])
-		handle_env(envp, split, code, i);
+		split = handle_env(envp, split, code, i);
 	if (!split && *code == 0)
 		printf("Error while handling env vars\n");
 	if (!split)
