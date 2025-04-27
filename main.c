@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/27 16:10:56 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/27 16:51:26 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int	main_loop(char *pr, int *status, char ***envp)
 	rl = readline(pr);
 	if (ft_strlen(rl) == 0)
 		return (free(rl), free(pr), rl == NULL);
+	add_history(rl);
 	line = parse(*envp, rl, status);
 	if (!line && *status != 2)
 		return (free(rl), free(pr), 1);
@@ -94,7 +95,9 @@ int	main(int argc, char **argv, char **envp)
 		if (!pr || main_loop(pr, &status, &envp))
 			break ;
 	}
-	exit (status);
+	rl_clear_history();
+	exit (status);//penser a supprimer .this_is_a_temporary_file_for_the_eof
 	argc++;
 	argv++;
 }
+
