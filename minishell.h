@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:41:26 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/24 21:59:56 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/28 16:07:23 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 //====================(DECLARATIONS)========================//
 
 //prompt
-char	*prompt(char **envp);
+char	*prompt();
 
 //envp
 int		check11(char *temp, char *path);

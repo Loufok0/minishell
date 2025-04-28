@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/27 16:51:26 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/28 16:21:54 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,16 @@ int	main(int ac, char **av, char **envp)
 
 void	sa(int sig)
 {
-	if (sig == 3)
-		ft_putendl_fd("quit (core dumped)", STDERR_FILENO);
-	else
-		ft_putchar_fd('\n', STDERR_FILENO);
+	char	*pr;
 
+	pr = prompt();
+	if (sig == 3)
+		ft_putstr_fd(pr, STDERR_FILENO);
+	else
+	{
+		if (pr)
+			ft_putstr_fd(pr, STDERR_FILENO);
+	}
 }
 
 int	main_loop(char *pr, int *status, char ***envp)
@@ -91,7 +96,7 @@ int	main(int argc, char **argv, char **envp)
 	signal(SIGQUIT, sa);
 	while (envp)
 	{
-		pr = prompt(envp);
+		pr = prompt();
 		if (!pr || main_loop(pr, &status, &envp))
 			break ;
 	}

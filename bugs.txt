@@ -18,6 +18,29 @@
 other - tu peux faire make -s au lieu de spam des @ partout dans le Makefile et make re run pour lancer msh directement
 c'est pas faux...
 
+
+
+
+================================================================================
+================================================================================
+-------------------------Requierement not done:---------------------------------
+
+in interactive mode:
+
+	ctrl-c display a new prompt on a new line			<-----------------------
+	ctrl-d exit the shell
+	ctrl-\ does nothing									idk if we respect the subject rn
+================================================================================
+================================================================================
+
+
+
+
+
+
+
+
+
 ================================================================================
  ___         _    _      _ _      _      ___
 |_ _|_ _  __| |_ ( )__ _| | |__ _| |_   |__ \
@@ -145,9 +168,8 @@ suposed to be:
 
 
 
-┌─[l @ frigo]-[minishell]-[ main]-✖
-└──>$HOME
-zsh: permission denied: /home/l						<====== The good behavior
+[l@frigo minishell]$ $HOME
+bash: /home/l: Is a directory
 
 ================================================================================
 
@@ -156,6 +178,8 @@ zsh: permission denied: /home/l						<====== The good behavior
 | _|| ' \ V /\ V /\ V / _ _
 |___|_||_\_/  \_/  \_(_|_|_)
 
+
+(env -i)
 
 $ export e="ls -la"
 
@@ -261,8 +285,7 @@ Some more:
 
 
 ┌─[l @ frigo]-[minishell]-[ main]-o
-└──>make fclean; make debug ; env -i ./msh
-msh compiled with debug!\n
+└──>env -i ./msh
 $ pwd
 
 NODE 0 :
@@ -348,11 +371,8 @@ Some more:
 =============
 
 
-
-
 ┌─[l @ frigo]-[minishell]-[ main]-✖
-└──>make fclean; make debug ; env -i ./msh
-msh compiled with debug!\n
+└──>env -i ./msh
 $ cd test/
 
 NODE 0 :
@@ -421,10 +441,9 @@ Surprisingly working
 
 
 
-┌─[l @ frigo]-[minishell]-[ main]-✖
-└──>make fclean; make ; env -i ./msh
-msh compiled!\n
-$ export do="remifasollasi"
+┌─[l @ frigo]-[minishell]-[ main]-o
+└──>env -i ./msh
+$ export q=a
 
 NODE 0 :
 
@@ -440,11 +459,11 @@ OUT_MODE:
 
 
 STR:
-export	do=	remifasollasi						<====== I though "oh fuck it'll never work"
+export	q=a
 
 
 exit status - 0
-$ $do											<====== In fact it does Yeeeeeeeeeeeeeeeeeeeeeeeee
+$ $q
 
 NODE 0 :
 
@@ -460,13 +479,14 @@ OUT_MODE:
 
 
 STR:
-emifasollasi
+a
 
 
-zsh: segmentation fault (core dumped)  env -i ./msh
+$PATH var not found							<====== why?
+exit status - 0
 
 ===========================
-Wrong behavior
+Wrong behavior vvv
 ===========================
 
 ┌─[l]~[/home/l/42/minishell]~o
@@ -534,7 +554,7 @@ bash
 
 
 [l@frigo minishell]$ $q
-bash: a: command not found
+bash: a: command not found				<<============
 [l@frigo minishell]$
 
 
@@ -549,42 +569,6 @@ bash: a: command not found
 |  _/ _` | '_(_-< | ' \/ _` | | '_ \ '_/ _ \ '_ (_-<_ _ _
 |_| \__,_|_| /__/_|_||_\__, | | .__/_| \___/_.__/__(_|_|_)
                        |___/  |_|
-
-
-
-
-┌─[l]~[/home/l/42/minishell]~o
-└─O "wefwearsg wer  we$SE rsg wer  $HOME $ $$"
-[ツ] Unclosed quote !
-We closed it with: "
-
-NODE 0 :
-
-INFILE:
-(null)
-
-OUTFILE:
-(null)
-
-
-OUT_MODE:
-0
-
-
-STR:
-wefwearsg	wer	we	rsg	wer	/home/l	$
-
-
-exit status - 0
-
-┌─[l]~[/home/l/42/minishell]~o
-└─O
-
-
-=============
-Some more:
-=============
-
 
 
 ┌─[l]~[/home/l/42/minishell]~o
@@ -631,58 +615,16 @@ STR:
 
 exit status - 0
 
-================
-UH ???
-================
-
-┌─[l @ frigo]-[minishell]-[ main]-✖
-└──>make fclean; make debug; ./msh
-msh compiled with debug!\n
-
-┌─[l]~[/home/l/42/minishell]~o
-└─O <tests/list.txt
-
-NODE 0 :
-
-INFILE:
-tests/list.txt
-
-OUTFILE:
-(null)
-
-
-OUT_MODE:
-0
-
-
-STR:
 
 
 
-exit status - 0
+[l@frigo minishell]$ export e = q
+bash: export: `=': not a valid identifier
 
-┌─[l]~[/home/l/42/minishell]~o
-└─O <tests/list.txt echo "" "" "" "" "" $?
-AddressSanitizer:DEADLYSIGNAL
-=================================================================
-==419394==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000261 (pc 0x6239dc28dbea bp 0x7fff919cc510 sp 0x7fff919cc510 T0)
-==419394==The signal is caused by a READ memory access.
-==419394==Hint: address points to the zero page.
-    #0 0x6239dc28dbea in ft_strnstr (/home/l/42/minishell/msh+0x6bea) (BuildId: e81ba738ff07f5306550e7666a24c90a8b6ddec9)
-    #1 0x6239dc28a15d in handle_redirections (/home/l/42/minishell/msh+0x315d) (BuildId: e81ba738ff07f5306550e7666a24c90a8b6ddec9)
-    #2 0x6239dc288b94 in parse (/home/l/42/minishell/msh+0x1b94) (BuildId: e81ba738ff07f5306550e7666a24c90a8b6ddec9)
-    #3 0x6239dc288347 in main_loop (/home/l/42/minishell/msh+0x1347) (BuildId: e81ba738ff07f5306550e7666a24c90a8b6ddec9)
-    #4 0x6239dc28848a in main (/home/l/42/minishell/msh+0x148a) (BuildId: e81ba738ff07f5306550e7666a24c90a8b6ddec9)
-    #5 0x7b097c7d9e07  (/usr/lib/libc.so.6+0x25e07) (BuildId: aed3a2b0cf4e6cc12296052529af22f6a450a75a)
-    #6 0x7b097c7d9ecb in __libc_start_main (/usr/lib/libc.so.6+0x25ecb) (BuildId: aed3a2b0cf4e6cc12296052529af22f6a450a75a)
-    #7 0x6239dc2881c4 in _start (/home/l/42/minishell/msh+0x11c4) (BuildId: e81ba738ff07f5306550e7666a24c90a8b6ddec9)
 
-AddressSanitizer can not provide additional info.
-SUMMARY: AddressSanitizer: SEGV (/home/l/42/minishell/msh+0x6bea) (BuildId: e81ba738ff07f5306550e7666a24c90a8b6ddec9) in ft_strnstr
-==419394==ABORTING
 
 =====================
-i didn't know where to put it but we'll see
+i didn't know where to put this error but we'll see
 =====================
 
 ┌─[l]~[/home/l/42/minishell]~o

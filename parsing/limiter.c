@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:15:25 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/22 01:01:27 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/28 16:13:41 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	limiter(char *limiter)
 	limiter = ft_strjoin_f(limiter, "\n");
 	if (!limiter)
 		return (0);
-	fd = open("./.this_is_a_temporary_file_for_the_eof"\
+	fd = open(TMP_FILE\
 		, O_CREAT | O_TRUNC | O_APPEND | O_WRONLY, 0777);
 	if (fd < 0)
 		return (printf("Error opening files of LIMITER\n"), 0);

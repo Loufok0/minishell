@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 11:00:31 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/27 16:27:52 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/28 16:13:52 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	**two(char **split, int *code, int i)
 		return (NULL);
 	}
 	limiter(split[i]);
-	split[i] = ft_strdup(".this_is_a_temporary_fil_for_the_eof");
+	split[i] = ft_strdup(TMP_FILE);
 	return (split);
 }
 
