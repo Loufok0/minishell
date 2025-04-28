@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   limiter.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:15:25 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/28 16:13:41 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/28 18:01:33 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	limiter(char *limiter)
 	limiter = ft_strjoin_f(limiter, "\n");
 	if (!limiter)
 		return (0);
-	fd = open(TMP_FILE\
+	fd = open(TMP_FILE \
 		, O_CREAT | O_TRUNC | O_APPEND | O_WRONLY, 0777);
 	if (fd < 0)
 		return (printf("Error opening files of LIMITER\n"), 0);

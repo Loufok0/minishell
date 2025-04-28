@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:20:03 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/04/25 15:46:48 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/04/28 18:08:50 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*find_exe(char *cmd, char **envp)
 	while (paths[i])
 	{
 		exe = pathcat(paths[i++], cmd);
-		if (exe && access(exe, X_OK) == 0)
+		if (exe && access(exe, F_OK) == 0)
 			break ;
 		else if (exe)
 			free(exe);

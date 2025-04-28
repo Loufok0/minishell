@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 21:12:59 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/04/24 14:32:48 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/04/28 16:05:30 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ int	ft_export(char **args, char ***envp)
 
 	l = arrlen((void **) args);
 	if (l < 2)
-	{
 		r = ft_env(*envp);
-	}
 	else if (l == 2)
 		r = setvar(args[1], envp);
 	else

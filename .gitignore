@@ -1,3 +1,5 @@
 **/**.o
 msh
 .vscode
+libft/libft.a
+helloworld

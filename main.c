@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/28 16:21:54 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/28 18:01:02 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,10 @@ void	sa(int sig)
 	char	*pr;
 
 	pr = prompt();
-	if (sig == 3)
-		ft_putstr_fd(pr, STDERR_FILENO);
-	else
-	{
-		if (pr)
-			ft_putstr_fd(pr, STDERR_FILENO);
-	}
+	if (!pr)
+		return ;
+	ft_putstr_fd(pr, 1);
+	sig++;
 }
 
 int	main_loop(char *pr, int *status, char ***envp)
@@ -78,7 +75,7 @@ int	main_loop(char *pr, int *status, char ***envp)
 	else if (*status != 2)
 	{
 		exe_pipeline(line, envp, status);
-		fprintf(stderr, "exit status - %i\n", *status & 0xFF); //a enlever (fprintf)
+		fprintf(stderr, "exit status - %i\n", *status); //a enlever (fprintf)
 		free_chain(line);
 	}
 	return (free(rl), free(pr), 0);
@@ -105,4 +102,3 @@ int	main(int argc, char **argv, char **envp)
 	argc++;
 	argv++;
 }
-

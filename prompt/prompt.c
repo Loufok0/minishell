@@ -6,14 +6,14 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:49:41 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/28 16:08:27 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/28 18:01:44 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 #include "colors.h"
 
-char	*prompt()
+char	*prompt(void)
 {
-	return (ft_strdup("\n<$ "));
+	return (ft_strdup("\n>$ "));
 }

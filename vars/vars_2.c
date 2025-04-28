@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:10:28 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/04/24 15:32:34 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/04/28 15:54:20 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ size_t	addvar(char ***vars)
 	size_t	i;
 	char	**new;
 
-	i = arrlen((void **)(*vars));
+	i = arrlen((void **)(*vars)) + 1;
 	new = malloc((i + 1) * sizeof(char *));
 	if (!new)
 		return (0);
-	ft_memmove(new, *vars, (i + 1) * sizeof(char *));
-	free(*vars);
 	new[i] = NULL;
+	ft_memmove(new, *vars, i * sizeof(char *));
+	free(*vars);
 	(*vars) = new;
 	return (i);
 }

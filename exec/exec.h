@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:19:51 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/04/24 15:40:01 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/04/28 18:05:40 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,9 @@ void		exe_pipeline(t_parsed *cmd, char ***envp, int *status);
 int			open_pipe(t_parsed *cmd);
 t_parsed	*getlast(t_parsed *node);
 char		*find_exe(char *cmd, char **envp);
+int			exe_file(char *path, t_parsed *cmd, char **envp);
+
+void		print_error_msg(char *str, int status);
+void		child_process(t_parsed *cmd, int *status, char *path, char ***envp);
 
 #endif

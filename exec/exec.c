@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:01:18 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/04/25 17:15:03 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/28 18:14:04 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	exe_file(char *path, t_parsed *cmd, char **envp)
 {
-	if (!path)
-		return (EXIT_SYSERROR);
+	if (!path || access(path, F_OK))
+		return (EXIT_NOT_FOUND);
 	if (access(path, X_OK))
 		return (EXIT_PERMISSION);
 	execve(path, cmd->split, envp);
@@ -29,21 +29,15 @@ pid_t	exe_cmd_fork(t_parsed *cmd, char ***envp, int *status)
 
 	path = find_exe(cmd->split[0], *envp);
 	if (!path && !is_builtin(cmd->split[0]))
-		return (0);
+	{
+		*status = EXIT_NOT_FOUND;
+		return (-1);
+	}
 	cpid = fork();
 	if (cpid == -1)
 		*status = EXIT_SYSERROR;
 	else if (cpid == 0)
-	{
-		dup2(cmd->fds[0], 0);
-		dup2(cmd->fds[1], 1);
-		if (cmd->next != 0)
-			close(cmd->next->fds[0]);
-		*status = exe_builtin(cmd->split, envp);
-		if (*status == EXIT_NOT_FOUND)
-			*status = exe_file(path, cmd, *envp);
-		exit(*status);
-	}
+	child_process(cmd, status, path, envp);
 	if (path)
 		free(path);
 	if (cmd->fds[1] != 1)
@@ -54,7 +48,7 @@ pid_t	exe_cmd_fork(t_parsed *cmd, char ***envp, int *status)
 pid_t	exe_cmd(t_parsed *cmd, char ***envp, int *status)
 {
 	if (!cmd->split[0])
-		return (0);
+		return (-1);
 	if (!is_builtin(cmd->split[0]))
 		return (exe_cmd_fork(cmd, envp, status));
 	else
@@ -93,8 +87,10 @@ void	exe_pipeline(t_parsed *cmd, char ***envp, int *status)
 		cpid = exe_cmd(cmd, envp, status);
 	else
 		cpid = exe_pipeline_chain(cmd, envp, status);
-	if (cpid < 0)
-		perror("msh");
 	if (cpid > 0)
-		waitpid(cpid, status, WUNTRACED);
+		waitpid(cpid, status, 0);
+	if (*status > 0xFF)
+		*status >>= 8;
+	if (cpid < 0 || *status)
+		print_error_msg(cmd->split[0], *status);
 }

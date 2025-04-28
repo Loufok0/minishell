@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:03:15 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/04/24 14:31:48 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/04/28 15:55:57 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	setvar(char const *var, char ***vars)
 	}
 	else
 	{
-		if (addvar(vars) == i)
+		if (addvar(vars) == i + 1)
 			(*vars)[i] = new;
 		else
 		{
@@ -89,7 +89,7 @@ int	setvar_join(char const *prefix, char const *val, char ***vars)
 	}
 	else
 	{
-		if (addvar(vars) == i)
+		if (addvar(vars) == i + 1)
 			(*vars)[i] = new;
 		else
 		{
