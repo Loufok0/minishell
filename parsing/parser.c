@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:46:37 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/29 16:26:51 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:33:47 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,32 @@ char	*replace_var(char *str, char *path, int *code)
 	int		i;
 	int		j;
 
+	new = NULL;
 	j = 1;
 	i = find_money(str);
 	while (str[i + j] && str[i + j] != ' ' && ft_isalpha(str[i + j]))
 		j++;
-	new = ft_calloc(1, sizeof(char) \
-		* (ft_strlen(str) - j + ft_strlen(path) + 1));
-	if (!new)
-		return (NULL);
-	ft_strlcat(new, str, i);
 	if (str[i] == '?')
 	{
-		if (!uh(new, code))
+		new = uh(new, str, code, i);
+		if (!new)
 			return (NULL);
 	}
-	else if (str[i] == '\0' || str[i] == ' ' || str[i] == '"')
-		ft_strlcat_mod(new, "$", 2);
 	else
-		ft_strlcat_mod(new, path, ft_strlen(path) + 1);
-	ft_strlcat_mod(new, str + i + j, ft_strlen(str + i + j));
-	new[ft_strlen(str) - j + ft_strlen(path) + 1] = '\0';
+	{
+		new = ft_calloc(1, sizeof(char) \
+			* (ft_strlen(str) - j + ft_strlen(path) + 1));
+		if (!new)
+			return (NULL);
+		ft_strlcat(new, str, i);
+		if (str[i] == '\0' || str[i] == ' ' || str[i] == '"')
+			ft_strlcat_mod(new, "$", 2);
+		else
+			ft_strlcat_mod(new, path, ft_strlen(path) + 1);
+		ft_strlcat_mod(new, str + i + j, ft_strlen(str + i + j));
+		new[ft_strlen(str) - j + ft_strlen(path) + 1] = '\0';
+	}
+
 	return (new);
 }
 

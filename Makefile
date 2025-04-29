@@ -52,7 +52,6 @@ SRCS_VARS = \
 
 SRCS = \
 	main.c\
-	prompt/prompt.c\
 	$(addprefix parsing/, $(SRCS_PARSING)) \
 	$(addprefix exec/, $(SRCS_EXEC)) \
 	$(addprefix builtins/, $(SRCS_BUILTINS)) \

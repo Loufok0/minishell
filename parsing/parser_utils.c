@@ -6,22 +6,29 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:46:29 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/24 17:01:17 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:34:07 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int	uh(char *new, int *code)
+char	*uh(char *new, char *str, int *code, int i)
 {
 	char	*nb;
 
 	nb = ft_itoa(*code);
 	if (!nb)
-		return (free(new), 0);
-	ft_strlcat_mod(new, nb, ft_strlen(nb) + 1);
+		return (NULL);
+	new = ft_calloc(1, sizeof(char) \
+		* (ft_strlen(str) - 2 + ft_strlen(nb) + 1));
+	if (!new)
+		return (NULL);
+	ft_strlcat(new, str, i);
+	ft_strlcat(new, nb, ft_strlen(nb) + 1);
+	ft_strlcat_mod(new, str + i + 2, ft_strlen(str + i + 2));
+	new[ft_strlen(str) - 2 + ft_strlen(nb) + 1] = '\0';
 	free(nb);
-	return (1);
+	return (new);
 }
 
 int	find_money(char *str)

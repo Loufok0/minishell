@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/29 15:38:47 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:43:39 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,11 @@ void	sa(int sig)
 {
 	char	*pr;
 
-	pr = prompt();
-	if (!pr)
-		return ;
-	ft_putstr_fd(pr, 1);
+	pr = "\033[34m\n<$$$> \033[0m";
+	if (sig == 3)
+		ft_putstr_fd("\t", 1);
+	else
+		ft_putstr_fd(pr, 1);
 	sig++;
 }
 
@@ -67,18 +68,18 @@ int	main_loop(char *pr, int *status, char ***envp)
 
 	rl = readline(pr);
 	if (ft_strlen(rl) == 0)
-		return (free(rl), free(pr), rl == NULL);
+		return (free(rl), rl == NULL);
 	add_history(rl);
 	line = parse(*envp, rl, status);
 	if (!line && *status != 2)
-		return (free(rl), free(pr), 1);
-	else if (*status != 2)
+		return (free(rl), 1);
+	else if (line->split[0] && *status != 2)
 	{
 		exe_pipeline(line, envp, status);
 		fprintf(stderr, "exit status - %i\n", *status); //a enlever (fprintf)
 		free_chain(line);
 	}
-	return (free(rl), free(pr), 0);
+	return (free(rl), 0);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -91,14 +92,14 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	signal(SIGINT, sa);
 	signal(SIGQUIT, sa);
+	pr = "\033[34m\n<$$$> \033[0m";
 	while (envp)
 	{
-		pr = prompt();
-		if (!pr || main_loop(pr, &status, &envp))
+		if (main_loop(pr, &status, &envp))
 			break ;
 	}
 	rl_clear_history();
-	exit (status);
+	exit (status);//penser a supprimer .this_is_a_temporary_file_for_the_eof
 	argc++;
 	argv++;
 }

@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:41:26 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/28 18:01:12 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/04/29 15:39:42 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "parsing/parsing.h"
-# include "prompt/colors.h"
 # include "exec/exec.h"
 # include "vars/vars.h"
 
