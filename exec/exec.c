@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:01:18 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/04/28 18:14:04 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:28:54 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,14 @@
 
 int	exe_file(char *path, t_parsed *cmd, char **envp)
 {
+	struct stat	sb;
+
 	if (!path || access(path, F_OK))
 		return (EXIT_NOT_FOUND);
 	if (access(path, X_OK))
 		return (EXIT_PERMISSION);
+	if (lstat(path, &sb) || !S_ISREG(sb.st_mode))
+		return (EXIT_PERMISSION + 0x80);
 	execve(path, cmd->split, envp);
 	return (EXIT_SYSERROR);
 }
@@ -52,7 +56,7 @@ pid_t	exe_cmd(t_parsed *cmd, char ***envp, int *status)
 	if (!is_builtin(cmd->split[0]))
 		return (exe_cmd_fork(cmd, envp, status));
 	else
-		*status = exe_builtin(cmd->split, envp);
+		*status = exe_builtin(cmd->split, envp, *status);
 	return (0);
 }
 
@@ -87,10 +91,13 @@ void	exe_pipeline(t_parsed *cmd, char ***envp, int *status)
 		cpid = exe_cmd(cmd, envp, status);
 	else
 		cpid = exe_pipeline_chain(cmd, envp, status);
+	if (!*envp)
+		return ;
 	if (cpid > 0)
 		waitpid(cpid, status, 0);
 	if (*status > 0xFF)
 		*status >>= 8;
 	if (cpid < 0 || *status)
 		print_error_msg(cmd->split[0], *status);
+	*status &= 0x7F;
 }

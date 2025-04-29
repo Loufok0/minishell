@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 09:49:44 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/04/24 14:47:40 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:24:29 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	is_builtin(const char *cmd)
 		return (0);
 }
 
-int	exe_builtin(char **args, char ***envp)
+int	exe_builtin(char **args, char ***envp, int oldstatus)
 {
 	if (ft_strncmp(args[0], "cd", 3) == 0)
 		return (ft_cd(args, envp));
@@ -47,7 +47,7 @@ int	exe_builtin(char **args, char ***envp)
 	else if (ft_strncmp(args[0], "unset", 6) == 0)
 		return (ft_unset(args, envp));
 	else if (ft_strncmp(args[0], "exit", 5) == 0)
-		return (ft_exit(args[1], envp));
+		return (ft_exit(args[1], envp, oldstatus));
 	else
 		return (EXIT_NOT_FOUND);
 }

@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 17:12:46 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/04/28 18:03:41 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:25:49 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	print_error_msg(char *str, int status)
 		ft_putendl_fd(": command not found", STDERR_FILENO);
 	else if (status == EXIT_PERMISSION)
 		ft_putendl_fd(": permission denied", STDERR_FILENO);
+	else if (status == EXIT_PERMISSION + 0x80)
+		ft_putendl_fd(": is  a directory", STDERR_FILENO);
 }
 
 void	child_process(t_parsed *cmd, int *status, char *path, char ***envp)
@@ -27,7 +29,7 @@ void	child_process(t_parsed *cmd, int *status, char *path, char ***envp)
 	dup2(cmd->fds[1], 1);
 	if (cmd->next != 0 && cmd->next->fds[0] != 0)
 		close(cmd->next->fds[0]);
-	*status = exe_builtin(cmd->split, envp);
+	*status = exe_builtin(cmd->split, envp, *status);
 	if (*status == EXIT_NOT_FOUND)
 		*status = exe_file(path, cmd, *envp);
 	exit(*status);

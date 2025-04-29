@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:46:37 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/27 16:44:13 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/29 16:26:51 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ t_parsed	*parse(char **envp, char *rl, int *code)
 		printf("Error while handling env vars\n");
 	if (!split || !handle_redirections(split, code))
 		return (NULL);
-	else
-		*code = 0;
 	parsed = struct_maker(split, code);
 	if (!parsed)
 		return (NULL);

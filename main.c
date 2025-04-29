@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/28 18:01:02 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/04/29 15:38:47 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 	}
 	rl_clear_history();
-	exit (status);//penser a supprimer .this_is_a_temporary_file_for_the_eof
+	exit (status);
 	argc++;
 	argv++;
 }
