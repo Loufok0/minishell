@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 09:49:44 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/04/29 16:24:29 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/04/29 17:15:50 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	exe_builtin(char **args, char ***envp, int oldstatus)
 	else if (ft_strncmp(args[0], "export", 7) == 0)
 		return (ft_export(args, envp));
 	else if (ft_strncmp(args[0], "pwd", 4) == 0)
-		return (ft_pwd());
+		return (ft_pwd(*envp));
 	else if (ft_strncmp(args[0], "unset", 6) == 0)
 		return (ft_unset(args, envp));
 	else if (ft_strncmp(args[0], "exit", 5) == 0)

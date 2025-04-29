@@ -6,7 +6,7 @@ CFLAGS = -Wall -Wextra -Werror -I$(LDIR) -I/usr/include -lreadline
 
 RM = rm -f
 
-NAME = msh
+NAME = minishell
 LIB = libft/libft.a
 
 SRCS_PARSING = parser.c \

@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 21:47:21 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/04/24 15:35:27 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/04/29 17:17:31 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	updateenvp(char *old, char *new, char ***envp)
 	int	err;
 
 	if (!old || !new)
-		return (EXIT_SYSERROR);
+		return (0);
 	err = setvar_join("OLDPWD=", old, envp)
 		| setvar_join("PWD=", new, envp);
 	return (err);
