@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:46:37 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/29 16:33:47 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/30 17:37:47 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ char	*replace_var(char *str, char *path, int *code)
 		ft_strlcat_mod(new, str + i + j, ft_strlen(str + i + j));
 		new[ft_strlen(str) - j + ft_strlen(path) + 1] = '\0';
 	}
-
 	return (new);
 }
 

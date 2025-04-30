@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:41:26 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/29 15:39:42 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/30 16:10:14 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,11 @@
 # define HIST_SIZE	100
 # define METACHARSET "<>|?*[]$\\(){}\"'`&;=! "
 # define TMP_FILE ".msh_tmp"
+# define PROMPT "\033[34m\n<$$$> \033[0m"
 
 //====================(STRUCTS)=============================//
 
 //====================(DECLARATIONS)========================//
-
-//prompt
-char	*prompt(void);
 
 //envp
 int		check11(char *temp, char *path);

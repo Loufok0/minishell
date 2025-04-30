@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:19:03 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/29 16:21:34 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/30 16:25:57 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_parsed
 	int				out_mode;
 	struct s_parsed	*next;
 	int				fds[2];
+	pid_t			pid;
 }	t_parsed;
 
 //====================(DECLARATIONS)========================//

@@ -9,18 +9,6 @@
 
 
 
-1. inch'allah? - bonne question (can't reproduce)
-2. exit? no... - ??? (can't reproduce)
-3. do we really need to ? - yes we do, it's cleaner and all managed by the Makefile (there wasn't much to fix)
-4. some vars - remove the " + 1" in parser.c:59:40 (fixed)
-5. envvv - yeah, it was trying to split $PATH which doesn't exist (fixed)
-
-other - tu peux faire make -s au lieu de spam des @ partout dans le Makefile et make re run pour lancer msh directement
-c'est pas faux...
-
-
-
-
 
 
 
@@ -49,68 +37,8 @@ malloc(): unaligned tcache chunk detected
 zsh: IOT instruction (core dumped)  ./msh
 
 
-
-
 ================================================================================
- ___     _ _     ___
-| __|_ _(_) |_  |__ \  _ _  ___
-| _|\ \ / |  _|   /_/ | ' \/ _ \_ _ _
-|___/_\_\_|\__|  (_)  |_||_\___(_|_|_)
-
-===================
-quand tu fais pleins de commandes pui exit des fois ca le fait ndr jsp pourquoi...
-==================
-
-┌─[l]~[/home/l/42/minishell]~o
-└─O exit
-
-NODE 0 :
-
-INFILE:
-(null)
-
-OUTFILE:
-(null)
-
-
-OUT_MODE:
-0
-
-
-STR:
-exit
-
-
-
-┌─[l]~[/home/l/42/minishell]~o				<=== Doesn't work...
-└─O
-
-======================
-A few moments later...
-======================
-
-┌─[l]~[/home/l/42/minishell]~o
-└─O exit
-
-NODE 0 :
-
-INFILE:
-(null)
-
-OUTFILE:
-(null)
-
-
-OUT_MODE:
-0
-
-
-STR:
-exit
-
-
-exit status - 0								<=== Do work...
-
+cat | cat | ... | ls
 
 ================================================================================
 
@@ -213,85 +141,3 @@ Makefile
 hello ?
 world ?
 [l@frigo minishell]$
-
-================================================================================
-
- ___
-| __|_ _____ __
-| _|\ \ / -_) _|
-|___/_\_\___\__|
-
-
-
-
-
-┌─[l]~[/home/l/42/minishell]~o
-└─O cat Makefile | grep NAME >> test
-
-NODE 0 :
-
-INFILE:
-(null)
-
-OUTFILE:
-(null)
-
-
-OUT_MODE:
-0
-
-
-STR:
-cat	Makefile
-
-
-
-NODE 1 :
-
-INFILE:
-(null)
-
-OUTFILE:
-test
-
-
-OUT_MODE:
-1024
-
-
-STR:
-grep	NAME
-
-
-grep: write error: Bad file descriptor
-exit status - 0
-
-
-
-==============================
-cat infnot supposed to happend
-==============================
-
-
-
-┌─[l]~[/home/l/42/minishell]~o
-└─O cat<<l
-hello ??
-l
-
-NODE 0 :
-
-INFILE:
-.this_is_a_temporary_fil_for_the_eof
-
-OUTFILE:
-(null)
-
-
-OUT_MODE:
-0
-
-
-STR:
-cat
-

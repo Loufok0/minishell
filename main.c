@@ -6,48 +6,11 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/29 16:43:39 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/30 17:37:36 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
-int	main(int ac, char **av, char **envp)
-{
-	char	*rl;
-	char	*pr;
-	int		code;
-	t_parsed	*list;
-
-	(void)ac;
-	(void)av;
-	envp = ft_arrdup(envp);
-	rl = NULL;
-	code = 0;
-	pr = prompt(envp);
-	while (!ft_strnstr(rl, "exit", ft_strlen(rl)))
-	// voir comment faire avec exceve pour "exit"
-	{
-		if (rl)
-			free(rl);
-		rl = readline(pr);
-		list = parse(envp, rl, &code);
-		if (!list && code != 2)
-			break ;
-		if (code != 2)
-		{
-			//process(list);
-			free_chain(list);
-		}
-		free(pr);
-		pr = prompt(envp);
-	}
-	free(pr);
-	free(rl);
-	return (0);
-}*/
-
-//on vas reorganiser tkt pas mdr
 
 void	sa(int sig)
 {
@@ -61,22 +24,22 @@ void	sa(int sig)
 	sig++;
 }
 
-int	main_loop(char *pr, int *status, char ***envp)
+int	main_loop(int *status, char ***envp)
 {
 	char		*rl;
 	t_parsed	*line;
 
-	rl = readline(pr);
+	rl = readline(PROMPT);
 	if (ft_strlen(rl) == 0)
 		return (free(rl), rl == NULL);
 	add_history(rl);
 	line = parse(*envp, rl, status);
-	if (!line && *status != 2)
+	if (!line)
 		return (free(rl), 1);
-	else if (line->split[0] && *status != 2)
+	else if (line->split[0])
 	{
 		exe_pipeline(line, envp, status);
-		fprintf(stderr, "exit status - %i\n", *status); //a enlever (fprintf)
+		fprintf(stderr, "exit status - %i\n", *status);
 		free_chain(line);
 	}
 	return (free(rl), 0);
@@ -85,21 +48,19 @@ int	main_loop(char *pr, int *status, char ***envp)
 int	main(int argc, char **argv, char **envp)
 {
 	int		status;
-	char	*pr;
 
 	envp = ft_arrdup(envp);
 	if (!envp)
 		return (1);
 	signal(SIGINT, sa);
 	signal(SIGQUIT, sa);
-	pr = "\033[34m\n<$$$> \033[0m";
 	while (envp)
 	{
-		if (main_loop(pr, &status, &envp))
+		if (main_loop(&status, &envp))
 			break ;
 	}
 	rl_clear_history();
-	exit (status);//penser a supprimer .this_is_a_temporary_file_for_the_eof
+	exit (status);
 	argc++;
 	argv++;
 }
