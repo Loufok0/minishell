@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 15:55:38 by malapoug          #+#    #+#             */
-/*   Updated: 2024/09/27 22:57:42 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/01 17:36:52 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 	size_t	i;
 	size_t	j;
 
+	if (!big || !little)
+		return (0);
 	if (*little == '\0')
 		return ((char *)big);
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:53:33 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/01 17:13:00 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/01 18:37:20 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,12 @@ int	has_prob_char(char *str)
 	return (0);
 }
 
-int	check_export(t_parsed *parsed) // check valids export names ?
+int	check_export(t_parsed *parsed)
 {
 	t_parsed	*temp;
 	int			found;
 	int			i;
 
-	show_t_parsed(parsed);
 	temp = parsed;
 	found = 0;
 	while (temp)
@@ -62,13 +61,17 @@ char	**join_export(char **split)
 {
 	char	*temp;
 	int		i;
+	int		found;
 
 	i = -1;
+	found = 0;
 	while (split[++i])
 	{
-		if (ft_strnstr(split[i], "export", 7) == 0 \
-			&& split[i + 1] && split[i + 2] && (split[i + 2][0] == '"' \
-			|| split[i + 2][0] == '\''))
+		if (ft_strnstr(split[i], "export", 7) != 0)
+			found = 1;
+		if (found && (split[i] && split[i][ft_strlen(split[i])] == '=' ) \
+			&& (split[i + 1] && (split[i + 1][ft_strlen(split[i + 1])] == '\'' \
+			|| split[i + 1][ft_strlen(split[i + 1])] == '\"')))
 		{
 			temp = ft_strjoin(split[i + 1], split[i + 2]);
 			if (!temp)

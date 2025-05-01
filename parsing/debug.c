@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 13:43:26 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/29 17:02:32 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/01 18:14:19 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	show_arr(char **arr)
 	while (arr[i])
 	{
 		ft_putstr_fd(arr[i], 2);
-		ft_putstr_fd("\t", 2);
+		ft_putstr_fd("\t[sep]\t", 2);
 		i++;
 	}
 	ft_putstr_fd("\n", 1);

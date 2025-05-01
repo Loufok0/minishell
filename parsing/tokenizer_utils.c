@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 17:35:36 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/28 15:30:06 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/01 18:46:38 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ int	check_follow(char **split, char *c)
 	return (1);
 }
 
-//	printf(RED "[ツ] Unclosed quote !\n" RESET);
-//	printf("We closed it with: %c\n", str[0]);
 int	closing_quote(char **split, char *str, int i)
 {
 	split[i] = ft_strjoin_f(split[i], str);
@@ -103,6 +101,7 @@ int	check_closed(char **split, int n)
 				return (0);
 			duck_fishing(split, i + 1);
 			size = arr_size(split);
+			i = 0;
 		}
 		else
 			i++;

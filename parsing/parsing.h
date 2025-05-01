@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:19:03 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/01 15:38:01 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/01 19:30:45 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ char		**in_one(t_parsed *node, char **split, int *code, int i);
 char		**in_two(t_parsed *node, char **split, int *code, int i);
 
 //out
-char		**out_one(t_parsed *node, char **split, int *code, int *i);
-char		**out_two(t_parsed *node, char **split, int *code, int *i);
+char		**out_one(t_parsed *node, char **split, int *code, int i);
+char		**out_two(t_parsed *node, char **split, int *code, int i);
 
 //limiter
 int			get_line(char **line);
@@ -86,25 +86,20 @@ t_parsed	*struct_maker(char **split, int *code);
 
 //tokenizer
 char		**tokenize(char *rl, int *code);
-
-//tokenizer_utils
-char		**split_insert_arr(char ***split, int c);
-
-//tokenizer_utils
-void		duck_fishing(char **split, int i);
-int			count_occ(char *str, int c);
-int			total_occ(char **split, int c);
+void	remove_spaces(char **split);
 
 //list_insert
 char		**list_insert(char **lst1, char **lst2, int n);
 
 //tokenizer_utils
+char		**split_insert_arr(char ***split, int c);
 char		**list_insert(char **lst1, char **lst2, int n);
 void		duck_fishing(char **split, int i);
 int			count_occ(char *str, int c);
 int			total_occ(char **split, int c);
 int			check_closed(char **split, int n);
 int			check_follow(char **split, char *c);
+t_parsed	*join_word(t_parsed *parsed);
 
 //export_check
 int			has_prob_char(char *str);

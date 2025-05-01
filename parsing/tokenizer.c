@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:06:44 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/30 17:39:30 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/01 19:37:07 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ char	**full_split(char *rl)
 {
 	char	**split;
 
-	split = ft_split_let(rl, '"');
+	split = ft_split_let(rl, ' ');
 	if (!split)
 		return (NULL);
-	split = split_insert_arr(&split, ' ');
+	split = split_insert_arr(&split, '"');
 	if (!split)
 		return (ft_free_arr(split, arr_size(split)), NULL);
 	split = split_insert_arr(&split, '\'');
@@ -96,7 +96,6 @@ char	**tokenize(char *rl, int *code)
 	if (!split)
 		return (NULL);
 	split = join_export(split);
-	remove_spaces(split);
 	while (split[++i])
 	{
 		if (ft_strncmp(split[i], "|", 2) == 0 \
