@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:17:34 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/25 18:27:12 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/01 19:59:52 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	count_pipes(char **split)
 	count = 0;
 	while (split[++i])
 	{
-		if (ft_strnstr(split[i], "|", 2))
+		if (split[i][0] != '\'' && split[i][0] != '"' && ft_strnstr(split[i], "|", 2))
 			count++;
 	}
 	return (count);

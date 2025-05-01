@@ -1,0 +1,8 @@
+/home/l
+HOME=/home/l
+HOMEBREW_CACHE=/tmp/l/Homebrew/Caches
+HOMEBREW_TEMP=/tmp/l/Homebrew/Temp
+42
+HOME=42
+HOMEBREW_CACHE=/tmp/l/Homebrew/Caches
+HOMEBREW_TEMP=/tmp/l/Homebrew/Temp

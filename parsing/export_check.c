@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:53:33 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/01 18:37:20 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/01 20:11:56 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,17 @@ int	check_export(t_parsed *parsed)
 	while (temp)
 	{
 		i = 0;
-		while (parsed->split[i])
+		while (temp->split[i])
 		{
+			if (found == 1 && temp->split[i] && has_prob_char(temp->split[i]))
+				return (free_chain(parsed), 0);
 			if (ft_strnstr(temp->split[i], "export", 7) != 0)
 			{
 				i++;
 				found = 1;
 			}
-			if (found == 1 && has_prob_char(temp->split[i]))
-				return (free_chain(parsed), 0);
-			i++;
+			else
+				i++;
 		}
 		temp = temp->next;
 	}
