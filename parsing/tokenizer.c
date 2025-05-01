@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:06:44 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/25 18:05:34 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/04/30 17:39:30 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ char	**tokenize(char *rl, int *code)
 	split = full_join_sign(split);
 	if (!split)
 		return (NULL);
+	split = join_export(split);
 	remove_spaces(split);
 	while (split[++i])
 	{

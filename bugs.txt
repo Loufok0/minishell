@@ -49,13 +49,12 @@ cat | cat | ... | ls
                        |___/  |_|
 
 
-┌─[l]~[/home/l/42/minishell]~o
-└─O export q = a
+<$$$> cat < sd
 
 NODE 0 :
 
 INFILE:
-(null)
+sd
 
 OUTFILE:
 (null)
@@ -63,81 +62,41 @@ OUTFILE:
 
 OUT_MODE:
 0
-
-
-STR:
-export	q	=	a
-
-
-exit status - 0
-
-┌─[l]~[/home/l/42/minishell]~o
-└─O $q
-
-NODE 0 :
-
-INFILE:
-(null)
-
-OUTFILE:
-(null)
-
-
-OUT_MODE:
-0
-
-
-STR:
-
-
-
-exit status - 0
-
-
-
-
-[l@frigo minishell]$ export e = q
-bash: export: `=': not a valid identifier
-
-
-
-=====================
-i didn't know where to put this error but we'll see
-=====================
-
-┌─[l]~[/home/l/42/minishell]~o
-└─O cat >> test
-
-NODE 0 :
-
-INFILE:
-(null)
-
-OUTFILE:
-test
-
-
-OUT_MODE:
-1024
 
 
 STR:
 cat
 
 
-hello ?
-cat: write error: Bad file descriptor
-exit status - 0
-
-┌─[l]~[/home/l/42/minishell]~o
-└─O bash
-[l@frigo minishell]$ cat >> test
-hello ?
-world ?
+/usr/bin/cat
+qwasefd
+qwasefd
+fffffffffff
+fffffffffff
 ^C
-[l@frigo minishell]$ cat test
-hello
-Makefile
-hello ?
-world ?
-[l@frigo minishell]$
+<$$$> exit status - 2
+
+<$$$> bash
+
+NODE 0 :
+
+INFILE:
+(null)
+
+OUTFILE:
+(null)
+
+
+OUT_MODE:
+0
+
+
+STR:
+bash
+
+
+/usr/bin/bash
+[l@frigo minishell]$ cat < d
+bash: d: No such file or directory
+
+

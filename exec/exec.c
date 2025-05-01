@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:01:18 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/01 16:33:11 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/01 17:00:45 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	exe_file(char *path, t_parsed *cmd, char **envp)
 		return (EXIT_NOT_FOUND);
 	if (access(path, X_OK))
 		return (EXIT_PERMISSION);
-	if (lstat(path, &sb) || !S_ISREG(sb.st_mode))
+	if (stat(path, &sb) || !S_ISREG(sb.st_mode))
 		return (EXIT_PERMISSION + 0x80);
 	ft_putendl_fd(path, STDERR_FILENO);
 	execve(path, cmd->split, envp);
@@ -86,7 +86,7 @@ void	exe_pipeline(t_parsed *cmd, char ***envp, int *status)
 	if (cmd->infile)
 		cmd->fds[0] = open(cmd->infile, O_RDONLY);
 	if (last->outfile)
-		last->fds[1] = open(last->outfile, last->out_mode | O_WRONLY | O_CREAT, 0666);
+		last->fds[1] = open(last->outfile, last->out_mode | O_WRONLY, 0666);
 	if (!cmd->next && is_builtin(cmd->split[0]))
 		*status = exe_builtin(cmd->split, envp, *status);
 	else

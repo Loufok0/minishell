@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:41:26 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/01 16:48:46 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/01 16:56:38 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 //====================(DEFINES)=============================//
 
 # define HIST_SIZE	100
-# define METACHARSET "<>|?*[]$\\(){}\"'`&;=! "
+# define METACHARSET "<>|?*[]$\\(){}\"'`&;=! +"
 # define TMP_FILE ".msh_tmp"
 # define PROMPT "\033[34m\n<$$$> \033[0m"
 

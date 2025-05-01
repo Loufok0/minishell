@@ -23,6 +23,7 @@ SRCS_PARSING = parser.c \
 	in.c \
 	out.c \
 	list_insert.c \
+	export_check.c
 
 SRCS_EXEC = \
 	exec.c \

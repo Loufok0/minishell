@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:19:03 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/30 16:25:57 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/01 15:38:01 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 //====================(DEFINES)=============================//
 
 # define TMP_FILE ".msh_tmp"
+# define METACHARSET "<>|?*[]$\\(){}\"'`&;=! +"
 
 //====================(STRUCTS)=============================//
 
@@ -56,8 +57,8 @@ char		**in_one(t_parsed *node, char **split, int *code, int i);
 char		**in_two(t_parsed *node, char **split, int *code, int i);
 
 //out
-char		**out_one(t_parsed *node, char **split, int *code, int i);
-char		**out_two(t_parsed *node, char **split, int *code, int i);
+char		**out_one(t_parsed *node, char **split, int *code, int *i);
+char		**out_two(t_parsed *node, char **split, int *code, int *i);
 
 //limiter
 int			get_line(char **line);
@@ -104,5 +105,10 @@ int			count_occ(char *str, int c);
 int			total_occ(char **split, int c);
 int			check_closed(char **split, int n);
 int			check_follow(char **split, char *c);
+
+//export_check
+int			has_prob_char(char *str);
+int			check_export(t_parsed *parsed);
+char		**join_export(char **split);
 
 #endif

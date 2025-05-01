@@ -6,11 +6,29 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:46:37 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/30 17:37:47 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/01 15:46:22 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+char	*replace_path(char *str, char *path, int i, int j)
+{
+	char	*new;
+
+	new = ft_calloc(1, sizeof(char) \
+		* (ft_strlen(str) - j + ft_strlen(path) + 1));
+	if (!new)
+		return (NULL);
+	ft_strlcat(new, str, i);
+	if (str[i] == '\0' || str[i] == ' ' || str[i] == '"')
+		ft_strlcat_mod(new, "$", 2);
+	else
+		ft_strlcat_mod(new, path, ft_strlen(path) + 1);
+	ft_strlcat_mod(new, str + i + j, ft_strlen(str + i + j));
+	new[ft_strlen(str) - j + ft_strlen(path) + 1] = '\0';
+	return (new);
+}
 
 char	*replace_var(char *str, char *path, int *code)
 {
@@ -30,19 +48,7 @@ char	*replace_var(char *str, char *path, int *code)
 			return (NULL);
 	}
 	else
-	{
-		new = ft_calloc(1, sizeof(char) \
-			* (ft_strlen(str) - j + ft_strlen(path) + 1));
-		if (!new)
-			return (NULL);
-		ft_strlcat(new, str, i);
-		if (str[i] == '\0' || str[i] == ' ' || str[i] == '"')
-			ft_strlcat_mod(new, "$", 2);
-		else
-			ft_strlcat_mod(new, path, ft_strlen(path) + 1);
-		ft_strlcat_mod(new, str + i + j, ft_strlen(str + i + j));
-		new[ft_strlen(str) - j + ft_strlen(path) + 1] = '\0';
-	}
+		new = replace_path(str, path, i, j);
 	return (new);
 }
 
@@ -93,6 +99,8 @@ t_parsed	*parse(char **envp, char *rl, int *code)
 		return (NULL);
 	parsed = struct_maker(split, code);
 	if (!parsed)
+		return (NULL);
+	if (!check_export(parsed))
 		return (NULL);
 	if (!parsed || !trimm_struct(parsed))
 		return (NULL);
