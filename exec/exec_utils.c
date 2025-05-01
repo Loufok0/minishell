@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:20:03 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/04/28 18:08:50 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/01 16:47:31 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,4 +84,15 @@ t_parsed	*getlast(t_parsed	*node)
 		return (getlast(node->next));
 	else
 		return (node);
+}
+
+void	print_error_msg(char *str, int status)
+{
+	ft_putstr_fd(str, STDERR_FILENO);
+	if (status == EXIT_NOT_FOUND)
+		ft_putendl_fd(": command not found", STDERR_FILENO);
+	else if (status == EXIT_PERMISSION)
+		ft_putendl_fd(": permission denied", STDERR_FILENO);
+	else if (status == EXIT_PERMISSION + 0x80)
+		ft_putendl_fd(": is  a directory", STDERR_FILENO);
 }

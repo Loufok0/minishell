@@ -27,7 +27,6 @@ SRCS_PARSING = parser.c \
 SRCS_EXEC = \
 	exec.c \
 	exec_utils.c \
-	exec_utils_2.c \
 
 SRCS_BUILTINS = \
 	builtins.c \
@@ -40,8 +39,8 @@ SRCS_BUILTINS = \
 	ft_unset.c \
 
 SRCS_LIB_UTILS = \
-	ft_split_let.c\
-	ft_strjoin_f.c\
+	ft_split_let.c \
+	ft_strjoin_f.c \
 	ft_free_arr.c\
 	ft_arrdup.c \
 	ft_arrlen.c \

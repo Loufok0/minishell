@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:41:26 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/30 16:10:14 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/01 16:48:46 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,6 @@ int		arr_size(char **arr);
 int		arr_size_i(int **arr);
 char	**ft_split_let(char const *s, char c);
 char	**ft_arrdup(char **arr);
+size_t	arrlen(void **a);
 
 #endif
