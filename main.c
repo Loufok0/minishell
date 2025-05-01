@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/30 17:37:36 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/01 17:02:59 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ int	main_loop(int *status, char ***envp)
 		return (free(rl), rl == NULL);
 	add_history(rl);
 	line = parse(*envp, rl, status);
-	if (!line)
+	if (!line && *status != 2)
 		return (free(rl), 1);
-	else if (line->split[0])
+	else if (line && line->split[0])
 	{
 		exe_pipeline(line, envp, status);
 		fprintf(stderr, "exit status - %i\n", *status);
