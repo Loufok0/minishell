@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:19:03 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/01 19:30:45 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/02 01:01:20 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ t_parsed	*struct_maker(char **split, int *code);
 
 //tokenizer
 char		**tokenize(char *rl, int *code);
-void	remove_spaces(char **split);
+void		remove_spaces(char **split);
 
 //list_insert
 char		**list_insert(char **lst1, char **lst2, int n);

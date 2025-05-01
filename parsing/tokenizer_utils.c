@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 17:35:36 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/01 18:46:38 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/02 01:09:31 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,16 +85,13 @@ int	check_closed(char **split, int n)
 {
 	int		size;
 	int		i;
-	int		count_s;
-	int		count_d;
 
 	size = arr_size(split);
 	i = 0;
 	while (i <= size)
 	{
-		count_s = count_occ(split[i], '\'');
-		count_d = count_occ(split[i], '\"');
-		if (!is_closed(split, i, count_s, count_d))
+		if (!is_closed(split, i, count_occ(split[i], '\'') \
+			, count_occ(split[i], '\"')))
 		{
 			split[i] = ft_strjoin_f(split[i], split[i + 1]);
 			if (!split[i])

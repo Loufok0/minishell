@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 18:38:22 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/01 19:36:07 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/02 01:04:35 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,28 +61,29 @@ int	total_occ(char **split, int c)
 
 t_parsed	*join_word(t_parsed *parsed)
 {
-	t_parsed	*temp;
+	t_parsed	*t;
 	int			i;
 
-	temp = parsed;
-	while (temp)
+	t = parsed;
+	while (t)
 	{
 		i = 0;
-		while (temp->split[i])
+		while (t->split[i])
 		{
-			if (temp->split[i] && temp->split[i + 1] && ft_strnstr(temp->split[i], " ", 2) == 0 \
-				&& ft_strnstr(temp->split[i + 1], " ", 2) == 0)
+			if (t->split[i] && t->split[i + 1] \
+				&& ft_strnstr(t->split[i], " ", 2) == 0 \
+				&& ft_strnstr(t->split[i + 1], " ", 2) == 0)
 			{
-				temp->split[i] = ft_strjoin_f(temp->split[i], temp->split[i + 1]);
-				if (!temp->split[i])
+				t->split[i] = ft_strjoin_f(t->split[i], t->split[i + 1]);
+				if (!t->split[i])
 					return (free_chain(parsed), NULL);
-				duck_fishing(temp->split, i + 1);
+				duck_fishing(t->split, i + 1);
 			}
 			else
 				i++;
 		}
-		remove_spaces(temp->split);
-		temp = temp->next;
+		remove_spaces(t->split);
+		t = t->next;
 	}
 	return (parsed);
 }

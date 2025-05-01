@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:46:37 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/01 19:51:12 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/02 01:11:58 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,6 @@ t_parsed	*parse(char **envp, char *rl, int *code)
 	int			i;
 
 	split = tokenize(rl, code);
-
 	if (!split && *code == 0)
 		printf("Error while tokenizing\n");
 	if (!split)
@@ -101,13 +100,9 @@ t_parsed	*parse(char **envp, char *rl, int *code)
 	parsed = struct_maker(split, code);
 	if (!parsed)
 		return (NULL);
-	if (!parsed || !trimm_struct(parsed))
-		return (NULL);
-	parsed = join_word(parsed);
-	if (!parsed)
+	if (!parsed || !trimm_struct(parsed) || !join_word(parsed))
 		return (NULL);
 	if (!check_export(parsed))
 		return (NULL);
-	show_t_parsed(parsed);
 	return (parsed);
 }
