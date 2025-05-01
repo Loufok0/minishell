@@ -6,13 +6,13 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 21:37:50 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/04/29 17:15:34 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/01 17:12:15 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-int	ft_pwd(char **envp)
+int	ft_pwd(char **envp, int fdout)
 {
 	char	*buf;
 
@@ -22,14 +22,14 @@ int	ft_pwd(char **envp)
 		buf = getvar("PWD", envp);
 		if (buf)
 		{
-			ft_putendl_fd(buf, 1);
+			ft_putendl_fd(buf, fdout);
 			return (EXIT_SUCCESS);
 		}
 		else
 			return (EXIT_SYSERROR);
 	}
 	else
-		ft_putendl_fd(buf, 1);
+		ft_putendl_fd(buf, fdout);
 	free(buf);
 	return (EXIT_SUCCESS);
 }

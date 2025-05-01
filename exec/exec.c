@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:01:18 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/01 17:00:45 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/01 17:13:42 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	exe_cmd(t_parsed *cmd, int *status, char ***envp)
 	dup2(cmd->fds[1], 1);
 	path = find_exe(cmd->split[0], *envp);
 	if (is_builtin(cmd->split[0]))
-		*status = exe_builtin(cmd->split, envp, *status);
+		*status = exe_builtin(cmd->split, envp, *status, cmd->fds[1]);
 	else if (path)
 		*status = exe_file(path, cmd, *envp);
 	exit (*status);
@@ -88,7 +88,7 @@ void	exe_pipeline(t_parsed *cmd, char ***envp, int *status)
 	if (last->outfile)
 		last->fds[1] = open(last->outfile, last->out_mode | O_WRONLY, 0666);
 	if (!cmd->next && is_builtin(cmd->split[0]))
-		*status = exe_builtin(cmd->split, envp, *status);
+		*status = exe_builtin(cmd->split, envp, *status, cmd->fds[1]);
 	else
 		start_pipeline(cmd, envp, status);
 	if (!*envp)

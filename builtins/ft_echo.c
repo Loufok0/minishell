@@ -6,13 +6,13 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:00:14 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/03/04 16:00:43 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/01 17:12:36 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-int	ft_echo(char **args)
+int	ft_echo(char **args, int fdout)
 {
 	int		endl;
 	int		first;
@@ -26,12 +26,12 @@ int	ft_echo(char **args)
 	while (args[i])
 	{
 		if (first)
-			ft_putchar_fd(' ', 1);
+			ft_putchar_fd(' ', fdout);
 		first |= 1;
-		ft_putstr_fd(args[i], 1);
+		ft_putstr_fd(args[i], fdout);
 		i++;
 	}
 	if (!endl)
-		ft_putchar_fd('\n', 1);
+		ft_putchar_fd('\n', fdout);
 	return (0);
 }

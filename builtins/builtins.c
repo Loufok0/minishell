@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 09:49:44 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/04/29 17:15:50 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/01 17:11:22 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,18 @@ int	is_builtin(const char *cmd)
 		return (0);
 }
 
-int	exe_builtin(char **args, char ***envp, int oldstatus)
+int	exe_builtin(char **args, char ***envp, int oldstatus, int fdout)
 {
 	if (ft_strncmp(args[0], "cd", 3) == 0)
 		return (ft_cd(args, envp));
 	else if (ft_strncmp(args[0], "echo", 5) == 0)
-		return (ft_echo(args));
+		return (ft_echo(args, fdout));
 	else if (ft_strncmp(args[0], "env", 4) == 0)
-		return (ft_env(*envp));
+		return (ft_env(*envp, fdout));
 	else if (ft_strncmp(args[0], "export", 7) == 0)
-		return (ft_export(args, envp));
+		return (ft_export(args, envp, fdout));
 	else if (ft_strncmp(args[0], "pwd", 4) == 0)
-		return (ft_pwd(*envp));
+		return (ft_pwd(*envp, fdout));
 	else if (ft_strncmp(args[0], "unset", 6) == 0)
 		return (ft_unset(args, envp));
 	else if (ft_strncmp(args[0], "exit", 5) == 0)
