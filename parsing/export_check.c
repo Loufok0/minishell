@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:53:33 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/30 17:39:38 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/01 17:13:00 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	check_export(t_parsed *parsed) // check valids export names ?
 	int			found;
 	int			i;
 
+	show_t_parsed(parsed);
 	temp = parsed;
 	found = 0;
 	while (temp)
@@ -43,8 +44,11 @@ int	check_export(t_parsed *parsed) // check valids export names ?
 		i = 0;
 		while (parsed->split[i])
 		{
-			if (ft_strnstr(temp->split[i], "export", 7) == 0)
+			if (ft_strnstr(temp->split[i], "export", 7) != 0)
+			{
+				i++;
 				found = 1;
+			}
 			if (found == 1 && has_prob_char(temp->split[i]))
 				return (free_chain(parsed), 0);
 			i++;
