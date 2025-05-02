@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 21:47:21 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/04/29 17:17:31 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/02 15:36:15 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	ft_cd(char **args, char ***envp)
 		chdir(getvar("HOME", *envp));
 		chdir(args[1] + (args[1][1] != '\0') + 1);
 	}
-	else
 		chdir(args[1]);
 	new = getcwd(NULL, 0);
 	status = updateenvp(old, new, envp);

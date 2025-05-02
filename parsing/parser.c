@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:46:37 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/02 01:11:58 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/02 16:58:07 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ char	*replace_path(char *str, char *path, int i, int j)
 	if (str[i] == '\0' || str[i] == ' ' || str[i] == '"')
 		ft_strlcat_mod(new, "$", 2);
 	else
-		ft_strlcat_mod(new, path, ft_strlen(path) + 1);
+		ft_strlcat(new, path, ft_strlen(path) + 1);
 	ft_strlcat_mod(new, str + i + j, ft_strlen(str + i + j));
-	new[ft_strlen(str) - j + ft_strlen(path) + 1] = '\0';
 	return (new);
 }
 
@@ -65,7 +64,7 @@ char	**handle_env(char **envp, char **split, int *code, int i)
 			break ;
 		path = getvar(split[i] + find_money(split[i]), envp);
 		if (!path || split[i][find_money(split[i])] == '$')
-			temp = replace_var(split[i], "", code);
+			temp = replace_var(split[i], NULL, code);
 		else
 			temp = replace_var(split[i] + 1, path, code);
 		if (!temp)
@@ -102,7 +101,6 @@ t_parsed	*parse(char **envp, char *rl, int *code)
 		return (NULL);
 	if (!parsed || !trimm_struct(parsed) || !join_word(parsed))
 		return (NULL);
-	if (!check_export(parsed))
-		return (NULL);
+	//show_t_parsed(parsed);
 	return (parsed);
 }

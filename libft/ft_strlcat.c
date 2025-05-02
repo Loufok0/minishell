@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 17:36:48 by malapoug          #+#    #+#             */
-/*   Updated: 2025/01/21 18:54:33 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/02 16:57:50 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	if (size <= s_d)
 		return (size + s_s);
 	i = 0;
-	while (s_d + i < size - 1 && src[i])
+	while (src && s_d + i < size - 1 && src[i])
 	{
 		dst[s_d + i] = src[i];
 		i++;
@@ -42,7 +42,7 @@ size_t	ft_strlcat_mod(char *dst, const char *src, size_t size)
 	s_d = ft_strlen(dst);
 	s_s = ft_strlen((char *)src);
 	i = 0;
-	while (src[i])
+	while (src && src[i])
 	{
 		dst[s_d + i] = src[i];
 		i++;

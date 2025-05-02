@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:19:51 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/01 16:58:58 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/02 16:00:43 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 typedef struct s_parsed	t_parsed;
 
 int			exe_file(char *path, t_parsed *cmd, char **envp);
-void		exe_cmd(t_parsed *cmd, int *status, char ***envp);
+int			exe_cmd(t_parsed *cmd, int *status, char ***envp);
 int			exe_pipeline_chain(t_parsed *cmd, int *status, char ***envp);
 void		start_pipeline(t_parsed *cmd, char ***envp, int *status);
 void		exe_pipeline(t_parsed *cmd, char ***envp, int *status);

@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:01:18 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/01 17:13:42 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/02 16:01:58 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	exe_file(char *path, t_parsed *cmd, char **envp)
 	return (EXIT_SYSERROR);
 }
 
-void	exe_cmd(t_parsed *cmd, int *status, char ***envp)
+int	exe_cmd(t_parsed *cmd, int *status, char ***envp)
 {
 	char	*path;
 
@@ -61,7 +61,11 @@ int	exe_pipeline_chain(t_parsed *cmd, int *status, char ***envp)
 		exe_pipeline_chain(cmd->next, status, envp);
 	}
 	else
-		exe_cmd(cmd, status, envp);
+	{
+		*status = exe_cmd(cmd, status, envp);
+		waitpid(cpid, status, 0);
+		exit(*status);
+	}
 	return (0);
 }
 

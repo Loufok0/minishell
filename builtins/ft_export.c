@@ -6,25 +6,53 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 21:12:59 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/01 17:12:22 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/02 16:12:45 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
+int	export_noargs(char **envp, int fdout)
+{
+	size_t	i;
+	size_t	l;
+
+	i = 0;
+	while (envp[i])
+	{
+		l = idlen(envp[i]) + 1;
+		ft_putstr_fd("declare -x ",fdout);
+		write(fdout, envp[i], l);
+		ft_putchar_fd('"',fdout);
+		ft_putstr_fd(envp[i] + l,fdout);
+		ft_putendl_fd("\"",fdout);
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}
+
 int	ft_export(char **args, char ***envp, int fdout)
 {
 	size_t	l;
-	int		r;
+	size_t	i;
 
+	i = 0;
 	l = arrlen((void **) args);
 	if (l < 2)
-		r = ft_env(*envp, fdout);
-	else if (l == 2)
-		r = setvar(args[1], envp);
-	else if (l == 3)
-		r = setvar_join(args[1], args[2], envp);
-	else
-		r = EXIT_FAILURE;
-	return (r);
+		return (export_noargs(*envp, fdout));
+	while (++i < l)
+	{
+		if (!args[i][idlen(args[i])])
+			continue ;
+		else if (args[i][0] == '=' || args[i][idlen(args[i])] != '=')
+		{
+			ft_putstr_fd("export: `", STDERR_FILENO);
+			ft_putstr_fd(args[i], STDERR_FILENO);
+			ft_putendl_fd("' is not a valid identifier", STDERR_FILENO);
+			return (EXIT_FAILURE);
+		}
+		if (setvar(args[i], envp))
+			return (EXIT_SYSERROR);
+	}
+	return (EXIT_SUCCESS);
 }

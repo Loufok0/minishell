@@ -3,60 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 14:53:33 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/01 20:11:56 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/02 17:05:06 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
-
-int	has_prob_char(char *str)
-{
-	int		i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	if (str[0] == '=')
-		return (printf("Export: `%c': not a valid identifier", str[0]), 0);
-	while (str[i])
-	{
-		if (str[i] != '=' && ft_strchr(METACHARSET, str[i]))
-			return (printf("Export: `%c': not a valid identifier", str[i]), 0);
-		i++;
-	}
-	return (0);
-}
-
-int	check_export(t_parsed *parsed)
-{
-	t_parsed	*temp;
-	int			found;
-	int			i;
-
-	temp = parsed;
-	found = 0;
-	while (temp)
-	{
-		i = 0;
-		while (temp->split[i])
-		{
-			if (found == 1 && temp->split[i] && has_prob_char(temp->split[i]))
-				return (free_chain(parsed), 0);
-			if (ft_strnstr(temp->split[i], "export", 7) != 0)
-			{
-				i++;
-				found = 1;
-			}
-			else
-				i++;
-		}
-		temp = temp->next;
-	}
-	return (1);
-}
 
 char	**join_export(char **split)
 {
