@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:01:18 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/01 17:13:42 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/05 17:11:13 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	exe_file(char *path, t_parsed *cmd, char **envp)
 		return (EXIT_PERMISSION);
 	if (stat(path, &sb) || !S_ISREG(sb.st_mode))
 		return (EXIT_PERMISSION + 0x80);
-	ft_putendl_fd(path, STDERR_FILENO);
+	//ft_putendl_fd(path, STDERR_FILENO);
 	execve(path, cmd->split, envp);
 	return (EXIT_SYSERROR);
 }

@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:19:03 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/02 01:01:20 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/05 18:59:52 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int			limiter(char *limiter);
 //parser
 t_parsed	*parse(char **envp, char *rl, int *code);
 int			is_problem_char(char *str);
-char		**handle_env(char **envp, char **split, int *code, int i);
+char		**handle_env(char **envp, char **split, int *code, int *i);
 char		*replace_var(char *str, char *path, int *code);
 
 //parser_utils
@@ -86,7 +86,7 @@ t_parsed	*struct_maker(char **split, int *code);
 
 //tokenizer
 char		**tokenize(char *rl, int *code);
-void		remove_spaces(char **split);
+void		remove_spaces(char **split, char *c);
 
 //list_insert
 char		**list_insert(char **lst1, char **lst2, int n);
