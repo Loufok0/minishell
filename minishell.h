@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:41:26 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/01 16:56:38 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/06 16:40:11 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define METACHARSET "<>|?*[]$\\(){}\"'`&;=! +"
 # define TMP_FILE ".msh_tmp"
 # define PROMPT "\033[34m\n<$$$> \033[0m"
+# define MSH_NAME "./minishell: "
 
 //====================(STRUCTS)=============================//
 
@@ -62,5 +63,8 @@ int		arr_size_i(int **arr);
 char	**ft_split_let(char const *s, char c);
 char	**ft_arrdup(char **arr);
 size_t	arrlen(void **a);
+
+
+void	print_prefix(char *prefix, char *str, char *suffix, int fd);
 
 #endif

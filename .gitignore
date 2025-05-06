@@ -3,3 +3,4 @@ msh
 .vscode
 libft/libft.a
 helloworld
+mstest_output*/*/*

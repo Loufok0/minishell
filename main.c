@@ -6,11 +6,21 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/01 17:38:27 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/06 16:38:12 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	print_prefix(char *prefix, char *str, char *suffix, int fd)
+{
+	if (prefix)
+		ft_putstr_fd(prefix, fd);
+	if (str)
+		ft_putstr_fd(str, fd);
+	if (suffix)
+		ft_putstr_fd(suffix, fd);
+}
 
 void	sa(int sig)
 {

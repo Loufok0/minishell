@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 18:38:22 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/02 01:04:35 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/05 15:58:45 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_parsed	*join_word(t_parsed *parsed)
 			else
 				i++;
 		}
-		remove_spaces(t->split);
+		remove_spaces(t->split, " ");
 		t = t->next;
 	}
 	return (parsed);

@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:46:37 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/02 16:58:07 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/06 14:21:27 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,30 +51,32 @@ char	*replace_var(char *str, char *path, int *code)
 	return (new);
 }
 
-char	**handle_env(char **envp, char **split, int *code, int i)
+char	**handle_env(char **envp, char **split, int *code, int *i)
 {
 	char	*path;
 	char	*temp;
 
 	path = NULL;
-	while (split[i] && split[i][0] != '\'' \
-		&& split[i][find_money(split[i])] != '\0')
+	while (split[*i] && ft_strchr(split[*i], '$') && split[*i][0] != '\'' \
+		&& split[*i][find_money(split[*i])] != '\0')
 	{
-		if (ft_strnstr(split[i], "<<", 3))
+		if (ft_strnstr(split[*i], "<<", 3))
 			break ;
-		path = getvar(split[i] + find_money(split[i]), envp);
-		if (!path || split[i][find_money(split[i])] == '$')
-			temp = replace_var(split[i], NULL, code);
+		path = getvar(split[*i] + find_money(split[*i]), envp);
+		if (!path || split[*i][find_money(split[*i])] == '$')
+			temp = replace_var(split[*i], "", code);
 		else
-			temp = replace_var(split[i] + 1, path, code);
+			temp = replace_var(split[*i] + 1, path, code);
 		if (!temp)
 			return (ft_free_arr(split, arr_size(split)), NULL);
-		free(split[i]);
-		split[i] = temp;
-		split = list_insert(split, tokenize(split[i], code), i);
+		free(split[*i]);
+		split[*i] = temp;
+		split = list_insert(split, tokenize(split[*i], code), *i);
 		if (!split)
 			return (NULL);
 	}
+	if (!split[*i])
+		(*i)--;
 	return (split);
 }
 
@@ -91,16 +93,19 @@ t_parsed	*parse(char **envp, char *rl, int *code)
 		return (NULL);
 	i = -1;
 	while (split && split[++i])
-		split = handle_env(envp, split, code, i);
+		split = handle_env(envp, split, code, &i);
 	if (!split && *code == 0)
 		printf("Error while handling env vars\n");
 	if (!split || !handle_redirections(split, code))
 		return (NULL);
+	remove_spaces(split, "");
 	parsed = struct_maker(split, code);
 	if (!parsed)
 		return (NULL);
 	if (!parsed || !trimm_struct(parsed) || !join_word(parsed))
 		return (NULL);
+	//if (!check_export(parsed))
+	//	return (NULL);
 	//show_t_parsed(parsed);
 	return (parsed);
 }

@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:01:18 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/02 16:01:58 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/06 16:00:26 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,12 @@
 
 int	exe_file(char *path, t_parsed *cmd, char **envp)
 {
-	struct stat	sb;
+	int	status;
 
-	if (!path || access(path, F_OK))
-		return (EXIT_NOT_FOUND);
-	if (access(path, X_OK))
-		return (EXIT_PERMISSION);
-	if (stat(path, &sb) || !S_ISREG(sb.st_mode))
-		return (EXIT_PERMISSION + 0x80);
-	ft_putendl_fd(path, STDERR_FILENO);
+	status = path_check(path, 'x', cmd->split[0]);
+	if (status)
+		return (status);
+	//ft_putendl_fd(path, STDERR_FILENO);
 	execve(path, cmd->split, envp);
 	return (EXIT_SYSERROR);
 }
@@ -40,6 +37,12 @@ int	exe_cmd(t_parsed *cmd, int *status, char ***envp)
 		*status = exe_builtin(cmd->split, envp, *status, cmd->fds[1]);
 	else if (path)
 		*status = exe_file(path, cmd, *envp);
+	else
+	{
+		*status = EXIT_NOT_FOUND;
+		ft_putstr_fd(cmd->split[0], STDERR_FILENO);
+		ft_putendl_fd(": command not found", STDERR_FILENO);
+	}
 	exit (*status);
 }
 
@@ -99,7 +102,4 @@ void	exe_pipeline(t_parsed *cmd, char ***envp, int *status)
 		return ;
 	if (*status > 0xFF)
 		*status >>= 8;
-	if (*status >= 125)
-		print_error_msg(cmd->split[0], *status);
-	*status &= 0x7F;
 }

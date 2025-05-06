@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 21:47:21 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/02 15:36:15 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/06 16:13:05 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,19 @@ int	updateenvp(char *old, char *new, char ***envp)
 	return (err);
 }
 
-int	ft_cd(char **args, char ***envp)
+void	printpwd(int fdout)
+{
+	char	*buf;
+	
+	buf = getcwd(NULL, 0);
+	if (buf)
+	{
+		ft_putendl_fd(buf, fdout);
+		free(buf);
+	}
+}
+
+int	ft_cd(char **args, char ***envp, int fdout)
 {
 	char	*old;
 	char	*new;
@@ -31,14 +43,17 @@ int	ft_cd(char **args, char ***envp)
 
 	old = getcwd(NULL, 0);
 	if (!old)
-		status = EXIT_SYSERROR;
+		status = EXIT_FAILURE;
 	if (!args[1])
 		chdir(getvar("HOME", *envp));
+	else if (ft_strncmp("-", args[1], 2) == 0)
+		printpwd(fdout);
 	else if (args[1][0] == '~')
 	{
 		chdir(getvar("HOME", *envp));
 		chdir(args[1] + (args[1][1] != '\0') + 1);
 	}
+	else
 		chdir(args[1]);
 	new = getcwd(NULL, 0);
 	status = updateenvp(old, new, envp);
