@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/06 16:38:12 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/07 14:24:00 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,10 @@ void	print_prefix(char *prefix, char *str, char *suffix, int fd)
 
 void	sa(int sig)
 {
-	char	*pr;
-
-	pr = "\033[34m\n<$$$> \033[0m";
-	if (sig == 3)
-		ft_putstr_fd("\t", 1);
-	else
-		ft_putstr_fd(pr, 1);
+	if (sig == SIGQUIT)
+		ft_putendl_fd("Quit (core dumped)", STDERR_FILENO);
+	else if (sig == SIGINT)
+		ft_putstr_fd(PROMPT, STDOUT_FILENO);
 	sig++;
 }
 
@@ -48,7 +45,9 @@ int	main_loop(int *status, char ***envp)
 		return (free(rl), 1);
 	else if (line && line->split[0])
 	{
+		signal(SIGQUIT, sa);
 		exe_pipeline(line, envp, status);
+		signal(SIGQUIT, SIG_IGN);
 		//fprintf(stderr, "exit status - %i\n", *status);
 		free_chain(line);
 	}
@@ -63,7 +62,7 @@ int	main(int argc, char **argv, char **envp)
 	if (!envp)
 		return (1);
 	signal(SIGINT, sa);
-	signal(SIGQUIT, sa);
+	signal(SIGQUIT, SIG_IGN);
 	while (envp)
 	{
 		if (main_loop(&status, &envp))
