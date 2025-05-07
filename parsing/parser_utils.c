@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*   parser_utils.c                                      :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:46:29 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/05 18:25:47 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/07 15:33:43 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ char	*uh(char *new, char *str, int *code, int i)
 		return (NULL);
 	ft_strlcat(new, str, i);
 	ft_strlcat(new, nb, ft_strlen(nb) + 1);
-	ft_strlcat_mod(new, str + i + 2, ft_strlen(str + i + 2));
-	new[ft_strlen(str) - 2 + ft_strlen(nb) + 1] = '\0';
+	ft_strlcat_mod(new, str + i + 1, ft_strlen(str + i + 2));
 	free(nb);
 	return (new);
 }
@@ -36,17 +35,18 @@ int	find_money(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i] && ((i > 0 && str[i - 1] != '$') || str[i] == ' ' \
+	while (str[i] && ((str[i] == '$' && str[i + 1] && str[i + 1] != '$') || str[i] == ' ' \
 		|| str[i] == '"'))
 		i++;
 	return (i);
 }
 
-int	is_problem_char(char *str)
+int	is_problem_char(char *str, int *code)
 {
 	if (str[0] == ')' \
 		|| str[0] == '}' || str[0] == '<' || str[0] == '>' || str[0] == '|')
 	{
+		*code = 2;
 		printf("Syntax error near unexpected token `%c'\n", (str[0]));
 		return (1);
 	}

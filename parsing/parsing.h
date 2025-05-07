@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   parsing.h                                           :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:19:03 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/05 18:59:52 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/07 16:10:47 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ char		**in_one(t_parsed *node, char **split, int *code, int i);
 char		**in_two(t_parsed *node, char **split, int *code, int i);
 
 //out
+int	skip_ispaces(char **split, int i);
 char		**out_one(t_parsed *node, char **split, int *code, int i);
 char		**out_two(t_parsed *node, char **split, int *code, int i);
 
@@ -66,15 +67,14 @@ int			limiter(char *limiter);
 
 //parser
 t_parsed	*parse(char **envp, char *rl, int *code);
-int			is_problem_char(char *str);
 char		**handle_env(char **envp, char **split, int *code, int *i);
 char		*replace_var(char *str, char *path, int *code);
 
 //parser_utils
 t_parsed	*trimm_struct(t_parsed *parsed);
 char		*uh(char *neew, char *str, int *code, int i);
+int			is_problem_char(char *str, int *code);
 int			find_money(char *str);
-int			is_problem_char(char *str);
 char		*trimm(char *split);
 
 //redirections

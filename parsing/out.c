@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   out.c                                              :+:      :+:    :+:   */
+/*   out.c                                               :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 17:53:54 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/05 18:21:03 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/07 15:45:26 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,14 @@ char	**out_one(t_parsed *node, char **split, int *code, int i)
 {
 	duck_fishing(split, i);
 	i = skip_ispaces(split, ++i);
-	if (!split[i] || (split[i] && is_problem_char(split[i]) == 1))
+	if (!split[i] || (split[i] && is_problem_char(split[i], code) == 1))
 	{
 		if (!split[i])
 		{
 			*code = 2;
 			printf("Syntax error near unexpected token `newline'\n");
 		}
-		node->outfile = ft_strdup("/dev/null");
-		if (!node->outfile)
-			return (free_chain(node), NULL);
-		node->out_mode |= O_WRONLY;
-		return (split);
+		return (free_chain(node), NULL);
 	}
 	node->outfile = ft_strdup(split[i]);
 	if (!node->outfile)
@@ -52,18 +48,14 @@ char	**out_two(t_parsed *node, char **split, int *code, int i)
 {
 	duck_fishing(split, i);
 	i = skip_ispaces(split, ++i);
-	if (!split[i] || (split[i] && is_problem_char(split[i]) == 1))
+	if (!split[i] || (split[i] && is_problem_char(split[i], code) == 1))
 	{
 		if (!split[i])
 		{
 			*code = 2;
 			printf("Syntax error near unexpected token `newline'\n");
 		}
-		node->outfile = ft_strdup("/dev/null");
-		if (!node->outfile)
-			return (free_chain(node), NULL);
-		node->out_mode |= O_APPEND;
-		return (split);
+		return (free_chain(node), NULL);
 	}
 	node->outfile = ft_strdup(split[i]);
 	if (!node->outfile)

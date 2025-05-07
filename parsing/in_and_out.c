@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   in_and_out.c                                       :+:      :+:    :+:   */
+/*   in_and_out.c                                        :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:15:05 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/05 16:39:14 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/07 16:28:42 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,15 @@ char	**in(t_parsed *node, char **split, int *code)
 	i = -1;
 	while (split[++i])
 	{
-		if (ft_strnstr(split[i], "<", 2))
-		{
-			if (!in_one(node, split, code, i))
-				return (NULL);
-		}
-		else if (ft_strnstr(split[i], "<<", 3))
+		ft_strncmp(split[i], "<<", 3);
+		if (!ft_strncmp(split[i], "<<", 3))
 		{
 			if (!in_two(node, split, code, i))
+				return (NULL);
+		}
+		else if (!ft_strncmp(split[i], "<", 2))
+		{
+			if (!in_one(node, split, code, i))
 				return (NULL);
 		}
 	}
@@ -40,15 +41,15 @@ char	**out(t_parsed *node, char **split, int *code)
 	i = -1;
 	while (split && split[++i])
 	{
-		if (ft_strnstr(split[i], ">", 2) && split[i][1] != '>')
+		if (!ft_strncmp(split[i], ">>", 3))
 		{
-			if (!out_one(node, split, code, i))
+			if (!out_two(node, split, code, i))
 				return (NULL);
 			i = 0;
 		}
-		else if (ft_strnstr(split[i], ">>", 3))
+		else if (!ft_strncmp(split[i], ">", 2) && split[i][1] != '>')
 		{
-			if (!out_two(node, split, code, i))
+			if (!out_one(node, split, code, i))
 				return (NULL);
 			i = 0;
 		}

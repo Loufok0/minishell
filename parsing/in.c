@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   in.c                                               :+:      :+:    :+:   */
+/*   in.c                                                :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 17:53:15 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/01 17:30:21 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/07 16:32:04 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	**in_one(t_parsed *node, char **split, int *code, int i)
 {
 	duck_fishing(split, i);
-	if (!split[i] || (split[i] && is_problem_char(split[i]) == 1))
+	if (!split[i] || (split[i] && is_problem_char(split[i], code) == 1))
 	{
 		if (!split[i])
 		{
@@ -34,7 +34,7 @@ char	**in_one(t_parsed *node, char **split, int *code, int i)
 char	**in_two(t_parsed *node, char **split, int *code, int i)
 {
 	duck_fishing(split, i);
-	if (!split[i] || (split[i] && is_problem_char(split[i]) == 1))
+	if (!split[i] || (split[i] && is_problem_char(split[i], code) == 1))
 	{
 		if (!split[i])
 		{
@@ -43,7 +43,6 @@ char	**in_two(t_parsed *node, char **split, int *code, int i)
 		}
 		return (free_chain(node), NULL);
 	}
-	limiter(split[i]);
 	duck_fishing(split, i--);
 	return (split);
 }

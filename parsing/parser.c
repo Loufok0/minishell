@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   parser.c                                            :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:46:37 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/06 14:21:27 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/07 16:33:40 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ char	**handle_env(char **envp, char **split, int *code, int *i)
 	char	*temp;
 
 	path = NULL;
-	while (split[*i] && ft_strchr(split[*i], '$') && split[*i][0] != '\'' \
-		&& split[*i][find_money(split[*i])] != '\0')
+	while (split[*i] && ft_strchr(split[*i], '$') \
+		&& split[*i][find_money(split[*i])] != '\0' && (ft_strchr(split[*i], '$') - 1)[0] != '\'')
 	{
 		if (ft_strnstr(split[*i], "<<", 3))
 			break ;

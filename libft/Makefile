@@ -62,7 +62,7 @@ $(NAME): $(OBJS)
 	ar -crs $(NAME) $(OBJS)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -g -gdwarf-4 -c $< -o $@
 
 clean:
 	$(RM) $(OBJS)
