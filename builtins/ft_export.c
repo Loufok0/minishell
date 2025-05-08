@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 21:12:59 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/02 16:12:45 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/08 16:21:06 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int	export_noargs(char **envp, int fdout)
 	while (envp[i])
 	{
 		l = idlen(envp[i]) + 1;
-		ft_putstr_fd("declare -x ",fdout);
+		ft_putstr_fd("declare -x ", fdout);
 		write(fdout, envp[i], l);
-		ft_putchar_fd('"',fdout);
-		ft_putstr_fd(envp[i] + l,fdout);
-		ft_putendl_fd("\"",fdout);
+		ft_putchar_fd('"', fdout);
+		ft_putstr_fd(envp[i] + l, fdout);
+		ft_putendl_fd("\"", fdout);
 		i++;
 	}
 	return (EXIT_SUCCESS);

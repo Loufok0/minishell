@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:57:27 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/06 16:21:46 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/08 16:21:59 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	ft_exit(char *status, char ***envp, int oldstatus)
 	int	exit_status;
 
 	if (status)
+	{
 		if (exit_input_check(status))
 		{
 			exit_status = 2;
@@ -40,6 +41,7 @@ int	ft_exit(char *status, char ***envp, int oldstatus)
 		}
 		else
 			exit_status = ft_atoi(status);
+	}
 	else
 		exit_status = oldstatus;
 	ft_free_arr(*envp, arrlen((void **)(*envp)));

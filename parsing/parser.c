@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                            :+:    :+:           */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:46:37 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/08 16:13:05 by l              ########   odam.nl        */
+/*   Updated: 2025/05/08 16:23:10 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,6 @@ t_parsed	*parse(char **envp, char *rl, int *code)
 		return (NULL);
 	if (!parsed || !trimm_struct(parsed) || !join_word(parsed))
 		return (NULL);
-	//if (!check_export(parsed))
-	//	return (NULL);
 	//show_t_parsed(parsed);
 	return (parsed);
 }

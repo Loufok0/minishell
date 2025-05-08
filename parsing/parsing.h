@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                           :+:    :+:           */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:19:03 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/08 16:07:48 by l              ########   odam.nl        */
+/*   Updated: 2025/05/08 16:33:20 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@
 
 # define TMP_FILE ".msh_tmp"
 # define METACHARSET "<>|?*[]$\\(){}\"'`&;=! +"
+# define MSG_UNEXPECTED_NL "Syntax error near unexpected token `newline'"
+# define MSG_UNEXPECTED_TOKEN "Syntax error near unexpected token `"
+# define MSG_UNEXPECTED_LEFT_CHEVRON "Syntax error near unexpected token `<'"
+# define MSG_UNEXPECTED_RIGHT_CHEVRON "Syntax error near unexpected token `>'"
 
 //====================(STRUCTS)=============================//
 
@@ -57,7 +61,7 @@ char		**in_one(t_parsed *node, char **split, int *code, int i);
 char		**in_two(t_parsed *node, char **split, int *code, int i);
 
 //out
-int	skip_ispaces(char **split, int i);
+int			skip_ispaces(char **split, int i);
 char		**out_one(t_parsed *node, char **split, int *code, int i);
 char		**out_two(t_parsed *node, char **split, int *code, int i);
 

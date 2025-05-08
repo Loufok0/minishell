@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:01:18 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/06 16:00:26 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/08 16:19:57 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	exe_file(char *path, t_parsed *cmd, char **envp)
 	status = path_check(path, 'x', cmd->split[0]);
 	if (status)
 		return (status);
-	//ft_putendl_fd(path, STDERR_FILENO);
 	execve(path, cmd->split, envp);
 	return (EXIT_SYSERROR);
 }

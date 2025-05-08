@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:41:26 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/07 18:24:10 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/08 16:51:03 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,7 @@
 
 //====================(DECLARATIONS)========================//
 
-//envp
-int		check11(char *temp, char *path);
-int		check21(char **args, char *path);
-char	*get_envp(char **envp, char *path);
-int		find_envp(char **envp, char *path);
-char	*get_path(char **envp, char *cmd);
+extern int	g_sig;
 
 //vars
 
@@ -63,7 +58,6 @@ int		arr_size_i(int **arr);
 char	**ft_split_let(char const *s, char c);
 char	**ft_arrdup(char **arr);
 size_t	arrlen(void **a);
-
 
 void	print_prefix(char *prefix, char *str, char *suffix, int fd);
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   in.c                                                :+:    :+:           */
+/*   in.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 17:53:15 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/07 16:32:04 by l              ########   odam.nl        */
+/*   Updated: 2025/05/08 16:27:58 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	**in_one(t_parsed *node, char **split, int *code, int i)
 		if (!split[i])
 		{
 			*code = 2;
-			printf("Syntax error near unexpected token `newline'\n");
+			ft_putendl_fd(MSG_UNEXPECTED_NL, STDERR_FILENO);
 		}
 		return (free_chain(node), NULL);
 	}
@@ -39,7 +39,7 @@ char	**in_two(t_parsed *node, char **split, int *code, int i)
 		if (!split[i])
 		{
 			*code = 2;
-			printf("Syntax error near unexpected token `newline'\n");
+			ft_putendl_fd(MSG_UNEXPECTED_NL, STDERR_FILENO);
 		}
 		return (free_chain(node), NULL);
 	}

@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 21:47:21 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/06 16:13:05 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/08 16:22:16 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	updateenvp(char *old, char *new, char ***envp)
 void	printpwd(int fdout)
 {
 	char	*buf;
-	
+
 	buf = getcwd(NULL, 0);
 	if (buf)
 	{

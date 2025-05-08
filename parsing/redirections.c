@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirections.c                                      :+:    :+:           */
+/*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 11:00:31 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/08 15:24:39 by l              ########   odam.nl        */
+/*   Updated: 2025/05/08 18:09:01 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,17 @@ char	**two(char **split, int *code, int i)
 		if (!split[i])
 		{
 			*code = 2;
-			printf("Syntax error near unexpected token `newline'\n");
+			ft_putendl_fd(MSG_UNEXPECTED_NL, STDERR_FILENO);
 		}
 		ft_free_arr(split, arr_size(split));
 		return (NULL);
 	}
 	limiter(split[i]);
+	if (g_sig)
+	{
+		*code = 2;
+		return (NULL);
+	}
 	split[i] = ft_strdup(TMP_FILE);
 	return (split);
 }
@@ -45,9 +50,9 @@ char	**handle_redirections(char **split, int *code)
 			|| ft_strnstr(split[i], ">>>", 4))
 		{
 			if (ft_strnstr(split[i], "<<<", 4))
-				printf("Syntax error near unexpected token `<'\n");
+				ft_putendl_fd(MSG_UNEXPECTED_LEFT_CHEVRON, STDERR_FILENO);
 			else if (ft_strnstr(split[i], ">>>", 4))
-				printf("Syntax error near unexpected token `>'\n");
+				ft_putendl_fd(MSG_UNEXPECTED_RIGHT_CHEVRON, STDERR_FILENO);
 			*code = 2;
 			ft_free_arr(split, arr_size(split));
 			return (NULL);
