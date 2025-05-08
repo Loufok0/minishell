@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 11:00:31 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/07 16:32:34 by l              ########   odam.nl        */
+/*   Updated: 2025/05/08 15:24:39 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	**two(char **split, int *code, int i)
 	split[i] = ft_strdup("<");
 	if (!split[i])
 		return (ft_free_arr(split, arr_size(split)), NULL);
-	i++;
+	i = skip_ispaces(split, ++i);
 	if (!split[i] || (split[i] && is_problem_char(split[i], code) == 1))
 	{
 		if (!split[i])
@@ -29,7 +29,6 @@ char	**two(char **split, int *code, int i)
 		ft_free_arr(split, arr_size(split));
 		return (NULL);
 	}
-	i = skip_ispaces(split, ++i);
 	limiter(split[i]);
 	split[i] = ft_strdup(TMP_FILE);
 	return (split);

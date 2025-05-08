@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:46:29 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/07 15:33:43 by l              ########   odam.nl        */
+/*   Updated: 2025/05/08 15:11:25 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ char	*trimm(char *split)
 {
 	char	*temp;
 
+	if (!split)
+		return (NULL);
 	if (split[0] == '\'')
 	{
 		temp = ft_strtrim(split, "'");
