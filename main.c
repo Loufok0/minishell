@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/07 14:24:00 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/08 16:16:18 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,12 @@ void	sa(int sig)
 	if (sig == SIGQUIT)
 		ft_putendl_fd("Quit (core dumped)", STDERR_FILENO);
 	else if (sig == SIGINT)
-		ft_putstr_fd(PROMPT, STDOUT_FILENO);
-	sig++;
+	{
+		ft_putchar_fd('\n', STDERR_FILENO);
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
+	}
 }
 
 int	main_loop(int *status, char ***envp)
