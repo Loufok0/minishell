@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main.c                                              :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/08 18:03:47 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:32:06 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int	main_loop(int *status, char ***envp)
 		signal(SIGQUIT, sa);
 		exe_pipeline(line, envp, status);
 		signal(SIGQUIT, SIG_IGN);
-		//fprintf(stderr, "exit status - %i\n", *status);
 		free_chain(line);
 	}
 	return (free(rl), 0);

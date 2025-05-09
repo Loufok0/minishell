@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   limiter.c                                          :+:      :+:    :+:   */
+/*   limiter.c                                           :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:15:25 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/09 03:48:01 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/09 14:51:17 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	limiter(char *limiter)
 	char	*line;
 
 	limiter = trimm(limiter);
+	printf("%s", limiter);
 	if (!limiter)
 		return (0);
 	limiter = ft_strjoin_f(limiter, "\n");

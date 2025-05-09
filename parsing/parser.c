@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   parser.c                                            :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:46:37 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/09 03:49:09 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:32:20 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,13 @@ t_parsed	*parse(char **envp, char *rl, int *code)
 	if (!split)
 		return (NULL);
 	i = -1;
+	if (!split || !handle_redirections(split, code))
+		return (NULL);
 	while (split && split[++i])
 		split = handle_env(envp, split, code, &i);
 	if (!split && *code == 0)
 		printf("Error while handling env vars\n");
-	if (!split || !handle_redirections(split, code))
+	if (!split)
 		return (NULL);
 	remove_spaces(split, "");
 	parsed = struct_maker(split, code);
@@ -114,6 +116,5 @@ t_parsed	*parse(char **envp, char *rl, int *code)
 		return (NULL);
 	if (!parsed || !trimm_struct(parsed) || !join_word(parsed))
 		return (NULL);
-	//show_t_parsed(parsed);
 	return (parsed);
 }

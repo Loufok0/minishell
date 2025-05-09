@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirections.c                                     :+:      :+:    :+:   */
+/*   redirections.c                                      :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 11:00:31 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/09 03:40:53 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:25:04 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-/*
 char	*get_lim(char **split, int i)
 {
 	while (split[i] && split[i + 1] && ft_strncmp(split[i + 1], " ", 2))
 	{
 		while (split[i + 1] && !ft_strncmp(split[i + 1], "\"\"", 3))
-			duck_fishing(split, i + 1);
-		split[i] = ft_strjoin_f(trimm(split[i]), trimm(split[i + 1]));
+			i++;
+		split[i] = trimm(split[i]);
+		split[i + 1] = trimm(split[i + 1]);
+		if (split[i + 1] && split[i + 1][idlen(split[i + 1])] != '\0')
+			return (split[i]);
+		split[i] = ft_strjoin_f(split[i], split[i + 1]);
 		if (!split[i])
 			return (ft_free_arr(split, arr_size(split)), NULL);
 		duck_fishing(split, i + 1);
 	}
 	return (split[i]);
 }
-*/
+
 char	**two(char **split, int *code, int i)
 {
 	free(split[i]);
@@ -44,7 +47,7 @@ char	**two(char **split, int *code, int i)
 		ft_free_arr(split, arr_size(split));
 		return (NULL);
 	}
-	limiter(split[i]);
+	limiter(get_lim(split, i));
 	if (g_sig)
 	{
 		*code = 2;
@@ -61,18 +64,18 @@ char	**handle_redirections(char **split, int *code)
 	i = -1;
 	while (split[++i])
 	{
-		if (ft_strnstr(split[i], "<<<", 4) \
-			|| ft_strnstr(split[i], ">>>", 4))
+		if (!ft_strncmp(split[i], "<<<", 4) \
+			|| !ft_strncmp(split[i], ">>>", 4))
 		{
-			if (ft_strnstr(split[i], "<<<", 4))
+			if (!ft_strncmp(split[i], "<<<", 4))
 				ft_putendl_fd(MSG_UNEXPECTED_LEFT_CHEVRON, STDERR_FILENO);
-			else if (ft_strnstr(split[i], ">>>", 4))
+			else if (!ft_strncmp(split[i], ">>>", 4))
 				ft_putendl_fd(MSG_UNEXPECTED_RIGHT_CHEVRON, STDERR_FILENO);
 			*code = 2;
 			ft_free_arr(split, arr_size(split));
 			return (NULL);
 		}
-		else if (ft_strnstr(split[i], "<<", 3))
+		else if (!ft_strncmp(split[i], "<<", 3))
 		{
 			split = two(split, code, i);
 			if (!split)
