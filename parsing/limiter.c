@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   limiter.c                                          :+:      :+:    :+:   */
+/*   limiter.c                                           :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:15:25 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/08 18:04:36 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/09 15:33:13 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,6 @@ int	get_line(char **line)
 	*line = ft_strjoin_f(*line, "\n");
 	rl_getc_function = rl_getc;
 	return (*line != NULL);
-	
-	char	*buffer;
-	char	c;
-	int		bytes;
-	int		i;
-
-	i = 0;
-	buffer = (char *)malloc(sizeof(char) * 50);
-	if (!buffer)
-		return (-1);
-	bytes = read(0, &c, 1);
-	while (bytes && c != '\n' && g_sig == 0)
-	{
-		if (c != '\n')
-			buffer[i] = c;
-		i++;
-		bytes = read(0, &c, 1);
-	}
-	buffer[i] = '\n';
-	buffer[++i] = '\0';
-	*line = buffer;
-	return (bytes);
 }
 
 int	limiter(char *limiter)
