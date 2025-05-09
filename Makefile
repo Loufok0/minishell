@@ -73,18 +73,18 @@ debug: $(OBJS) $(LIB)
 	@echo $(NAME)" compiled with debug!\n"
 
 %.a:
-	$(MAKE) -C $(dir $@)
+	$(MAKE) -C $(dir $@) -s
 
 $(ODIR)/%.o: %.c
-	mkdir -p $(dir $@)
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -g -gdwarf-4 -c -o $@ $<
 
 clean:
-	$(MAKE) clean -C $(LDIR)
+	$(MAKE) clean -C $(LDIR) -s
 	$(RM) $(OBJS)
 
 fclean:
-	$(MAKE) fclean -C $(LDIR)
+	$(MAKE) fclean -C $(LDIR) -s
 	$(RM) $(OBJS) $(NAME)
 
 re: fclean all

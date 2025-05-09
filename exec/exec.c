@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:01:18 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/08 16:19:57 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/09 14:44:23 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,10 @@ int	exe_pipeline_chain(t_parsed *cmd, int *status, char ***envp)
 
 void	start_pipeline(t_parsed *cmd, char ***envp, int *status)
 {
-	pid_t		cpid;
+	pid_t	cpid;
 
+	if (!is_builtin(cmd->split[0]))
+		setvar_join("_=", cmd->split[0], envp);
 	cpid = fork();
 	if (cpid < 0)
 		return ;
