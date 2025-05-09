@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 17:53:54 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/08 16:37:26 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/09 02:21:49 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	skip_ispaces(char **split, int i)
 char	**out_one(t_parsed *node, char **split, int *code, int i)
 {
 	duck_fishing(split, i);
-	i = skip_ispaces(split, ++i);
+	i = skip_ispaces(split, i);
 	if (!split[i] || (split[i] && is_problem_char(split[i], code) == 1))
 	{
 		if (!split[i])
@@ -49,7 +49,7 @@ char	**out_one(t_parsed *node, char **split, int *code, int i)
 char	**out_two(t_parsed *node, char **split, int *code, int i)
 {
 	duck_fishing(split, i);
-	i = skip_ispaces(split, ++i);
+	i = skip_ispaces(split, i);
 	if (!split[i] || (split[i] && is_problem_char(split[i], code) == 1))
 	{
 		if (!split[i])

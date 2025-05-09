@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/06 17:46:29 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/08 16:22:57 by ylabussi         ###   ########.fr       */
+/*   Created: 2025/05/09 03:40:03 by malapoug          #+#    #+#             */
+/*   Updated: 2025/05/09 03:51:46 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,18 @@ int	find_money(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i] && ((str[i] == '$' && str[i + 1] && \
-		str[i + 1] != '$') || str[i] == ' ' || str[i] == '"'))
-		i++;
+	while (str[i])
+	{
+		if (str[i] == '$')
+		{
+			if (str[i + 1] == '\0' || str[i + 1] == '$' || str[i + 1] == ' ')
+				i++;
+			else
+				return (i);
+		}
+		else
+			i++;
+	}
 	return (i);
 }
 

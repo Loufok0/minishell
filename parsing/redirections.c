@@ -6,12 +6,27 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 11:00:31 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/08 18:09:01 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/09 03:40:53 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
+/*
+char	*get_lim(char **split, int i)
+{
+	while (split[i] && split[i + 1] && ft_strncmp(split[i + 1], " ", 2))
+	{
+		while (split[i + 1] && !ft_strncmp(split[i + 1], "\"\"", 3))
+			duck_fishing(split, i + 1);
+		split[i] = ft_strjoin_f(trimm(split[i]), trimm(split[i + 1]));
+		if (!split[i])
+			return (ft_free_arr(split, arr_size(split)), NULL);
+		duck_fishing(split, i + 1);
+	}
+	return (split[i]);
+}
+*/
 char	**two(char **split, int *code, int i)
 {
 	free(split[i]);
