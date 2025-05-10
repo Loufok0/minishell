@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 03:40:03 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/09 03:51:46 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/10 16:52:07 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*uh(char *new, char *str, int *code, int i)
 		return (NULL);
 	ft_strlcat(new, str, i);
 	ft_strlcat(new, nb, ft_strlen(nb) + 1);
-	ft_strlcat_mod(new, str + i + 1, ft_strlen(str + i + 2));
+	new = ft_strjoin_f(new, str + i + 2);
 	free(nb);
 	return (new);
 }

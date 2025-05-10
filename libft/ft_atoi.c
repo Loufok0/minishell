@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 17:49:52 by malapoug          #+#    #+#             */
-/*   Updated: 2024/10/01 13:00:48 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/10 16:41:42 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_atoi(const char *str)
 		str++;
 	if (*str == '-' || *str == '+')
 	{
-		signe *= (44 - *str);
+		signe *= (',' - *str);
 		str++;
 	}
 	while (*str && *str >= '0' && *str <= '9')
@@ -33,10 +33,3 @@ int	ft_atoi(const char *str)
 	}
 	return (res * signe);
 }
-
-/*(-: 45 and +: 43)
-int main()
-{
-	printf("%d", ft_atoi("123456789"));
-}
-*/

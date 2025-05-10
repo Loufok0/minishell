@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:20:03 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/06 16:37:56 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/10 16:36:46 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,5 @@ int	path_check(char *path, char mode, char *str)
 		return (print_prefix(MSH_NAME, str, MSG_NOT_DIR, STDERR_FILENO),
 			EXIT_PERMISSION);
 	else
-		return (0);
+		return (EXIT_SUCCESS);
 }

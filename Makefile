@@ -3,7 +3,6 @@ CC = cc
 DEBUG = -fsanitize=address
 
 CFLAGS = -Wall -Wextra -Werror -I$(LDIR) -I/usr/include -lreadline
-
 RM = rm -f
 
 NAME = minishell

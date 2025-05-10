@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:01:18 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/09 14:44:23 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/10 18:04:17 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	exe_file(char *path, t_parsed *cmd, char **envp)
 {
-	int	status;
+	int		status;
 
 	status = path_check(path, 'x', cmd->split[0]);
 	if (status)
@@ -23,7 +23,7 @@ int	exe_file(char *path, t_parsed *cmd, char **envp)
 	return (EXIT_SYSERROR);
 }
 
-int	exe_cmd(t_parsed *cmd, int *status, char ***envp)
+int	exe_cmd(t_parsed *cmd, int *status, char ***envp, t_parsed *head)
 {
 	char	*path;
 
@@ -41,11 +41,13 @@ int	exe_cmd(t_parsed *cmd, int *status, char ***envp)
 		*status = EXIT_NOT_FOUND;
 		ft_putstr_fd(cmd->split[0], STDERR_FILENO);
 		ft_putendl_fd(": command not found", STDERR_FILENO);
+		free_chain(head);
+		ft_free_arr(*envp, arrlen((void **)(*envp)));
 	}
 	exit (*status);
 }
 
-int	exe_pipeline_chain(t_parsed *cmd, int *status, char ***envp)
+int	exe_pipeline_chain(t_parsed *cmd, int *status, char ***envp, t_parsed *head)
 {
 	pid_t	cpid;
 
@@ -60,11 +62,11 @@ int	exe_pipeline_chain(t_parsed *cmd, int *status, char ***envp)
 	else if (cpid == 0 && cmd->next)
 	{
 		close(cmd->fds[1]);
-		exe_pipeline_chain(cmd->next, status, envp);
+		exe_pipeline_chain(cmd->next, status, envp, head);
 	}
 	else
 	{
-		*status = exe_cmd(cmd, status, envp);
+		*status = exe_cmd(cmd, status, envp, head);
 		waitpid(cpid, status, 0);
 		exit(*status);
 	}
@@ -81,7 +83,7 @@ void	start_pipeline(t_parsed *cmd, char ***envp, int *status)
 	if (cpid < 0)
 		return ;
 	else if (cpid == 0)
-		exe_pipeline_chain(cmd, status, envp);
+		exe_pipeline_chain(cmd, status, envp, cmd);
 	else
 		waitpid(cpid, status, 0);
 }

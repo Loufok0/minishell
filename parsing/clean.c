@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 19:33:16 by malapoug          #+#    #+#             */
-/*   Updated: 2025/04/13 11:43:56 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/10 18:11:31 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ void	clean_node(t_parsed *parsed)
 		free(parsed->infile);
 	if (parsed->outfile)
 		free(parsed->outfile);
+	if (parsed->fds[0] != 0)
+		close(parsed->fds[0]);
+	if (parsed->fds[1] != 1)
+		close(parsed->fds[1]);
 	if (parsed)
 		free(parsed);
 }

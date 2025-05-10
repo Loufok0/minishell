@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/09 15:44:30 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/10 17:50:38 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	sa(int sig)
 		ft_putendl_fd("Quit (core dumped)", STDERR_FILENO);
 	else if (sig == SIGINT)
 	{
+		ft_putchar_fd('\n', STDOUT_FILENO);
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
@@ -43,6 +44,8 @@ int	main_loop(int *status, char ***envp)
 	t_parsed	*line;
 
 	rl = readline(PROMPT);
+	if (g_sig)
+		*status = g_sig | 0x80;
 	g_sig = 0;
 	if (ft_strlen(rl) == 0)
 		return (free(rl), rl == NULL);
@@ -75,6 +78,8 @@ int	main(int argc, char **argv, char **envp)
 			break ;
 	}
 	rl_clear_history();
+	if (envp)
+		ft_free_arr(envp, arrlen((void **)envp));
 	exit (status);
 	argc++;
 	argv++;
