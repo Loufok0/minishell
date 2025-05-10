@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 21:47:21 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/10 16:37:05 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/10 18:19:57 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,28 +40,26 @@ int	ft_cd(char **args, char ***envp, int fdout)
 	char	*old;
 	char	*new;
 	int		status;
-	
-	if (path_check(args[1], 'd', args[1]))
-		return (EXIT_FAILURE);
+
 	old = getcwd(NULL, 0);
 	if (!old)
-	status = EXIT_FAILURE;
+		status = EXIT_FAILURE;
 	if (!args[1])
-	chdir(getvar("HOME", *envp));
+		chdir(getvar("HOME", *envp));
 	else if (ft_strncmp("-", args[1], 2) == 0)
-	printpwd(fdout);
+		printpwd(fdout);
 	else if (args[1][0] == '~')
 	{
 		chdir(getvar("HOME", *envp));
 		chdir(args[1] + (args[1][1] != '\0') + 1);
 	}
 	else
-	chdir(args[1]);
+		chdir(args[1]);
 	new = getcwd(NULL, 0);
 	status = updateenvp(old, new, envp);
 	if (old)
-	free(old);
+		free(old);
 	if (new)
-	free(new);
-	return (status);
+		free(new);
+	return (path_check(args[1], 'd', args[1]) | status);
 }
