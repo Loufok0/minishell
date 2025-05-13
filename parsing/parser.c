@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:46:37 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/10 16:49:20 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/13 18:26:43 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ t_parsed	*parse(char **envp, char *rl, int *code)
 	if (!split)
 		return (NULL);
 	i = -1;
-	if (!split || !handle_redirections(split, code))
+	if (!split || !handle_redirections(split, code, envp))
 		return (NULL);
 	while (split && split[++i])
 		split = handle_env(envp, split, code, &i);

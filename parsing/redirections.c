@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:44:04 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/09 15:44:07 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/13 18:26:10 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*get_lim(char **split, int i)
 	return (split[i]);
 }
 
-char	**two(char **split, int *code, int i)
+char	**two(char **split, int *code, int i, char **envp)
 {
 	free(split[i]);
 	split[i] = ft_strdup("<");
@@ -47,7 +47,7 @@ char	**two(char **split, int *code, int i)
 		ft_free_arr(split, arr_size(split));
 		return (NULL);
 	}
-	limiter(get_lim(split, i));
+	limiter(get_lim(split, i), code, envp);
 	if (g_sig)
 	{
 		*code = 2;
@@ -57,7 +57,7 @@ char	**two(char **split, int *code, int i)
 	return (split);
 }
 
-char	**handle_redirections(char **split, int *code)
+char	**handle_redirections(char **split, int *code, char **envp)
 {
 	int		i;
 
@@ -77,7 +77,7 @@ char	**handle_redirections(char **split, int *code)
 		}
 		else if (!ft_strncmp(split[i], "<<", 3))
 		{
-			split = two(split, code, i);
+			split = two(split, code, i, envp);
 			if (!split)
 				return (NULL);
 			i = 0;

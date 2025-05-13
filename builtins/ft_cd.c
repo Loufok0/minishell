@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 21:47:21 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/10 18:19:57 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/13 18:17:43 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ int	updateenvp(char *old, char *new, char ***envp)
 		return (0);
 	err = setvar_join("OLDPWD=", old, envp)
 		| setvar_join("PWD=", new, envp);
+	if (old)
+		free(old);
+	if (new)
+		free(new);
 	return (err);
 }
 
@@ -41,6 +45,8 @@ int	ft_cd(char **args, char ***envp, int fdout)
 	char	*new;
 	int		status;
 
+	if (ft_strncmp("-", args[1], 2))
+		status = path_check(args[1], 'd', args[1]);
 	old = getcwd(NULL, 0);
 	if (!old)
 		status = EXIT_FAILURE;
@@ -57,9 +63,5 @@ int	ft_cd(char **args, char ***envp, int fdout)
 		chdir(args[1]);
 	new = getcwd(NULL, 0);
 	status = updateenvp(old, new, envp);
-	if (old)
-		free(old);
-	if (new)
-		free(new);
-	return (path_check(args[1], 'd', args[1]) | status);
+	return (status);
 }

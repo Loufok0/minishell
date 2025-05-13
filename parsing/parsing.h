@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                           :+:    :+:           */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:19:03 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/09 15:07:49 by l              ########   odam.nl        */
+/*   Updated: 2025/05/13 18:51:17 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 //====================(DEFINES)=============================//
 
 # define TMP_FILE ".msh_tmp"
-# define METACHARSET "<>|?*[]$\\(){}\"'`&;=! +"
 # define MSG_UNEXPECTED_NL "Syntax error near unexpected token `newline'"
 # define MSG_UNEXPECTED_TOKEN "Syntax error near unexpected token `"
 # define MSG_UNEXPECTED_LEFT_CHEVRON "Syntax error near unexpected token `<'"
@@ -67,7 +66,7 @@ char		**out_two(t_parsed *node, char **split, int *code, int i);
 
 //limiter
 int			get_line(char **line);
-int			limiter(char *limiter);
+int			limiter(char *limiter, int *status, char **envp);
 
 //parser
 t_parsed	*parse(char **envp, char *rl, int *code);
@@ -82,8 +81,8 @@ int			find_money(char *str);
 char		*trimm(char *split);
 
 //redirections
-char		**handle_redirections(char **split, int *code);
-char		**two(char **split, int *code, int i);
+char		**handle_redirections(char **split, int *code, char **envp);
+char		**two(char **split, int *code, int i, char **envp);
 
 //struct
 t_parsed	*struct_maker(char **split, int *code);

@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   limiter.c                                           :+:    :+:           */
+/*   limiter.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:15:25 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/09 15:33:13 by l              ########   odam.nl        */
+/*   Updated: 2025/05/13 18:59:28 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	print_fline(char *line, int fd, int status, char **envp);
 
 int	get_line(char **line)
 {
@@ -21,7 +23,7 @@ int	get_line(char **line)
 	return (*line != NULL);
 }
 
-int	limiter(char *limiter)
+int	limiter(char *limiter, int *status, char **envp)
 {
 	int		fd;
 	char	*line;
@@ -36,14 +38,47 @@ int	limiter(char *limiter)
 		, O_CREAT | O_TRUNC | O_APPEND | O_WRONLY, 0777);
 	if (fd < 0)
 		return (printf("Error opening files of LIMITER\n"), 0);
-	while (get_line(&line) && g_sig == 0)
+	while (g_sig == 0)
 	{
-		if (ft_strncmp(line, limiter, ft_strlen(limiter) + 1) == 0)
-			return (free(line), free(limiter), close(fd), 1);
-		write(fd, line, ft_strlen(line));
+		get_line(&line);
+		if (ft_strncmp(line, limiter, strlen(limiter)) == 0)
+			break;
+		print_fline(line, fd, *status, envp);
 		free(line);
 	}
+	free(line);
 	free(limiter);
 	close(fd);
 	return (1);
+}
+
+void	print_fline(char *line, int fd, int status, char **envp)
+{
+	size_t	i;
+	size_t	l;
+	char	*tmp;
+
+	i = 0;
+	while (line[i])
+	{
+		if (ft_strchr(line, '$'))
+			l = ft_strchr(line, '$') - line;
+		else
+			l = ft_strlen(line);
+		write(fd, line + i, l);
+		i += l;
+		if (line[i] && idlen(line + i + 1) > 0)
+		{
+			tmp = getvar(line + i + 1, envp);
+			if (tmp)
+				ft_putstr_fd(tmp, fd);
+		}
+		else if (line[i + 1] == '?')
+			ft_putnbr_fd(status, fd);
+		else if (line[i + 1] == '$')
+			;
+		else if (line[i + 1])
+			ft_putchar_fd('$', fd);
+		i++;
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
+/*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:17:34 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/02 01:01:45 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/13 18:12:59 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	init_node(char **split, t_parsed *node)
 	node->split = split;
 	node->infile = NULL;
 	node->outfile = NULL;
-	node->out_mode = 0;
+	node->out_mode = O_TRUNC;
 	node->fds[0] = 0;
 	node->fds[1] = 1;
 }

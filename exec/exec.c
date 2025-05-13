@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:01:18 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/10 18:04:17 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/13 18:09:44 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int	exe_cmd(t_parsed *cmd, int *status, char ***envp, t_parsed *head)
 		*status = EXIT_NOT_FOUND;
 		ft_putstr_fd(cmd->split[0], STDERR_FILENO);
 		ft_putendl_fd(": command not found", STDERR_FILENO);
-		free_chain(head);
-		ft_free_arr(*envp, arrlen((void **)(*envp)));
 	}
+	free_chain(head);
+	ft_free_arr(*envp, arrlen((void **)(*envp)));
 	exit (*status);
 }
 
