@@ -5,3 +5,4 @@ libft/libft.a
 helloworld
 mstest_output*/*/*
 minishell
+ignore_readline_leaks.supp

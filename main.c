@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/10 17:50:38 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/13 16:33:15 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ int	main(int argc, char **argv, char **envp)
 {
 	int		status;
 
+	status = 0;
+	g_sig = 0;
 	envp = ft_arrdup(envp);
 	if (!envp)
 		return (1);
