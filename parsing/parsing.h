@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   parsing.h                                           :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:19:03 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/13 18:51:17 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/15 15:16:48 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ char		**out(t_parsed *node, char **split, int *code);
 
 //in
 char		**in_one(t_parsed *node, char **split, int *code, int i);
-char		**in_two(t_parsed *node, char **split, int *code, int i);
 
 //out
 int			skip_ispaces(char **split, int i);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirections.c                                     :+:      :+:    :+:   */
+/*   redirections.c                                      :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:44:04 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/13 18:26:10 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/15 15:33:21 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ char	**two(char **split, int *code, int i, char **envp)
 			*code = 2;
 			ft_putendl_fd(MSG_UNEXPECTED_NL, STDERR_FILENO);
 		}
-		ft_free_arr(split, arr_size(split));
-		return (NULL);
+		return (ft_free_arr(split, arr_size(split)), NULL);
 	}
+	if (close(open(TMP_FILE, O_CREAT, 0777)))
+		return (ft_free_arr(split, arr_size(split)), *code = 2, NULL);
 	limiter(get_lim(split, i), code, envp);
 	if (g_sig)
 	{

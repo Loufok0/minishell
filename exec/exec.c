@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   exec.c                                              :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:01:18 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/13 18:09:44 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/15 16:46:04 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	exe_cmd(t_parsed *cmd, int *status, char ***envp, t_parsed *head)
 	}
 	free_chain(head);
 	ft_free_arr(*envp, arrlen((void **)(*envp)));
+	close_fds();
 	exit (*status);
 }
 
@@ -61,13 +62,13 @@ int	exe_pipeline_chain(t_parsed *cmd, int *status, char ***envp, t_parsed *head)
 		return (1);
 	else if (cpid == 0 && cmd->next)
 	{
-		close(cmd->fds[1]);
 		exe_pipeline_chain(cmd->next, status, envp, head);
 	}
 	else
 	{
 		*status = exe_cmd(cmd, status, envp, head);
 		waitpid(cpid, status, 0);
+		close_fds();
 		exit(*status);
 	}
 	return (0);

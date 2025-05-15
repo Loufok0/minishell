@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   parser.c                                            :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:46:37 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/13 18:26:43 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/15 16:02:24 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,9 @@ t_parsed	*parse(char **envp, char *rl, int *code)
 	char		**split;
 	t_parsed	*parsed;
 	int			i;
+	int			n_code;
 
+	n_code = 0;
 	split = tokenize(rl, code);
 	if (!split && *code == 0)
 		printf("Error while tokenizing\n");
@@ -111,10 +113,11 @@ t_parsed	*parse(char **envp, char *rl, int *code)
 	if (!split)
 		return (NULL);
 	remove_spaces(split, "");
-	parsed = struct_maker(split, code);
+	parsed = struct_maker(split, &n_code);
 	if (!parsed)
-		return (NULL);
+		return (*code = n_code, NULL);
 	if (!parsed || !trimm_struct(parsed) || !join_word(parsed))
-		return (NULL);
+		return (*code = n_code, NULL);
+	show_t_parsed(parsed);
 	return (parsed);
 }

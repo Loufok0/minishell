@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   limiter.c                                          :+:      :+:    :+:   */
+/*   limiter.c                                           :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:15:25 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/13 18:59:28 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/15 15:25:34 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,17 @@ int	limiter(char *limiter, int *status, char **envp)
 	while (g_sig == 0)
 	{
 		get_line(&line);
-		if (ft_strncmp(line, limiter, strlen(limiter)) == 0)
+		if (line && ft_strncmp(line, limiter, strlen(limiter)) == 0)
+		{
+			free(line);
 			break;
-		print_fline(line, fd, *status, envp);
-		free(line);
+		}
+		if (line)
+		{
+			print_fline(line, fd, *status, envp);
+			free(line);
+		}
 	}
-	free(line);
 	free(limiter);
 	close(fd);
 	return (1);
@@ -59,7 +64,7 @@ void	print_fline(char *line, int fd, int status, char **envp)
 	char	*tmp;
 
 	i = 0;
-	while (line[i])
+	while (i < (size_t)ft_strlen(line) && line[i])
 	{
 		if (ft_strchr(line, '$'))
 			l = ft_strchr(line, '$') - line;
@@ -73,11 +78,11 @@ void	print_fline(char *line, int fd, int status, char **envp)
 			if (tmp)
 				ft_putstr_fd(tmp, fd);
 		}
-		else if (line[i + 1] == '?')
+		else if (line[i] && line[i + 1] == '?')
 			ft_putnbr_fd(status, fd);
-		else if (line[i + 1] == '$')
+		else if (line[i] && line[i + 1] == '$')
 			;
-		else if (line[i + 1])
+		else if (line[i] && line[i + 1])
 			ft_putchar_fd('$', fd);
 		i++;
 	}

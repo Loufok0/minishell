@@ -1,18 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main.c                                              :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/13 18:52:07 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/15 17:01:56 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 int	g_sig;
+
+void	close_fds(void)
+{
+	close(0);
+	close(1);
+}
 
 void	print_prefix(char *prefix, char *str, char *suffix, int fd)
 {
@@ -60,6 +66,8 @@ int	main_loop(int *status, char ***envp)
 		signal(SIGQUIT, SIG_IGN);
 		free_chain(line);
 	}
+	else if (line && !line->split[0])
+		free_chain(line);
 	return (free(rl), 0);
 }
 
@@ -71,7 +79,7 @@ int	main(int argc, char **argv, char **envp)
 	g_sig = 0;
 	envp = ft_arrdup(envp);
 	if (!envp)
-		return (1);
+		return (close_fds(), 1);
 	signal(SIGINT, sa);
 	signal(SIGQUIT, SIG_IGN);
 	while (envp)
@@ -82,6 +90,7 @@ int	main(int argc, char **argv, char **envp)
 	rl_clear_history();
 	if (envp)
 		ft_free_arr(envp, arrlen((void **)envp));
+	close_fds();
 	exit (status);
 	argc++;
 	argv++;
