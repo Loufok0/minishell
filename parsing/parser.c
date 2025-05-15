@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:46:37 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/15 16:02:24 by l              ########   odam.nl        */
+/*   Updated: 2025/05/15 17:12:24 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,5 @@ t_parsed	*parse(char **envp, char *rl, int *code)
 		return (*code = n_code, NULL);
 	if (!parsed || !trimm_struct(parsed) || !join_word(parsed))
 		return (*code = n_code, NULL);
-	show_t_parsed(parsed);
 	return (parsed);
 }
