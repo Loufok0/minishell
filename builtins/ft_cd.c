@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_cd.c                                            :+:      :+:    :+:   */
+/*   ft_cd.c                                             :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 21:47:21 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/13 18:17:43 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/15 17:21:44 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int	ft_cd(char **args, char ***envp, int fdout)
 	char	*new;
 	int		status;
 
-	if (ft_strncmp("-", args[1], 2))
+
+	if (args[1] && ft_strncmp("-", args[1], 2))
 		status = path_check(args[1], 'd', args[1]);
 	old = getcwd(NULL, 0);
 	if (!old)
