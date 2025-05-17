@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   in.c                                                :+:    :+:           */
+/*   in.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 17:53:15 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/15 17:17:02 by l              ########   odam.nl        */
+/*   Updated: 2025/05/17 19:06:00 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	**in_one(t_parsed *node, char **split, int *code, int i)
 		return (split);
 	}
 	if (!node->infile)
-		return (free_chain(node), NULL);
+		return (*code = 2, split);
 	duck_fishing(split, i--);
 	return (split);
 }

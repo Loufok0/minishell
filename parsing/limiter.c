@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:15:25 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/17 12:27:14 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/17 18:44:56 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	get_line(char **line)
 	return (*line != NULL);
 }
 
-static int	loop(int fd, char **envp, int *status)
+static int	loop(char *limiter, int fd, char **envp, int *status)
 {
 	char	*line;
 
@@ -55,7 +55,7 @@ int	limiter(char *limiter, int *status, char **envp)
 		, O_CREAT | O_TRUNC | O_APPEND | O_WRONLY, 0777);
 	if (fd < 0)
 		return (printf("Error opening files of LIMITER\n"), 0);
-	while (g_sig == 0 && loop(fd, envp, status))
+	while (g_sig == 0 && loop(limiter, fd, envp, status))
 		;
 	free(limiter);
 	close(fd);
@@ -85,9 +85,7 @@ void	print_fline(char *line, int fd, int status, char **envp)
 		}
 		else if (line[i] && line[i + 1] == '?')
 			ft_putnbr_fd(status, fd);
-		else if (line[i] && line[i + 1] == '$')
-			;
-		else if (line[i] && line[i + 1])
+		else if (line[i] && line[i + 1] && line[i + 1] != '$')
 			ft_putchar_fd('$', fd);
 		i++;
 	}

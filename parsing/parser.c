@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                            :+:    :+:           */
+/*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 17:46:37 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/15 17:12:24 by l              ########   odam.nl        */
+/*   Updated: 2025/05/17 18:46:07 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,6 @@ t_parsed	*parse(char **envp, char *rl, int *code)
 		return (NULL);
 	remove_spaces(split, "");
 	parsed = struct_maker(split, &n_code);
-	if (!parsed)
-		return (*code = n_code, NULL);
 	if (!parsed || !trimm_struct(parsed) || !join_word(parsed))
 		return (*code = n_code, NULL);
 	return (parsed);

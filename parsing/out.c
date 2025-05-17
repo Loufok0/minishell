@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 17:53:54 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/09 02:21:49 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/17 19:05:33 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,14 @@ char	**out_one(t_parsed *node, char **split, int *code, int i)
 			*code = 2;
 			ft_putendl_fd(MSG_UNEXPECTED_NL, STDERR_FILENO);
 		}
-		return (free_chain(node), NULL);
+		return (*code = 2, split);
 	}
 	node->outfile = ft_strdup(split[i]);
 	if (!node->outfile)
-		return (free_chain(node), NULL);
+		return (*code = 2, split);
 	if (close(open(node->outfile, O_CREAT, 0777)))
-		return (path_check(node->outfile, 'f', node->outfile), \
-			free_chain(node), *code = 1, NULL);
+		return (*code = 1, path_check(node->outfile, 'f'\
+			, node->outfile), split);
 	node->out_mode |= O_WRONLY;
 	duck_fishing(split, i--);
 	return (split);
@@ -57,14 +57,14 @@ char	**out_two(t_parsed *node, char **split, int *code, int i)
 			*code = 2;
 			ft_putendl_fd(MSG_UNEXPECTED_NL, STDERR_FILENO);
 		}
-		return (free_chain(node), NULL);
+		return (*code = 2, split);
 	}
 	node->outfile = ft_strdup(split[i]);
 	if (!node->outfile)
 		return (free_chain(node), NULL);
 	if (close(open(node->outfile, O_CREAT, 0777)))
 		return (path_check(node->outfile, 'f', node->outfile), \
-			free_chain(node), *code = 1, NULL);
+			*code = 1, split);
 	node->out_mode |= O_APPEND;
 	duck_fishing(split, i--);
 	return (split);
