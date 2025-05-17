@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   limiter.c                                           :+:    :+:           */
+/*   limiter.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:15:25 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/15 15:25:34 by l              ########   odam.nl        */
+/*   Updated: 2025/05/17 12:27:14 by malapoug         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,27 @@ int	get_line(char **line)
 	return (*line != NULL);
 }
 
+static int	loop(int fd, char **envp, int *status)
+{
+	char	*line;
+
+	get_line(&line);
+	if (line && ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
+	{
+		free(line);
+		return (0);
+	}
+	if (line)
+	{
+		print_fline(line, fd, *status, envp);
+		free(line);
+	}
+	return (1);
+}
+
 int	limiter(char *limiter, int *status, char **envp)
 {
 	int		fd;
-	char	*line;
 
 	limiter = trimm(limiter);
 	if (!limiter)
@@ -38,20 +55,8 @@ int	limiter(char *limiter, int *status, char **envp)
 		, O_CREAT | O_TRUNC | O_APPEND | O_WRONLY, 0777);
 	if (fd < 0)
 		return (printf("Error opening files of LIMITER\n"), 0);
-	while (g_sig == 0)
-	{
-		get_line(&line);
-		if (line && ft_strncmp(line, limiter, strlen(limiter)) == 0)
-		{
-			free(line);
-			break;
-		}
-		if (line)
-		{
-			print_fline(line, fd, *status, envp);
-			free(line);
-		}
-	}
+	while (g_sig == 0 && loop(fd, envp, status))
+		;
 	free(limiter);
 	close(fd);
 	return (1);
