@@ -15,6 +15,8 @@
 
 # include "../exec/exec.h"
 
+# define MSG_TOO_MANY_ARGS "exit: too many arguments"
+
 int	is_builtin(const char *cmd);
 int	exe_builtin(char **args, char ***envp, int oldstatus, int fdout);
 
@@ -24,6 +26,6 @@ int	ft_export(char **args, char ***envp, int fdout);
 int	ft_pwd(char **envp, int fdout);
 int	ft_cd(char **args, char ***envp, int fdout);
 int	ft_unset(char **args, char ***envp);
-int	ft_exit(char *status, char ***envp, int oldstatus);
+int	ft_exit(char **args, char ***envp, int oldstatus);
 
 #endif

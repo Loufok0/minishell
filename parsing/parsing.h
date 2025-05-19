@@ -22,7 +22,6 @@
 
 //====================(DEFINES)=============================//
 
-# define TMP_FILE ".msh_tmp"
 # define MSG_UNEXPECTED_NL "Syntax error near unexpected token `newline'"
 # define MSG_UNEXPECTED_TOKEN "Syntax error near unexpected token `"
 # define MSG_UNEXPECTED_LEFT_CHEVRON "Syntax error near unexpected token `<'"

@@ -27,41 +27,23 @@ int	updateenvp(char *old, char *new, char ***envp)
 	return (err);
 }
 
-void	printpwd(int fdout)
-{
-	char	*buf;
-
-	buf = getcwd(NULL, 0);
-	if (buf)
-	{
-		ft_putendl_fd(buf, fdout);
-		free(buf);
-	}
-}
-
 int	ft_cd(char **args, char ***envp, int fdout)
 {
 	char	*old;
 	char	*new;
 	int		status;
 
-	if (args[1] && ft_strncmp("-", args[1], 2))
+	if (args[1])
 		status = path_check(args[1], 'd', args[1]);
 	old = getcwd(NULL, 0);
 	if (!old)
 		status = EXIT_FAILURE;
 	if (!args[1])
 		chdir(getvar("HOME", *envp));
-	else if (ft_strncmp("-", args[1], 2) == 0)
-		printpwd(fdout);
-	else if (args[1][0] == '~')
-	{
-		chdir(getvar("HOME", *envp));
-		chdir(args[1] + (args[1][1] != '\0') + 1);
-	}
 	else
 		chdir(args[1]);
 	new = getcwd(NULL, 0);
 	status = updateenvp(old, new, envp);
 	return (status);
+	fdout++;
 }

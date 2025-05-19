@@ -21,7 +21,7 @@ char	*find_exe(char *cmd, char **envp)
 
 	i = 0;
 	exe = NULL;
-	if (ft_strchr("/.~", cmd[0]))
+	if (ft_strchr("/.", cmd[0]))
 		return (ft_strdup(cmd));
 	pathvar = getvar("PATH", envp);
 	if (!pathvar)
@@ -48,6 +48,8 @@ char	*pathcat(const char *path, const char *rel)
 	char	*new;
 
 	len = ft_strlen(path);
+	if (path[len - 1] == '/')
+		len--;
 	addsep = (path[len - 1] != '/');
 	if (addsep)
 		len++;
@@ -56,7 +58,8 @@ char	*pathcat(const char *path, const char *rel)
 	if (!new)
 		return (NULL);
 	ft_strlcpy(new, path, len + 1);
-	ft_strlcat(new, "/", len + 1);
+	if (path[len - 1] == '/')
+		ft_strlcat(new, "/", len + 1);
 	ft_strlcat(new, rel, len + 1);
 	return (new);
 }

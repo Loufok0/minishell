@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   ft_exit.c                                           :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:57:27 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/10 16:43:27 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/19 17:44:18 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-int	ft_exit(char *status, char ***envp, int oldstatus)
+int	ft_exit(char **args, char ***envp, int oldstatus)
 {
 	int	exit_status;
 
-	if (status)
+	if (arrlen((void **) args) > 2)
 	{
-		exit_status = ft_atoi(status);
+		ft_putendl_fd(MSG_TOO_MANY_ARGS, STDERR_FILENO);
+		return (EXIT_NOT_FOUND);
+	}
+	if (*args)
+	{
+		exit_status = ft_atoi(*args);
 	}
 	else
 		exit_status = oldstatus;

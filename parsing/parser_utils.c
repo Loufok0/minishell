@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*   parser_utils.c                                      :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 03:40:03 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/10 16:52:07 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/19 18:21:10 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ char	*uh(char *new, char *str, int *code, int i)
 		* (ft_strlen(str) - 2 + ft_strlen(nb) + 1));
 	if (!new)
 		return (NULL);
-	ft_strlcat(new, str, i);
-	ft_strlcat(new, nb, ft_strlen(nb) + 1);
+	ft_strlcat(new, str, i + 1);
+	ft_strlcat_mod(new, nb, ft_strlen(nb) + 1);
 	new = ft_strjoin_f(new, str + i + 2);
 	free(nb);
 	return (new);

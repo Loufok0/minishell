@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   out.c                                              :+:      :+:    :+:   */
+/*   out.c                                               :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 17:53:54 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/17 19:05:33 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/19 17:32:58 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	**out_one(t_parsed *node, char **split, int *code, int i)
 	node->outfile = ft_strdup(split[i]);
 	if (!node->outfile)
 		return (*code = 2, split);
-	if (close(open(node->outfile, O_CREAT, 0777)))
+	if (close(open(node->outfile, O_CREAT | O_TRUNC, 0777)))
 		return (*code = 1, path_check(node->outfile, 'f'\
 			, node->outfile), split);
 	node->out_mode |= O_WRONLY;

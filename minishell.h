@@ -33,7 +33,7 @@
 
 # define HIST_SIZE	100
 # define METACHARSET "<>|?*[]$\\(){}\"'`&;=! +\n"
-# define TMP_FILE ".msh_tmp"
+# define TMP_FILE "/tmp/.msh_tmp"
 # define PROMPT ">$ " //"\033[34m\n<$$$> \033[0m"
 # define MSH_NAME "./minishell: "
 
