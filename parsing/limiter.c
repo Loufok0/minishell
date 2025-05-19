@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   limiter.c                                          :+:      :+:    :+:   */
+/*   limiter.c                                           :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:15:25 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/17 18:44:56 by malapoug         ###   ########.fr       */
+/*   Updated: 2025/05/19 15:41:49 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 void	print_fline(char *line, int fd, int status, char **envp);
 
-int	get_line(char **line)
+int	get_line(char **line, int *status)
 {
 	rl_getc_function = getc;
 	*line = readline("> ");
+	if (!*line)
+		return (*status = 2, 2);
 	*line = ft_strjoin_f(*line, "\n");
 	rl_getc_function = rl_getc;
 	return (*line != NULL);
@@ -27,7 +29,7 @@ static int	loop(char *limiter, int fd, char **envp, int *status)
 {
 	char	*line;
 
-	get_line(&line);
+	get_line(&line, status);
 	if (line && ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
 	{
 		free(line);
@@ -37,6 +39,11 @@ static int	loop(char *limiter, int fd, char **envp, int *status)
 	{
 		print_fline(line, fd, *status, envp);
 		free(line);
+	}
+	else if (g_sig == 0)
+	{
+		ft_putendl_fd(MSG_UNEXPECTED_EOF, STDERR_FILENO);
+		return (0);
 	}
 	return (1);
 }

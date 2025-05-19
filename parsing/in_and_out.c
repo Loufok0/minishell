@@ -6,7 +6,7 @@
 /*   By: malapoug <malapoug@student.42lausanne.ch>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 17:15:05 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/15 15:52:42 by l              ########   odam.nl        */
+/*   Updated: 2025/05/19 15:22:50 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**in(t_parsed *node, char **split, int *code)
 		if (!ft_strncmp(split[i], "<", 2))
 		{
 			if (*code || !in_one(node, split, code, i))
-				return (split);
+				return (*code = 2, split);
 		}
 	}
 	return (split);
@@ -38,13 +38,13 @@ char	**out(t_parsed *node, char **split, int *code)
 		if (!ft_strncmp(split[i], ">>", 3))
 		{
 			if (!out_two(node, split, code, i))
-				return (NULL);
+				return (*code = 2, split);
 			i = 0;
 		}
 		else if (!ft_strncmp(split[i], ">", 2) && split[i][1] != '>')
 		{
 			if (!out_one(node, split, code, i))
-				return (NULL);
+				return (*code = 2, split);
 			i = 0;
 		}
 	}

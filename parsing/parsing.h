@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:19:03 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/15 15:16:48 by l              ########   odam.nl        */
+/*   Updated: 2025/05/19 15:36:00 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # define MSG_UNEXPECTED_TOKEN "Syntax error near unexpected token `"
 # define MSG_UNEXPECTED_LEFT_CHEVRON "Syntax error near unexpected token `<'"
 # define MSG_UNEXPECTED_RIGHT_CHEVRON "Syntax error near unexpected token `>'"
+# define MSG_UNEXPECTED_EOF "warning: here-document delimited by end-of-file"
 
 //====================(STRUCTS)=============================//
 
@@ -64,7 +65,7 @@ char		**out_one(t_parsed *node, char **split, int *code, int i);
 char		**out_two(t_parsed *node, char **split, int *code, int i);
 
 //limiter
-int			get_line(char **line);
+int			get_line(char **line, int *status);
 int			limiter(char *limiter, int *status, char **envp);
 
 //parser
