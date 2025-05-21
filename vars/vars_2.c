@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:10:28 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/02 16:18:39 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/21 18:59:31 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ size_t	addvar(char ***vars)
 	ft_memmove(new, *vars, i * sizeof(char *));
 	free(*vars);
 	(*vars) = new;
-	return (i);
+	return (i - 1);
 }
 
 int	delvar(char const *var, char ***vars)
@@ -41,6 +41,7 @@ int	delvar(char const *var, char ***vars)
 	i = getvarid(var, l, *vars);
 	if (i == arl)
 		return (0);
+	ft_putendl_fd((*vars)[i], STDERR_FILENO);
 	new = ft_calloc(arl, sizeof(char *));
 	if (!new)
 		return (1);

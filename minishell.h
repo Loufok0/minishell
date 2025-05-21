@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:41:26 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/15 15:47:52 by l              ########   odam.nl        */
+/*   Updated: 2025/05/21 18:45:55 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ int		arr_size_i(int **arr);
 char	**ft_split_let(char const *s, char c);
 char	**ft_arrdup(char **arr);
 size_t	arrlen(void **a);
+void	printf_fd(char *s1, char *arg, char *s2, int fd);
+void	print_fd(char *s1, char arg, char *s2, int fd);
 
 void	print_prefix(char *prefix, char *str, char *suffix, int fd);
 void	close_fds(void);

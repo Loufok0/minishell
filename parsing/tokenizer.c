@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizer.c                                        :+:      :+:    :+:   */
+/*   tokenizer.c                                         :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/31 12:06:44 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/08 16:38:09 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/21 18:42:22 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,8 @@ char	**tokenize(char *rl, int *code)
 			ft_strncmp(split[i + 1], "|", 2) == 0))
 		{
 			*code = 2;
-			printf("bash: syntax error near unexpected token `%c'\n", \
-				(split[i][0]));
+			print_fd("bash: syntax error near unexpected token `", \
+				split[i][0], "'\n", STDERR_FILENO);
 			return (ft_free_arr(split, arr_size(split)), NULL);
 		}
 	}

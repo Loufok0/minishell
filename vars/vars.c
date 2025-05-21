@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:03:15 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/04/28 15:55:57 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/21 19:03:02 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ size_t	getvarid(const char *var, size_t l, char **vars)
 	size_t	i;
 
 	i = 0;
-	while (vars[i] && (ft_strncmp(vars[i], var, l) || vars[i][l] != '='))
+	while (vars[i] && (ft_strncmp(vars[i], var, l) || (var[l] && vars[i][l] != var[l])))
 		i++;
 	return (i);
 }
@@ -41,7 +41,7 @@ char	*getvar(char const *var, char **vars)
 	r = NULL;
 	l = idlen(var);
 	i = getvarid(var, l, vars);
-	if (vars[i])
+	if (vars[i] && vars[i][l] == '=')
 		r = vars[i] + l + 1;
 	return (r);
 }
@@ -62,7 +62,7 @@ int	setvar(char const *var, char ***vars)
 	}
 	else
 	{
-		if (addvar(vars) == i + 1)
+		if (addvar(vars) == i)
 			(*vars)[i] = new;
 		else
 		{

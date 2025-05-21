@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:59:34 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/01 17:12:27 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/21 18:28:35 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ int	ft_env(char **envp, int fdout)
 
 	i = 0;
 	while (envp[i])
-		ft_putendl_fd(envp[i++], fdout);
+	{
+		if (strchr(envp[i], '='))
+			ft_putendl_fd(envp[i], fdout);
+		i++;
+	}
 	return (0);
 }

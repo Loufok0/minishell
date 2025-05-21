@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:57:27 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/19 17:44:18 by l              ########   odam.nl        */
+/*   Updated: 2025/05/21 18:24:20 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,16 @@ int	ft_exit(char **args, char ***envp, int oldstatus)
 		ft_putendl_fd(MSG_TOO_MANY_ARGS, STDERR_FILENO);
 		return (EXIT_NOT_FOUND);
 	}
-	if (*args)
+	if (args[1])
 	{
-		exit_status = ft_atoi(*args);
+		exit_status = ft_atoi(args[1]);
+		if (!ft_isdigit(args[1][0]))
+		{
+			ft_putstr_fd("exit: ", STDERR_FILENO);
+			ft_putstr_fd(args[1], STDERR_FILENO);
+			ft_putendl_fd(": numeric argument required", STDERR_FILENO);
+			exit_status = 2;
+		}
 	}
 	else
 		exit_status = oldstatus;
