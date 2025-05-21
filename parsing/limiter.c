@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:15:25 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/21 17:16:35 by l              ########   odam.nl        */
+/*   Updated: 2025/05/21 17:47:23 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int	get_line(char **line, int *status)
 {
 	rl_getc_function = getc;
 	*line = readline("> ");
+	rl_getc_function = rl_getc;
 	if (!*line)
 		return (*status = 2, 2);
 	*line = ft_strjoin_f(*line, "\n");
-	rl_getc_function = rl_getc;
 	return (*line != NULL);
 }
 
