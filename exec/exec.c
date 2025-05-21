@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:01:18 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/15 16:46:04 by l              ########   odam.nl        */
+/*   Updated: 2025/05/21 16:01:22 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,11 @@ int	exe_cmd(t_parsed *cmd, int *status, char ***envp, t_parsed *head)
 	dup2(cmd->fds[1], 1);
 	path = find_exe(cmd->split[0], *envp);
 	if (is_builtin(cmd->split[0]))
+	{
+		if (path)
+			free (path);
 		*status = exe_builtin(cmd->split, envp, *status, cmd->fds[1]);
+	}
 	else if (path)
 		*status = exe_file(path, cmd, *envp);
 	else

@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 15:44:04 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/15 15:33:21 by l              ########   odam.nl        */
+/*   Updated: 2025/05/21 17:20:12 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,12 @@ char	**two(char **split, int *code, int i, char **envp)
 	if (close(open(TMP_FILE, O_CREAT, 0777)))
 		return (ft_free_arr(split, arr_size(split)), *code = 2, NULL);
 	limiter(get_lim(split, i), code, envp);
+	split[i] = ft_strdup(TMP_FILE);
 	if (g_sig)
 	{
 		*code = 2;
-		return (NULL);
+		return (ft_free_arr(split, arr_size(split)), NULL);
 	}
-	split[i] = ft_strdup(TMP_FILE);
 	return (split);
 }
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_utils.c                                       :+:      :+:    :+:   */
+/*   exec_utils.c                                        :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 19:20:03 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/10 16:36:46 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/21 15:58:11 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*pathcat(const char *path, const char *rel)
 	if (!new)
 		return (NULL);
 	ft_strlcpy(new, path, len + 1);
-	if (path[len - 1] == '/')
+	if (path[ft_strlen(path) - 1] != '/')
 		ft_strlcat(new, "/", len + 1);
 	ft_strlcat(new, rel, len + 1);
 	return (new);
