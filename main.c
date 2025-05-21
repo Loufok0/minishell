@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:24:35 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/21 17:48:25 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/21 19:20:11 by ylabussi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ int	main_loop(int *status, char ***envp)
 	t_parsed	*line;
 
 	rl = readline(PROMPT);
+	g_sig = 0;
 	if (g_sig)
 		*status = g_sig | 0x80;
-	g_sig = 0;
 	if (ft_strlen(rl) == 0)
-		return (free(rl), rl == NULL);
+		return (free(rl), (rl == NULL));
 	add_history(rl);
 	line = parse(*envp, rl, status);
 	if (!line && *status != 1 && *status != 2)
