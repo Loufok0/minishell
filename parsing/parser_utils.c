@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 03:40:03 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/19 18:21:10 by l              ########   odam.nl        */
+/*   Updated: 2025/05/21 18:43:15 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ int	is_problem_char(char *str, int *code)
 		|| str[0] == '}' || str[0] == '<' || str[0] == '>' || str[0] == '|')
 	{
 		*code = 2;
-		printf("Syntax error near unexpected token `%c'\n", (str[0]));
+		print_fd("bash: syntax error near unexpected token `", \
+			str[0], "'\n", STDERR_FILENO);
 		return (1);
 	}
 	return (0);

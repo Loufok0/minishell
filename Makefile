@@ -41,9 +41,10 @@ SRCS_BUILTINS = \
 SRCS_LIB_UTILS = \
 	ft_split_let.c \
 	ft_strjoin_f.c \
-	ft_free_arr.c\
+	ft_free_arr.c \
 	ft_arrdup.c \
 	ft_arrlen.c \
+	printf_variations.c \
 
 SRCS_VARS = \
 	vars_2.c \

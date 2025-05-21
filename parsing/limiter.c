@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 19:15:25 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/21 17:47:23 by l              ########   odam.nl        */
+/*   Updated: 2025/05/21 18:43:03 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ int	limiter(char *limiter, int *status, char **envp)
 	fd = open(TMP_FILE \
 		, O_CREAT | O_TRUNC | O_APPEND | O_WRONLY, 0777);
 	if (fd < 0)
-		return (printf("Error opening files of LIMITER\n"), 0);
+		return (ft_putendl_fd("Error opening files of LIMITER", \
+			STDERR_FILENO), 0);
 	while (g_sig == 0 && loop(limiter, fd, envp, status))
 		;
 	free(limiter);

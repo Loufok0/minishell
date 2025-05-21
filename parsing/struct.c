@@ -6,7 +6,7 @@
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 13:17:34 by malapoug          #+#    #+#             */
-/*   Updated: 2025/05/15 16:31:01 by l              ########   odam.nl        */
+/*   Updated: 2025/05/21 18:42:53 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ t_parsed	*struct_maker(char **split, int *code)
 
 	parsed = create_chain(split, count_pipes(split));
 	if (!parsed)
-		return (*code = 2, printf("Error while creating struct\n"), NULL);
+		return (*code = 2, ft_putendl_fd("Error while creating struct", \
+			STDERR_FILENO), NULL);
 	if (!remove_in_out(parsed, code))
 		return (NULL);
 	return (parsed);
