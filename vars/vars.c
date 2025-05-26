@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vars.c                                             :+:      :+:    :+:   */
+/*   vars.c                                              :+:    :+:           */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylabussi <ylabussi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 16:03:15 by ylabussi          #+#    #+#             */
-/*   Updated: 2025/05/21 19:03:02 by ylabussi         ###   ########.fr       */
+/*   Updated: 2025/05/26 15:48:33 by l              ########   odam.nl        */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ size_t	getvarid(const char *var, size_t l, char **vars)
 	size_t	i;
 
 	i = 0;
-	while (vars[i] && (ft_strncmp(vars[i], var, l) || (var[l] && vars[i][l] != var[l])))
+	while (vars[i] && (ft_strncmp(vars[i], var, l) \
+		|| !ft_strchr(METACHARSET, vars[i][l])))
 		i++;
 	return (i);
 }
